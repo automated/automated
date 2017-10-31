@@ -1,22 +1,7 @@
 {
-  "author": "",
   "bin": {
     "automated": "./lib/bin/automated/index.sh"
   },
-  "bugs": {
-    "url": "https://github.com/automated-tools/automated/issues"
-  },
-  "description": "",
-  "homepage": "https://github.com/automated-tools/automated",
-  "license": "ISC",
-  "main": "index.js",
   "name": "@automated/automated",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/automated-tools/automated.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "version": "0.0.1"
 }
