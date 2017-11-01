@@ -2,17 +2,10 @@
 
 export NODE_ENV="automated"
 
-# echo $(find ./plugins -type d)
-
-# for plugin in `find ../../../plugins -type d`
-# do
-#     //Do whatever you need with D
-# done
-
 pwd=`pwd`;
+pluginScript='/node_modules/@automated/[plugin-]*/index.sh'
 
-pluginPath='/node_modules/@automated/plugin-jest/index.sh';
-
-# echo $pwd$pluginPath
-
-sh $pwd$pluginPath;
+for plugin in `ls -d $pwd$pluginScript`
+do
+  sh $plugin
+done
