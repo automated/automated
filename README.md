@@ -2,6 +2,7 @@
 
 Automated is a test framework that is designed to simplify testing by standardizing.
 
+- [Example project](https://github.com/automated-tools/example)
 - [Plugins](https://github.com/topics/automated-plugin)
 
 ---
