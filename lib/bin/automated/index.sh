@@ -2,6 +2,7 @@
 
 export NODE_ENV="automated"
 
+### Get cli arguments
 # maintain arg quotes - https://stackoverflow.com/a/24179878/537998
 function requote() {
   local res=""
@@ -13,11 +14,26 @@ function requote() {
   sed -e 's/^ //' <<< "${res}"
 }
 cliArgs=$(requote "${@}")
+###
 
 pwd=`pwd`;
-pluginScript='/node_modules/@automated/[plugin-]*/index.sh'
+pluginDirSearch='/node_modules/@automated/[plugin-]*'
 
-for plugin in `ls -d $pwd$pluginScript`
+for pluginDir in `ls -d $pwd$pluginDirSearch`
 do
-  sh $plugin $cliArgs
+  # look for something like `jest[`
+  pluginWithBraket=$(echo $pluginDir | pcregrep -o1 'plugin-(.*)')\\[
+
+  if [[ $cliArgs == *$pluginWithBraket* ]]; then
+    # run with args
+    pluginArgs=$(echo $cliArgs | pcregrep -o1 "$pluginWithBraket(.*)\]")
+    cmd=$(echo $pluginDir/index.sh $pluginArgs)
+    echo $cmd
+    sh $cmd
+  else
+    # run without args
+    cmd=$(echo $pluginDir/index.sh)
+    echo $cmd
+    sh $cmd
+  fi
 done
