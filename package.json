@@ -10,15 +10,22 @@
     "url": "https://github.com/automated-tools/automated/issues"
   },
   "description": "Use-case-oriented testing",
+  "engines": {
+    "node": "8.2.1"
+  },
+  "files": [
+    "lib"
+  ],
   "homepage": "https://github.com/automated-tools/automated",
   "license": "Apache-2.0",
-  "main": "README.md",
+  "main": "lib/bin/automated/index.sh",
   "name": "@automated/automated",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/automated-tools/automated.git"
   },
   "scripts": {
+    "ci": "npm test && npm publish",
     "test": "sh tests/runner.sh"
   },
   "version": "0.0.1"
