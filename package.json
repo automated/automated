@@ -18,5 +18,8 @@
     "type": "git",
     "url": "git+https://github.com/automated-tools/automated.git"
   },
+  "scripts": {
+    "test": "sh tests/runner.sh"
+  },
   "version": "0.0.1"
 }
