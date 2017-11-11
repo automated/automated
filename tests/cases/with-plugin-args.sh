@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 title="With plugin args"
 
