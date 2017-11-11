@@ -28,12 +28,12 @@ do
     # run with args
     pluginArgs=$(echo $cliArgs | pcregrep -o1 "$pluginWithBraket(.*)\]")
     cmd=$(echo $pluginDir/index.sh $pluginArgs)
-    echo $cmd
+    # echo $cmd
     sh $cmd
   else
     # run without args
     cmd=$(echo $pluginDir/index.sh)
-    echo $cmd
+    # echo $cmd
     sh $cmd
   fi
 done

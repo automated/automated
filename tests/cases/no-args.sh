@@ -4,10 +4,11 @@ title="Without args"
 
 pwd=`pwd`
 
-testA=$(sh lib/bin/automated/index.sh 2>&1 >/dev/null)
-testB="ls: ${pwd}/node_modules/@automated/[plugin-]*: No such file or directory"
+testA=$(sh lib/bin/automated/index.sh)
+args=${@}
+argsChar='${@}'
 
-if [ "$testA" = "$testB" ]
+if [ "$args" == "$testA$argsChar" ]
 then
   echo "SUCCESS: ${title}"
   exit 0
