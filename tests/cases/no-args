@@ -4,7 +4,7 @@ title="Without args"
 
 pwd=`pwd`
 
-testA=$(sh lib/bin/automated/index.sh)
+testA=$(lib/bin/automated)
 args=${@}
 argsChar='${@}'
 

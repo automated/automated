@@ -5,7 +5,7 @@ title="With plugin args"
 pwd=`pwd`
 
 testArgs='--bar --car'
-testA=$(sh lib/bin/automated/index.sh foo\[$testArgs\])
+testA=$(lib/bin/automated foo\[$testArgs\])
 
 args=${@}
 argsSubStr=${args:0:18}
