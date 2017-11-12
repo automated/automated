@@ -1,8 +1,5 @@
 {
-  "author": {
-    "name": "Contributors",
-    "url": "https://github.com/automated-tools/automated/graphs/contributors"
-  },
+  "author": "Contributors (https://github.com/automated-tools/automated/graphs/contributors)",
   "bin": {
     "automated": "./lib/bin/automated"
   },
@@ -25,7 +22,7 @@
     "url": "git+https://github.com/automated-tools/automated.git"
   },
   "scripts": {
-    "ci": "npm test && npm publish",
+    "ci": "npm test && npm publish --access public",
     "test": "tests/runner"
   },
   "version": "0.0.1"
