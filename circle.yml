@@ -6,5 +6,6 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
+      - run: apt-get update && apt-get install -y pcregrep
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run: npm run ci

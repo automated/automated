@@ -3,15 +3,16 @@
 pwd=`pwd`
 
 # add mock plugin
-testEcho='Wow! Coverage! ⚙️ ${@}'
+testEcho='kjb324kj 4b23kj4b ${@}'
 
 pluginDir="node_modules/@automated/plugin-foo"
 mkdir -p $pluginDir
 echo "echo \"${testEcho}\"" > "${pluginDir}/index"
+chmod u+x ${pluginDir}/index
 
 for file in `find "${pwd}/tests/cases" -maxdepth 1 -type f`; do
   $file $testEcho
 done
 
 # remove mock plugin
-# rm -rf "node_modules"
+rm -rf "node_modules"
