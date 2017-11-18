@@ -8,4 +8,4 @@
 
 * [API](https://github.com/automated-tools/automated/blob/master/docs/api.md)
 * [Example project](https://github.com/automated-tools/example)
-* [Plugins](https://github.com/search?q=topic%3Aplugin+org%3Aautomated-tools&type=Repositories)
+* [Plugins](https://github.com/search?utf8=%E2%9C%93&q=plugin-+org%3Aautomated-tools&type=Repositories)

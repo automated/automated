@@ -18,7 +18,7 @@ test.
 #### Add a Plugin
 
 The base Automated project is simply a plugin runner. Install a
-[plugin](https://github.com/search?q=topic%3Aplugin+org%3Aautomated-tools&type=Repositories)
+[plugin](https://github.com/search?utf8=%E2%9C%93&q=plugin-+org%3Aautomated-tools&type=Repositories)
 to get started.
 
 #### Commands
