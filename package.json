@@ -22,7 +22,7 @@
     "url": "git+https://github.com/automated-tools/automated.git"
   },
   "scripts": {
-    "ci": "npm test && npm publish --access public",
+    "publish": "npm publish --access public",
     "test": "tests/runner"
   },
   "version": "0.0.4"
