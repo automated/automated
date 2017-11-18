@@ -4,24 +4,24 @@
 
 Note: This is only designed to work with React at this time.
 
-#### Install
+### Install
 
 ```bash
 yarn add @automated/automated
 ```
 
-#### Configure
+### Configure
 
 Create `.automated.js` config files as siblings of components you would like to
 test.
 
-#### Add a Plugin
+### Add a Plugin
 
 The base Automated project is simply a plugin runner. Install a
 [plugin](https://github.com/search?utf8=%E2%9C%93&q=plugin-+org%3Aautomated-tools&type=Repositories)
 to get started.
 
-#### Commands
+### Commands
 
 The default command will look for automated plugins and run config files found.
 
@@ -42,7 +42,7 @@ yarn automated jest\[--updateSnapshot --watch\]
 The most basic `.automated.js` config file can be empty, in which case it will
 use defaults.
 
-Export each of the attributes like `export const Component`
+Export each attribute. e.g. `export const Component`
 
 | Attribute      | Type               | Default                                                  |
 | -------------- | ------------------ | -------------------------------------------------------- |
@@ -51,7 +51,7 @@ Export each of the attributes like `export const Component`
 | `title`        | String             | Component name                                           |
 | `useCases`     | Array of `useCase` | See `useCase`                                            |
 
-#### `useCase` Object
+### `useCase` Object
 
 ```js
 {
