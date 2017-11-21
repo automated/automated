@@ -60,3 +60,27 @@ Export each attribute. e.g. `export const Component`
   // context: (object) provides React context
 }
 ```
+
+# Plugin development
+
+These are notes or experimental, not supported.
+
+## Lifecycle
+
+Automated has lifecycle steps for plugins
+
+```bash
+# for all tests
+- collection-will-start
+- collection-did-start
+- collection-running
+
+# iterates on each test
+- test-will-start
+- test-did-start
+- test-running
+- test-will-end
+
+# for all tests
+- collection-will-end
+```

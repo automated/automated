@@ -19,21 +19,37 @@ cliArgs=$(requote "${@}")
 pwd=`pwd`;
 pluginDirSearch='/node_modules/@automated/[plugin-]*'
 
-for pluginDir in `ls -d $pwd$pluginDirSearch`
-do
-  # look for something like `jest[`
-  pluginWithBraket=$(echo $pluginDir | pcregrep -o1 'plugin-(.*)')\\[
+declare -a lifecycles=(
+  collection-will-start
+  collection-did-start
+  collection-running
+  test-will-start
+  test-did-start
+  test-running
+  test-will-end
+  collection-will-end
+)
 
-  if [[ $cliArgs == *$pluginWithBraket* ]]; then
-    # run with args
-    pluginArgs=$(echo $cliArgs | pcregrep -o1 "$pluginWithBraket(.*)\]")
-    cmd=$(echo $pluginDir/index $pluginArgs)
-    # echo $cmd
-    $cmd
-  else
-    # run without args
-    cmd=$(echo $pluginDir/index)
-    # echo $cmd
-    $cmd
-  fi
+for lifecycle in "${lifecycles[@]}"
+do
+  for pluginDir in `ls -d $pwd$pluginDirSearch`
+  do
+    # look for something like `jest[`
+    pluginWithBraket=$(echo $pluginDir | pcregrep -o1 'plugin-(.*)')\\[
+    script=$pluginDir/$lifecycle
+    if [[ -e $script ]]; then
+      if [[ $cliArgs == *$pluginWithBraket* ]]; then
+        # run with args
+        pluginArgs=$(echo $cliArgs | pcregrep -o1 "$pluginWithBraket(.*)\]")
+        cmd=$(echo $script $pluginArgs)
+        # echo $cmd
+        $cmd
+      else
+        # run without args
+        cmd=$(echo $script)
+        # echo $cmd
+        $cmd
+      fi
+    fi
+  done
 done
