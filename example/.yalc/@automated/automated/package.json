@@ -1,0 +1,22 @@
+{
+  "name": "@automated/automated",
+  "description": "Use-case-oriented testing",
+  "files": [
+    "out"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/automated/automated",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/automated/automated.git"
+  },
+  "scripts": {},
+  "version": "0.1.0",
+  "bugs": {
+    "url": "https://github.com/automated/automated/issues"
+  },
+  "main": "index.js",
+  "author": "",
+  "dependencies": {},
+  "yalcSig": "5181199ba9db4c624ce721fa87d2eb2f"
+}
