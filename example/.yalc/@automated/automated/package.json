@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/automated/automated/issues"
   },
-  "main": "index.js",
+  "main": "out/index.js",
   "author": {
     "name": "Contributors",
     "url": "https://github.com/automated/automated/contributors"
@@ -28,10 +28,11 @@
     "node": ">=16"
   },
   "dependencies": {
+    "@types/rollup-plugin-json": "^3.0.3",
     "jest": "^27.0.6"
   },
   "scripts": {
     "start": "nps"
   },
-  "yalcSig": "ec10c2328265e3959a885c61689afafc"
+  "yalcSig": "2ea8f0c8a79d17a94da3477f940fdbea"
 }

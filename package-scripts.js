@@ -1,8 +1,6 @@
 const lint = "eslint --ignore-path .gitignore --ext .jsx,.js,.ts,.tsx '.'";
 
-const build = 'webpack';
-
-const devLibraryOnly = `yarn nodemon --watch webpack.config.ts --watch src/**/* --exec "${build}"`;
+const build = 'tsc';
 
 const yalcPublishToExample = [
   'yalc publish',
@@ -17,8 +15,10 @@ const dev = [
   `yarn nodemon`,
   [
     "--ext '*'",
+    `--watch "tsconfig.json"`,
+    `--watch "package.json"`,
     `--watch "src/**/*"`,
-    `--watch "webpack.config.ts"`,
+    // `--watch "webpack.config.ts"`,
     `--exec "${build} && ${yalcPublishToExample}"`,
   ].join(' '),
 ].join(' ');

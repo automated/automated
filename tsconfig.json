@@ -4,11 +4,14 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "module": "commonjs",
+    "module": "ESNext",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "outDir": "./out",
     "strict": true,
-    "target": "es6"
-  }
+    "target": "es6",
+    "sourceMap": true,
+    "declaration": true
+  },
+  "include": ["src"]
 }
