@@ -15,7 +15,6 @@
     "type": "git",
     "url": "git+https://github.com/automated/automated.git"
   },
-  "scripts": {},
   "version": "0.1.0",
   "bugs": {
     "url": "https://github.com/automated/automated/issues"
@@ -25,13 +24,38 @@
     "name": "Contributors",
     "url": "https://github.com/automated/automated/contributors"
   },
-  "bundledDependencies": [
-    "jest"
-  ],
   "engines": {
     "node": ">=16"
   },
   "dependencies": {
     "jest": "^27.0.6"
+  },
+  "devDependencies": {
+    "@types/node": "^16.4.9",
+    "@types/webpack": "^5.28.0",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-typescript-sort-keys": "^1.6.0",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.12",
+    "nps": "^5.10.0",
+    "prettier": "^2.3.2",
+    "ts-loader": "^9.2.4",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5",
+    "webpack": "^5.47.1",
+    "webpack-cli": "^4.7.2",
+    "yalc": "^1.0.0-pre.53"
+  },
+  "scripts": {
+    "start": "nps"
   }
 }

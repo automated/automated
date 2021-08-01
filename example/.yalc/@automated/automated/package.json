@@ -1,6 +1,11 @@
 {
   "name": "@automated/automated",
   "description": "Use-case-oriented testing",
+  "keywords": [
+    "test",
+    "testing",
+    "coverage"
+  ],
   "files": [
     "out"
   ],
@@ -10,13 +15,23 @@
     "type": "git",
     "url": "git+https://github.com/automated/automated.git"
   },
-  "scripts": {},
   "version": "0.1.0",
   "bugs": {
     "url": "https://github.com/automated/automated/issues"
   },
   "main": "index.js",
-  "author": "",
-  "dependencies": {},
-  "yalcSig": "5181199ba9db4c624ce721fa87d2eb2f"
+  "author": {
+    "name": "Contributors",
+    "url": "https://github.com/automated/automated/contributors"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "jest": "^27.0.6"
+  },
+  "scripts": {
+    "start": "nps"
+  },
+  "yalcSig": "ec10c2328265e3959a885c61689afafc"
 }

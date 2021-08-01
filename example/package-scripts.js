@@ -10,6 +10,8 @@ const scripts = {
   lintFix: `${lint} --fix`,
 
   start: 'next start',
+
+  automated: 'yarn automated',
 };
 
 module.exports = { scripts };
