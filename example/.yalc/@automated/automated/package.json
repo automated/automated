@@ -28,7 +28,8 @@
     "node": ">=16"
   },
   "dependencies": {
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "storybook": "^6.3.6"
   },
   "resolutions": {
     "@types/react": "^17.0.15"
@@ -36,5 +37,5 @@
   "scripts": {
     "start": "nps"
   },
-  "yalcSig": "bca46a55201163135bd04d6490c2b7e8"
+  "yalcSig": "479f46be6f63f446565f271234cac86a"
 }

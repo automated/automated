@@ -11,7 +11,7 @@ export type Props = {
 };
 
 const Base = ({ background, text, onClick }: Props) => {
-  const [buttonActive, setButtonActive] = useState(false);
+  // const [buttonActive, setButtonActive] = useState(false);
 
   return (
     <button

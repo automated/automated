@@ -20,7 +20,6 @@ const runner = ({ filename, Component, process: theirProcess, useCases: useCases
             const { props } = useCases[key];
             test(key, () => {
                 const render = react_test_renderer_1.default.create(react_1.default.createElement(Component, Object.assign({}, props)));
-                console.log(render.toJSON());
                 expect(render.toJSON()).toMatchSnapshot();
             });
         });

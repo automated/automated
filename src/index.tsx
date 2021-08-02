@@ -51,7 +51,6 @@ export const runner = ({
 
       test(key, () => {
         const render = TestRenderer.create(<Component {...props} />);
-        console.log(render.toJSON());
         expect(render.toJSON()).toMatchSnapshot();
       });
     });
