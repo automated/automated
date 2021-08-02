@@ -28,16 +28,23 @@
     "node": ">=16"
   },
   "dependencies": {
-    "@types/rollup-plugin-json": "^3.0.3",
     "jest": "^27.0.6"
   },
   "devDependencies": {
+    "@testing-library/react": "^11.2.7",
+    "@types/react-test-renderer": "^16.9.5",
+    "@types/testing-library__jest-dom": "^5.14.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.1",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@types/jest": "^26.0.24",
     "@types/node": "^16.4.9",
-    "@types/webpack": "^5.28.0",
+    "@types/react": "^17.0.15",
+    "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "babel-eslint": "^10.1.0",
-    "declaration-bundler-webpack-plugin": "^1.0.3",
     "eslint": "^7.25.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
@@ -46,22 +53,14 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-typescript-sort-keys": "^1.6.0",
-    "jest": "^27.0.6",
     "nodemon": "^2.0.12",
     "nps": "^5.10.0",
     "prettier": "^2.3.2",
-    "rollup": "^2.55.1",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-sourcemaps": "^0.6.3",
-    "rollup-plugin-typescript2": "^0.30.0",
-    "ts-loader": "^9.2.4",
-    "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
-    "webpack": "^5.47.1",
-    "webpack-cli": "^4.7.2",
     "yalc": "^1.0.0-pre.53"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.15"
   },
   "scripts": {
     "start": "nps"
