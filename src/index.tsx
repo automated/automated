@@ -1,6 +1,7 @@
 import React from 'react';
 // import { render } from '@testing-library/react';
 import TestRenderer from 'react-test-renderer';
+import { storiesOf } from '@storybook/react';
 
 // import '@testing-library/jest-dom/extend-expect';
 
@@ -27,6 +28,9 @@ type Process = NodeJS.Process & {
 const defaultUseCase: UseCase = {};
 const defaultUseCases: UseCases = { default: defaultUseCase };
 
+const isJest = false;
+const isStorybook = !!process.env.STORYBOOK;
+
 export const runner = ({
   filename,
   Component,
@@ -43,16 +47,27 @@ export const runner = ({
 
   const describeName = filename.replace(initCwd, '');
 
-  describe(describeName, () => {
-    const useCases = useCasesProp || defaultUseCases;
+  const foo = storiesOf('Button', module);
 
+  const useCases = useCasesProp || defaultUseCases;
+
+  if (isStorybook) {
     Object.keys(useCases).forEach((key) => {
       const { props } = useCases[key];
+      foo.add(key, () => <Component {...props} />);
+    });
+  }
 
-      test(key, () => {
-        const render = TestRenderer.create(<Component {...props} />);
-        expect(render.toJSON()).toMatchSnapshot();
+  if (isJest) {
+    describe(describeName, () => {
+      Object.keys(useCases).forEach((key) => {
+        const { props } = useCases[key];
+
+        test(key, () => {
+          const render = TestRenderer.create(<Component {...props} />);
+          expect(render.toJSON()).toMatchSnapshot();
+        });
       });
     });
-  });
+  }
 };

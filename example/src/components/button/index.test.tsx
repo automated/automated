@@ -3,6 +3,7 @@ import {
   UseCase as DefaultUseCase,
   runner,
 } from '@automated/automated';
+
 import Component, { Props } from './';
 
 interface UseCase extends Omit<DefaultUseCase, 'props'> {

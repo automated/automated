@@ -1,37 +1,21 @@
 {
-  "name": "@automated/automated",
-  "description": "Use-case-oriented testing",
-  "keywords": [
-    "test",
-    "testing",
-    "coverage"
-  ],
-  "files": [
-    "out"
-  ],
-  "license": "Apache-2.0",
-  "homepage": "https://github.com/automated/automated",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/automated/automated.git"
-  },
-  "version": "0.1.0",
-  "bugs": {
-    "url": "https://github.com/automated/automated/issues"
-  },
-  "main": "out/index.js",
   "author": {
     "name": "Contributors",
     "url": "https://github.com/automated/automated/contributors"
   },
-  "engines": {
-    "node": ">=16"
+  "bin": {
+    "automated": "src/cli/index.sh"
   },
-  "dependencies": {
-    "jest": "^27.0.6",
-    "storybook": "^6.3.6"
+  "bugs": {
+    "url": "https://github.com/automated/automated/issues"
   },
+  "description": "Use-case-oriented testing",
   "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@storybook/addon-actions": "^6.3.7",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-links": "^6.3.7",
+    "@storybook/react": "^6.3.7",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@types/jest": "^26.0.24",
@@ -43,6 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.25.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
@@ -51,19 +36,47 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-typescript-sort-keys": "^1.6.0",
+    "jest": "^27.0.6",
     "nodemon": "^2.0.12",
     "nps": "^5.10.0",
     "prettier": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.1",
+    "storybook": "^6.3.6",
     "typescript": "^4.3.5",
     "yalc": "^1.0.0-pre.53"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "files": [
+    "out"
+  ],
+  "homepage": "https://github.com/automated/automated",
+  "keywords": [
+    "test",
+    "testing",
+    "coverage"
+  ],
+  "license": "Apache-2.0",
+  "main": "out/index.js",
+  "name": "@automated/automated",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/automated/automated.git"
   },
   "resolutions": {
     "@types/react": "^17.0.15"
   },
   "scripts": {
-    "start": "nps"
+    "build-storybook": "build-storybook",
+    "start": "nps",
+    "storybook": "start-storybook -p 6006"
+  },
+  "version": "0.1.0",
+  "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0"
   }
 }
