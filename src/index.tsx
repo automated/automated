@@ -3,6 +3,7 @@ import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import { storiesOf } from '@storybook/react';
 
+import Wrapper from './storybook/wrapper';
 // import '@testing-library/jest-dom/extend-expect';
 
 type Props = Record<string, any>;
@@ -54,7 +55,11 @@ export const runner = ({
   if (isStorybook) {
     Object.keys(useCases).forEach((key) => {
       const { props } = useCases[key];
-      foo.add(key, () => <Component {...props} />);
+      foo.add(key, () => (
+        <Wrapper>
+          <Component {...props} />
+        </Wrapper>
+      ));
     });
   }
 

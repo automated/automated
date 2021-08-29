@@ -1,4 +1,4 @@
-import GlobalStyles from 'root/src/global-styles';
+import GlobalStyles from '../../global-styles';
 
 const Base = ({ children }: { children: React.ReactNode }) => (
   <>

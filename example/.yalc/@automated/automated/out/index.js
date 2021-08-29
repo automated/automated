@@ -8,6 +8,7 @@ const react_1 = __importDefault(require("react"));
 // import { render } from '@testing-library/react';
 const react_test_renderer_1 = __importDefault(require("react-test-renderer"));
 const react_2 = require("@storybook/react");
+const wrapper_1 = __importDefault(require("./storybook/wrapper"));
 const defaultUseCase = {};
 const defaultUseCases = { default: defaultUseCase };
 const isJest = false;
@@ -22,7 +23,8 @@ const runner = ({ filename, Component, process: theirProcess, useCases: useCases
     if (isStorybook) {
         Object.keys(useCases).forEach((key) => {
             const { props } = useCases[key];
-            foo.add(key, () => react_1.default.createElement(Component, Object.assign({}, props)));
+            foo.add(key, () => (react_1.default.createElement(wrapper_1.default, null,
+                react_1.default.createElement(Component, { ...props }))));
         });
     }
     if (isJest) {
@@ -30,7 +32,7 @@ const runner = ({ filename, Component, process: theirProcess, useCases: useCases
             Object.keys(useCases).forEach((key) => {
                 const { props } = useCases[key];
                 test(key, () => {
-                    const render = react_test_renderer_1.default.create(react_1.default.createElement(Component, Object.assign({}, props)));
+                    const render = react_test_renderer_1.default.create(react_1.default.createElement(Component, { ...props }));
                     expect(render.toJSON()).toMatchSnapshot();
                 });
             });

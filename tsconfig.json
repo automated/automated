@@ -2,16 +2,16 @@
   "compilerOptions": {
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
+    "declaration": true,
     "esModuleInterop": true,
     "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "outDir": "./out",
-    "strict": true,
-    "target": "es6",
     "sourceMap": true,
-    "declaration": true
+    "strict": true,
+    "target": "esnext"
   },
   "include": ["src"]
 }
