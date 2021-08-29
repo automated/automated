@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "Contributors",
+    "url": "https://github.com/automated/automated/contributors"
+  },
+  "bin": {
+    "automated": "src/cli/index.sh"
+  },
+  "bugs": {
+    "url": "https://github.com/automated/automated/issues"
+  },
+  "description": "Use-case-oriented testing",
+  "engines": {
+    "node": ">=16"
+  },
+  "files": [
+    "out"
+  ],
+  "homepage": "https://github.com/automated/automated",
+  "keywords": [
+    "test",
+    "testing",
+    "coverage"
+  ],
+  "license": "Apache-2.0",
+  "main": "out/index.js",
+  "name": "@automated/automated",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/automated/automated.git"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.15"
+  },
+  "scripts": {
+    "build-storybook": "build-storybook",
+    "start": "nps",
+    "storybook": "start-storybook -p 6006"
+  },
+  "version": "0.1.0",
+  "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0"
+  },
+  "yalcSig": "ce71cfcd8c7b4a00fed6e1567edf13d2"
+}
