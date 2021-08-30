@@ -13,8 +13,6 @@ export type Props = {
 const Base = ({ background, text, onClick }: Props) => {
   // const [buttonActive, setButtonActive] = useState(false);
 
-  console.log(process.env);
-
   return (
     <button
       onClick={onClick}

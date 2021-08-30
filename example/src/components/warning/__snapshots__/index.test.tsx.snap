@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`/src/components/warning/index.test.tsx default 1`] = `
+exports[`/Users/kirkstrobeck/sync/homedir/git/automated/automated/example/src/components/warning/index.test.tsx default 1`] = `
 .emotion-0 {
   padding: 100px;
   border-radius: 10px;

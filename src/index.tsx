@@ -1,10 +1,13 @@
+import { toMatchDiffSnapshot } from 'snapshot-diff';
 import React from 'react';
 // import { render } from '@testing-library/react';
 import TestRenderer from 'react-test-renderer';
 import { storiesOf } from '@storybook/react';
 
-import Wrapper from './storybook/wrapper';
 // import '@testing-library/jest-dom/extend-expect';
+import Wrapper from './storybook/wrapper';
+
+expect.extend({ toMatchDiffSnapshot });
 
 type Props = Record<string, any>;
 
@@ -29,7 +32,7 @@ type Process = NodeJS.Process & {
 const defaultUseCase: UseCase = {};
 const defaultUseCases: UseCases = { default: defaultUseCase };
 
-const isJest = false;
+const isJest = !!process.env.JEST_WORKER_ID;
 const isStorybook = !!process.env.STORYBOOK;
 
 export const runner = ({
@@ -70,7 +73,9 @@ export const runner = ({
 
         test(key, () => {
           const render = TestRenderer.create(<Component {...props} />);
-          expect(render.toJSON()).toMatchSnapshot();
+          const renderToJson = render.toJSON();
+          if (key === 'default') renderToJson;
+          expect(renderToJson).toMatchSnapshot();
         });
       });
     });

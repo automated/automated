@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
@@ -11,7 +12,9 @@
     "outDir": "./out",
     "sourceMap": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "skipLibCheck": true
   },
+  "exclude": ["node_modules"],
   "include": ["src"]
 }

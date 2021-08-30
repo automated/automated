@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`/src/components/button/index.test.tsx default 1`] = `
+exports[`/Users/kirkstrobeck/sync/homedir/git/automated/automated/example/src/components/button/index.test.tsx default 1`] = `
 .emotion-0 {
   padding: 20px 30px;
   border-radius: 10px;
@@ -19,7 +19,7 @@ exports[`/src/components/button/index.test.tsx default 1`] = `
 </button>
 `;
 
-exports[`/src/components/button/index.test.tsx setBackground 1`] = `
+exports[`/Users/kirkstrobeck/sync/homedir/git/automated/automated/example/src/components/button/index.test.tsx setBackground 1`] = `
 .emotion-0 {
   padding: 20px 30px;
   border-radius: 10px;
@@ -38,7 +38,7 @@ exports[`/src/components/button/index.test.tsx setBackground 1`] = `
 </button>
 `;
 
-exports[`/src/components/button/index.test.tsx setText 1`] = `
+exports[`/Users/kirkstrobeck/sync/homedir/git/automated/automated/example/src/components/button/index.test.tsx setText 1`] = `
 .emotion-0 {
   padding: 20px 30px;
   border-radius: 10px;

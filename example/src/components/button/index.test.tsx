@@ -1,12 +1,12 @@
 import {
   TestName,
-  UseCase as DefaultUseCase,
+  UseCase as GenericUseCase,
   runner,
 } from '@automated/automated';
 
 import Component, { Props } from './';
 
-interface UseCase extends Omit<DefaultUseCase, 'props'> {
+interface UseCase extends Omit<GenericUseCase, 'props'> {
   props: Props;
 }
 

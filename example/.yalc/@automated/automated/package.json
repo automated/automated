@@ -11,7 +11,7 @@
   },
   "description": "Use-case-oriented testing",
   "engines": {
-    "node": ">=16"
+    "node": ">=14.17.5"
   },
   "files": [
     "out"
@@ -29,18 +29,9 @@
     "type": "git",
     "url": "git+https://github.com/automated/automated.git"
   },
-  "resolutions": {
-    "@types/react": "^17.0.15"
-  },
   "scripts": {
-    "build-storybook": "build-storybook",
-    "start": "nps",
-    "storybook": "start-storybook -p 6006"
+    "default": "nps"
   },
   "version": "0.1.0",
-  "dependencies": {
-    "@emotion/react": "^11.4.1",
-    "@emotion/styled": "^11.3.0"
-  },
-  "yalcSig": "35997ad5d81e7ac087291e25f87f8157"
+  "yalcSig": "900c034675bde8a9a55def7c52d598e2"
 }
