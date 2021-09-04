@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "@automated/automated": {
-      "signature": "900c034675bde8a9a55def7c52d598e2",
+      "signature": "e7809fcd84488abebcb1fb8609d9a2e1",
       "file": true
     }
   }

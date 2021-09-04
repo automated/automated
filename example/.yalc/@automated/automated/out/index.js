@@ -4,18 +4,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.runner = void 0;
-const snapshot_diff_1 = require("snapshot-diff");
+// import { toMatchDiffSnapshot } from 'snapshot-diff';
 const react_1 = __importDefault(require("react"));
 // import { render } from '@testing-library/react';
-const react_test_renderer_1 = __importDefault(require("react-test-renderer"));
+// import TestRenderer from 'react-test-renderer';
 const react_2 = require("@storybook/react");
+// import puppeteer from 'puppeteer';
 // import '@testing-library/jest-dom/extend-expect';
 const wrapper_1 = __importDefault(require("./storybook/wrapper"));
-expect.extend({ toMatchDiffSnapshot: snapshot_diff_1.toMatchDiffSnapshot });
 const defaultUseCase = {};
 const defaultUseCases = { default: defaultUseCase };
 const isJest = !!process.env.JEST_WORKER_ID;
 const isStorybook = !!process.env.STORYBOOK;
+console.log(process.env);
 const runner = ({ filename, Component, process: theirProcess, useCases: useCasesProp, }) => {
     const initCwd = String(theirProcess.env.INIT_CWD);
     if (!initCwd)
@@ -30,20 +31,27 @@ const runner = ({ filename, Component, process: theirProcess, useCases: useCases
                 react_1.default.createElement(Component, { ...props }))));
         });
     }
-    if (isJest) {
-        describe(describeName, () => {
-            Object.keys(useCases).forEach((key) => {
-                const { props } = useCases[key];
-                test(key, () => {
-                    const render = react_test_renderer_1.default.create(react_1.default.createElement(Component, { ...props }));
-                    const renderToJson = render.toJSON();
-                    if (key === 'default')
-                        renderToJson;
-                    expect(renderToJson).toMatchSnapshot();
-                });
-            });
-        });
-    }
+    // if (isJest) {
+    //   describe(describeName, () => {
+    //     console.log('jest!');
+    //     Object.keys(useCases).forEach((key) => {
+    //       const { props } = useCases[key];
+    //       test(key, () => {
+    //         const render = TestRenderer.create(<Component {...props} />);
+    //         const renderToJson = render.toJSON();
+    //         if (key === 'default') renderToJson;
+    //         expect(renderToJson).toMatchSnapshot();
+    //       });
+    //       (async () => {
+    //         const browser = await puppeteer.launch();
+    //         const page = await browser.newPage();
+    //         await page.goto('https://example.com');
+    //         await page.screenshot({ path: 'example.png' });
+    //         await browser.close();
+    //       })();
+    //     });
+    //   });
+    // }
 };
 exports.runner = runner;
 //# sourceMappingURL=index.js.map

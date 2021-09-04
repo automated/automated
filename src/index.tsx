@@ -1,13 +1,14 @@
-import { toMatchDiffSnapshot } from 'snapshot-diff';
+// import { toMatchDiffSnapshot } from 'snapshot-diff';
 import React from 'react';
 // import { render } from '@testing-library/react';
-import TestRenderer from 'react-test-renderer';
+// import TestRenderer from 'react-test-renderer';
 import { storiesOf } from '@storybook/react';
 
+// import puppeteer from 'puppeteer';
 // import '@testing-library/jest-dom/extend-expect';
 import Wrapper from './storybook/wrapper';
 
-expect.extend({ toMatchDiffSnapshot });
+// expect.extend({ toMatchDiffSnapshot });
 
 type Props = Record<string, any>;
 
@@ -34,6 +35,8 @@ const defaultUseCases: UseCases = { default: defaultUseCase };
 
 const isJest = !!process.env.JEST_WORKER_ID;
 const isStorybook = !!process.env.STORYBOOK;
+
+console.log(process.env);
 
 export const runner = ({
   filename,
@@ -66,18 +69,28 @@ export const runner = ({
     });
   }
 
-  if (isJest) {
-    describe(describeName, () => {
-      Object.keys(useCases).forEach((key) => {
-        const { props } = useCases[key];
+  // if (isJest) {
+  //   describe(describeName, () => {
+  //     console.log('jest!');
+  //     Object.keys(useCases).forEach((key) => {
+  //       const { props } = useCases[key];
 
-        test(key, () => {
-          const render = TestRenderer.create(<Component {...props} />);
-          const renderToJson = render.toJSON();
-          if (key === 'default') renderToJson;
-          expect(renderToJson).toMatchSnapshot();
-        });
-      });
-    });
-  }
+  //       test(key, () => {
+  //         const render = TestRenderer.create(<Component {...props} />);
+  //         const renderToJson = render.toJSON();
+  //         if (key === 'default') renderToJson;
+  //         expect(renderToJson).toMatchSnapshot();
+  //       });
+
+  //       (async () => {
+  //         const browser = await puppeteer.launch();
+  //         const page = await browser.newPage();
+  //         await page.goto('https://example.com');
+  //         await page.screenshot({ path: 'example.png' });
+
+  //         await browser.close();
+  //       })();
+  //     });
+  //   });
+  // }
 };
