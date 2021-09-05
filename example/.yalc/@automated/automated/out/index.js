@@ -32,13 +32,19 @@ const defaultUseCase = {};
 const defaultUseCases = { default: defaultUseCase };
 const runner = ({ filename, Component, useCases: useCasesProp, }) => {
     // const describeName = deriveDescribeName({ filename });
-    // const useCases = useCasesProp || defaultUseCases;
-    // const isJest = !!process.env.IS_JEST;
+    const useCases = useCasesProp || defaultUseCases;
+    const isJest = !!process.env.IS_JEST;
     const isStorybook = !!process.env.STORYBOOK_IS_STORYBOOK;
     // const Button = () => <div>kldskjsflk</div>;
     // storiesOf('Button', fooModule).add('with text', () => <Button />);
     if (isStorybook) {
-        (0, storybook_1.default)(module);
+        // storybookRunner(module);
+        (0, storybook_1.default)({
+            Component,
+            describeName: 'foobar',
+            useCases,
+            // module,
+        });
     }
 };
 exports.runner = runner;
@@ -52,12 +58,6 @@ exports.runner = runner;
 //       See https://github.com/ComponentDriven/csf/issues/26
 //   */
 //   // storybookRunner(module);
-//   // storybookRunner({
-//   //   Component,
-//   //   describeName,
-//   //   useCases,
-//   //   fooModule: module,
-//   // });
 //   const foo = storiesOf('Button', module);
 //   const Foo = () => <div>kldskjsflk</div>;
 //   foo.add('hello', () => <Foo />);
