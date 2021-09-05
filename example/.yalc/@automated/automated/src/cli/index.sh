@@ -20,9 +20,9 @@ elif [ "$1" = "storybook" ]; then
 # console.log('isJest', isJest);
 # console.log('isStorybook', isStorybook);
 
-  export STORYBOOK_FOO="blazoo"
+  export STORYBOOK_IS_STORYBOOK=true
 
-  STORYBOOK_FOO="blazoo" \
+  STORYBOOK_IS_STORYBOOK=true \
   /Users/kirkstrobeck/sync/homedir/git/automated/automated/node_modules/.bin/start-storybook \
   --config-dir="/Users/kirkstrobeck/sync/homedir/git/automated/automated/.storybook" \
   --port 3144
