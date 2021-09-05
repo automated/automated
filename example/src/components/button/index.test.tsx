@@ -33,7 +33,7 @@ useCases.setBackground = {
 };
 
 runner({
-  filename: __filename,
+  dirname: __dirname,
   Component,
   useCases,
 });

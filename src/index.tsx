@@ -1,57 +1,36 @@
 import React from 'react';
-// import { storiesOf } from '@storybook/react';
 
 import { UseCase, UseCases } from './types';
 
 import jestRunner from './jest';
 import storybookRunner from './storybook';
-
-const deriveDescribeName = ({ filename }: { filename: string }) => {
-  const pwd = String(process.env.PWD);
-  if (!pwd || pwd === 'undefined') {
-    throw new Error('Missing `process.env.PWD`');
-  }
-  return filename.replace(pwd, '');
-
-  // const initCwd = String(theirProcess.env.INIT_CWD);
-  // if (!initCwd || initCwd === 'undefined') {
-  //   // throw new Error('Missing `process.env.INIT_CWD`');
-  // }
-  // const describeName = filename.replace(initCwd, '');
-};
-
+import deriveDescribeName from './utils/derive-describe-name';
 // const fooModule = module;
 
 const defaultUseCase: UseCase = {};
 const defaultUseCases: UseCases = { default: defaultUseCase };
 
 export const runner = ({
-  filename,
+  dirname,
   Component,
   useCases: useCasesProp,
 }: {
-  filename: string;
+  dirname: string;
   Component: React.ElementType;
   useCases?: UseCases;
 }) => {
-  // const describeName = deriveDescribeName({ filename });
+  const describeName = deriveDescribeName({ dirname });
 
   const useCases = useCasesProp || defaultUseCases;
 
   const isJest = !!process.env.IS_JEST;
   const isStorybook = !!process.env.STORYBOOK_IS_STORYBOOK;
 
-  // const Button = () => <div>kldskjsflk</div>;
-
-  // storiesOf('Button', fooModule).add('with text', () => <Button />);
   if (isStorybook) {
-    // storybookRunner(module);
-
     storybookRunner({
       Component,
-      describeName: 'foobar',
+      describeName,
       useCases,
-      // module,
     });
   }
 };

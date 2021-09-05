@@ -15,35 +15,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.runner = void 0;
 const storybook_1 = __importDefault(require("./storybook"));
-const deriveDescribeName = ({ filename }) => {
-    const pwd = String(process.env.PWD);
-    if (!pwd || pwd === 'undefined') {
-        throw new Error('Missing `process.env.PWD`');
-    }
-    return filename.replace(pwd, '');
-    // const initCwd = String(theirProcess.env.INIT_CWD);
-    // if (!initCwd || initCwd === 'undefined') {
-    //   // throw new Error('Missing `process.env.INIT_CWD`');
-    // }
-    // const describeName = filename.replace(initCwd, '');
-};
+const derive_describe_name_1 = __importDefault(require("./utils/derive-describe-name"));
 // const fooModule = module;
 const defaultUseCase = {};
 const defaultUseCases = { default: defaultUseCase };
-const runner = ({ filename, Component, useCases: useCasesProp, }) => {
-    // const describeName = deriveDescribeName({ filename });
+const runner = ({ dirname, Component, useCases: useCasesProp, }) => {
+    const describeName = (0, derive_describe_name_1.default)({ dirname });
     const useCases = useCasesProp || defaultUseCases;
     const isJest = !!process.env.IS_JEST;
     const isStorybook = !!process.env.STORYBOOK_IS_STORYBOOK;
-    // const Button = () => <div>kldskjsflk</div>;
-    // storiesOf('Button', fooModule).add('with text', () => <Button />);
     if (isStorybook) {
-        // storybookRunner(module);
         (0, storybook_1.default)({
             Component,
-            describeName: 'foobar',
+            describeName,
             useCases,
-            // module,
         });
     }
 };

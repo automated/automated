@@ -6,6 +6,6 @@ import { runner } from '@automated/automated';
 import Component from './';
 
 runner({
-  filename: __filename,
+  dirname: __dirname,
   Component,
 });
