@@ -1,9 +1,14 @@
 const path = require('path');
 
 function findStories() {
-  const file = __dirname + '/../example/src/components/button/index.test.tsx';
-  console.log(file);
-  return [file];
+  // console.log('IS_STORYBOOK', !!process.env.IS_STORYBOOK);
+  // console.log('IS_JEST', !!process.env.IS_JEST);
+  // console.log(process.env);
+
+  return [
+    path.join(__dirname, '/../example/src/components/button/index.test.tsx'),
+    path.join(__dirname, '/../example/src/components/warning/index.test.tsx'),
+  ];
 }
 
 const resolveModulesPath = (_path) =>

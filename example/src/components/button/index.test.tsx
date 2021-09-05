@@ -34,7 +34,6 @@ useCases.setBackground = {
 
 runner({
   filename: __filename,
-  process,
   Component,
   useCases,
 });

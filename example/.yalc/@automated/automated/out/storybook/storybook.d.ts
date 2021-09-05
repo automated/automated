@@ -1,8 +1,9 @@
 import React from 'react';
 import { UseCases } from './types';
-export declare const runner: ({ filename, Component, useCases: useCasesProp, }: {
+export declare const runner: ({ filename, Component, env, useCases: useCasesProp, }: {
     filename: string;
+    env: any;
     Component: React.ElementType;
-    useCases?: UseCases | undefined;
+    useCases?: any;
 }) => void;
 export * from './types';

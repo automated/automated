@@ -1,57 +1,82 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.runner = void 0;
-// import { toMatchDiffSnapshot } from 'snapshot-diff';
-const react_1 = __importDefault(require("react"));
-// import { render } from '@testing-library/react';
-// import TestRenderer from 'react-test-renderer';
-const react_2 = require("@storybook/react");
-// import puppeteer from 'puppeteer';
-// import '@testing-library/jest-dom/extend-expect';
-const wrapper_1 = __importDefault(require("./storybook/wrapper"));
+const storybook_1 = __importDefault(require("./storybook"));
+const deriveDescribeName = ({ filename }) => {
+    const pwd = String(process.env.PWD);
+    if (!pwd || pwd === 'undefined') {
+        throw new Error('Missing `process.env.PWD`');
+    }
+    return filename.replace(pwd, '');
+    // const initCwd = String(theirProcess.env.INIT_CWD);
+    // if (!initCwd || initCwd === 'undefined') {
+    //   // throw new Error('Missing `process.env.INIT_CWD`');
+    // }
+    // const describeName = filename.replace(initCwd, '');
+};
 const defaultUseCase = {};
 const defaultUseCases = { default: defaultUseCase };
-const isJest = !!process.env.JEST_WORKER_ID;
-const isStorybook = !!process.env.STORYBOOK;
-console.log(process.env);
-const runner = ({ filename, Component, process: theirProcess, useCases: useCasesProp, }) => {
-    const initCwd = String(theirProcess.env.INIT_CWD);
-    if (!initCwd)
-        throw new Error('Missing `process.env.INIT_CWD`');
-    const describeName = filename.replace(initCwd, '');
-    const foo = (0, react_2.storiesOf)('Button', module);
-    const useCases = useCasesProp || defaultUseCases;
-    if (isStorybook) {
-        Object.keys(useCases).forEach((key) => {
-            const { props } = useCases[key];
-            foo.add(key, () => (react_1.default.createElement(wrapper_1.default, null,
-                react_1.default.createElement(Component, { ...props }))));
-        });
-    }
-    // if (isJest) {
-    //   describe(describeName, () => {
-    //     console.log('jest!');
-    //     Object.keys(useCases).forEach((key) => {
-    //       const { props } = useCases[key];
-    //       test(key, () => {
-    //         const render = TestRenderer.create(<Component {...props} />);
-    //         const renderToJson = render.toJSON();
-    //         if (key === 'default') renderToJson;
-    //         expect(renderToJson).toMatchSnapshot();
-    //       });
-    //       (async () => {
-    //         const browser = await puppeteer.launch();
-    //         const page = await browser.newPage();
-    //         await page.goto('https://example.com');
-    //         await page.screenshot({ path: 'example.png' });
-    //         await browser.close();
-    //       })();
-    //     });
-    //   });
-    // }
+const runner = ({ filename, Component, useCases: useCasesProp, }) => {
+    const fooModule = module;
+    (0, storybook_1.default)(fooModule);
+    // const describeName = deriveDescribeName({ filename });
+    // const useCases = useCasesProp || defaultUseCases;
+    // const isJest = !!process.env.IS_JEST;
+    // const isStorybook = !!process.env.STORYBOOK_IS_STORYBOOK;
+    // const Button = () => <div>kldskjsflk</div>;
+    // storiesOf('Button', fooModule).add('with text', () => <Button />);
 };
 exports.runner = runner;
+//   // if (isStorybook) {
+//   /*
+//     Storybook is super brittle – I’m having to do back-flips to make it work.
+//     Here are some notes:
+//     - env must be prefixed with `STORYBOOK_` otherwise it’s just blown away.
+//     - I cannot figure out how to get `storiesOf` to run in another file, so it
+//       needs to be inlined here
+//     - Dynamic story support is being dropped for no reason.
+//       See https://github.com/ComponentDriven/csf/issues/26
+//   */
+//   // storybookRunner(module);
+//   // storybookRunner({
+//   //   Component,
+//   //   describeName,
+//   //   useCases,
+//   //   fooModule: module,
+//   // });
+//   const foo = storiesOf('Button', module);
+//   const Foo = () => <div>kldskjsflk</div>;
+//   foo.add('hello', () => <Foo />);
+//   // Object.entries(useCases).forEach(([key, value]) => {
+//   //   const { props } = value;
+//   //   console.log(key, value);
+//   //   foo.add(key, () => (
+//   //     <Wrapper>
+//   //       <Component {...props} />
+//   //     </Wrapper>
+//   //   ));
+//   // });
+//   // }
+//   // if (isJest) {
+//   // jestRunner({
+//   //   Component,
+//   //   describeName,
+//   //   useCases,
+//   // });
+//   // }
+// };
+__exportStar(require("./types"), exports);
 //# sourceMappingURL=index.js.map

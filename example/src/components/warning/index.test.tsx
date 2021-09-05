@@ -7,6 +7,5 @@ import Component from './';
 
 runner({
   filename: __filename,
-  process,
   Component,
 });
