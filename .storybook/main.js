@@ -1,20 +1,26 @@
+/*
+
+    Storybook is super brittle – I’m having to do back-flips to make it work.
+    Here are some notes:
+
+    - Dynamic story support is being dropped for no reason.
+      See https://github.com/ComponentDriven/csf/issues/26
+
+    - console is blown away so no debugging
+
+  */
 const path = require('path');
 
 function findStories() {
-  // console.log('IS_STORYBOOK', !!process.env.IS_STORYBOOK);
-  // console.log('IS_JEST', !!process.env.IS_JEST);
-  console.log(process.env);
+  /*
 
-  // process.env.STORYBOOK_FOO = 'blamo';
+  env’s must be prefixed with `STORYBOOK_` otherwise they’re just blown away.
+  why storybook .. just, why
 
-  // env’s must be prefixed with `STORYBOOK_` otherwise they’re just blown away.
-  // why storybook .. just, why
+  */
   Object.entries(process.env).forEach(([key, value]) => {
     process.env[`STORYBOOK_${key}`] = value;
   });
-
-  console.log('sdfsdf');
-  console.log(process.env);
 
   return [
     path.join(__dirname, '/../example/src/components/button/index.test.tsx'),
@@ -38,9 +44,6 @@ const out = {
       __filename: true,
       __dirname: true,
     },
-
-    // target: 'node',
-    // node: false,
 
     module: {
       ...config.module,
