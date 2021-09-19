@@ -1,8 +1,5 @@
-import {
-  TestName,
-  UseCase as GenericUseCase,
-  runner,
-} from '@automated/automated';
+import { TestName, UseCase as GenericUseCase } from '@automated/automated';
+import { runner } from '@automated/automated/out/jest/index';
 
 import Component, { Props } from './';
 

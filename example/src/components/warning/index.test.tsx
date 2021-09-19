@@ -1,8 +1,4 @@
-/*
-No props example
-*/
-
-import { runner } from '@automated/automated';
+import { runner } from '@automated/automated/out/jest/index';
 import Component from './';
 
 runner({

@@ -1,8 +1,7 @@
-import { UseCases } from './types';
+import { UseCases } from '../types';
 import React from 'react';
-declare const base: ({ useCases, Component, describeName, }: {
-    useCases: UseCases;
+export declare const runner: ({ dirname, Component, useCases: useCasesProp, }: {
+    dirname: string;
     Component: React.ElementType;
-    describeName: string;
+    useCases?: any;
 }) => void;
-export default base;

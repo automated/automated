@@ -9,7 +9,10 @@
     - console is blown away so no debugging
 
   */
+
 const path = require('path');
+const { DefinePlugin } = require('webpack');
+const nodeExternals = require('webpack-node-externals');
 
 function findStories() {
   /*
@@ -23,8 +26,11 @@ function findStories() {
   });
 
   return [
-    path.join(__dirname, '/../example/src/components/button/index.test.tsx'),
-    path.join(__dirname, '/../example/src/components/warning/index.test.tsx'),
+    path.join(__dirname, '/../example/src/components/button/index.stories.tsx'),
+    path.join(
+      __dirname,
+      '/../example/src/components/warning/index.stories.tsx',
+    ),
   ];
 }
 
@@ -36,31 +42,87 @@ const out = {
 
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
 
-  webpackFinal: (config) => ({
-    ...config,
+  webpackFinal: (config) => {
+    const out = {
+      ...config,
 
-    node: {
-      global: true,
-      __filename: true,
-      __dirname: true,
-    },
+      node: {
+        __dirname: true,
 
-    module: {
-      ...config.module,
+        child_process: 'empty',
+      },
 
-      rules: [
-        ...config.module.rules,
+      module: {
+        ...config.module,
 
-        {
-          test: /\.(ts|tsx)$/,
-          loader: resolveModulesPath('babel-loader'),
-          options: {
-            presets: [resolveModulesPath('@emotion/babel-preset-css-prop')],
+        rules: [
+          ...config.module.rules,
+
+          {
+            test: /\.(ts|tsx)$/,
+            loader: resolveModulesPath('babel-loader'),
+            options: {
+              presets: [resolveModulesPath('@emotion/babel-preset-css-prop')],
+            },
           },
-        },
+
+          // {
+          //   test: /node_modules/,
+          //   use: { loader: 'umdCompatLoader' },
+          // },
+        ],
+      },
+
+      plugins: [
+        ...config.plugins,
+        // new IgnorePlugin({
+        //   checkResource(resource) {
+        //     console.log(resource);
+        //     // do something with resource
+        //     return true;
+        //   },
+        // }),
+
+        new DefinePlugin({
+          __IS_STORYBOOK__: JSON.stringify(
+            !!process.env.STORYBOOK_IS_STORYBOOK,
+          ),
+        }),
       ],
-    },
-  }),
+
+      // resolveLoader: {
+      //   ...config.resolveLoader,
+      //   modules: [path.join(__dirname, 'node_modules')],
+      // },
+
+      // externals: [
+      //   nodeExternals({
+      //     modulesFromFile: true,
+      //   }),
+      // ],
+      // externals: [
+      //   // Every non-relative module is external
+      //   // abc -> require("abc")
+      //   /^[a-z\-0-9]+$/,
+      // ],
+
+      // // target: 'node',
+
+      // resolve: {
+      //   ...config.resolve,
+
+      //   // symlinks: false,
+
+      //   // extensions: ['*'],
+
+      //   // modules: [path.join(__dirname, 'node_modules')],
+      // },
+    };
+
+    // console.log(JSON.stringify(out, null, 2));
+
+    return out;
+  },
 };
 
 module.exports = out;

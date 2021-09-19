@@ -1,12 +1,12 @@
 const Base = () => (
   <div
     css={{
-      padding: 100,
-      borderRadius: 10,
       background: 'red',
+      borderRadius: 10,
       color: 'white',
-      fontWeight: 800,
+      fontFamily: 'arial',
       fontSize: 20,
+      padding: 20,
     }}
   >
     Warning!

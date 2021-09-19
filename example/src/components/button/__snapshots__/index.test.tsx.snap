@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/Users/kirkstrobeck/sync/homedir/git/automated/automated/example/src/components/button snapshot-default 1`] = `
+.emotion-0 {
+  padding: 20px 30px;
+  border-radius: 10px;
+  border: none;
+  background: blue;
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+<button
+  className="emotion-0"
+  onClick={[Function]}
+>
+  Get started
+</button>
+`;
+
+exports[`/Users/kirkstrobeck/sync/homedir/git/automated/automated/example/src/components/button snapshot-setBackground 1`] = `
+.emotion-0 {
+  padding: 20px 30px;
+  border-radius: 10px;
+  border: none;
+  background: green;
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+<button
+  className="emotion-0"
+  onClick={[Function]}
+>
+  Get started
+</button>
+`;
+
+exports[`/Users/kirkstrobeck/sync/homedir/git/automated/automated/example/src/components/button snapshot-setText 1`] = `
+.emotion-0 {
+  padding: 20px 30px;
+  border-radius: 10px;
+  border: none;
+  background: blue;
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+<button
+  className="emotion-0"
+  onClick={[Function]}
+>
+  Hello automated
+</button>
+`;

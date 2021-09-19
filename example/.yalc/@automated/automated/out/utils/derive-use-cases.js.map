@@ -1,0 +1,1 @@
+{"version":3,"file":"derive-use-cases.js","sourceRoot":"","sources":["../../src/utils/derive-use-cases.ts"],"names":[],"mappings":";;AAEA,MAAM,IAAI,GAAG,CAAC,EAAE,QAAQ,EAA2B,EAAE,EAAE;IACrD,MAAM,cAAc,GAAY,EAAE,CAAC;IACnC,MAAM,eAAe,GAAa,EAAE,OAAO,EAAE,cAAc,EAAE,CAAC;IAC9D,OAAO,QAAQ,IAAI,eAAe,CAAC;AACrC,CAAC,CAAC;AAEF,kBAAe,IAAI,CAAC"}

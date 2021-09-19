@@ -34,9 +34,8 @@
   },
   "version": "0.1.0",
   "dependencies": {
-    "@types/jest-image-snapshot": "^4.3.1",
-    "jest-image-snapshot": "^4.5.1",
-    "kebab-case": "^1.0.1"
+    "node-fetch": "^3.0.0",
+    "webpack-node-externals": "^3.0.0"
   },
-  "yalcSig": "315640b46f5bab8920fdcd49ef6525b2"
+  "yalcSig": "03405d55255b300abd7cce14d9897a9e"
 }

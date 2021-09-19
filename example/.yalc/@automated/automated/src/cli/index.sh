@@ -6,9 +6,12 @@
 
 if [ "$1" = "jest" ]; then
 
+  echo "automated:jest"
 
   all_args=("$@")
   rest_args=("${all_args[@]:1}")
+
+  export IS_JEST=true
 
   IS_JEST=true \
   /Users/kirkstrobeck/sync/homedir/git/automated/automated/example/node_modules/.bin/jest \
@@ -16,12 +19,7 @@ if [ "$1" = "jest" ]; then
 
 elif [ "$1" = "storybook" ]; then
 
-
-# console.log('isJest', isJest);
-# console.log('isStorybook', isStorybook);
-
-
-
+  echo "automated:storybook"
 
   export STORYBOOK_IS_STORYBOOK=true
 

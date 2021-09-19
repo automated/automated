@@ -1,7 +1,15 @@
-import type { Config } from '@jest/types';
+// import type { Config } from '@jest/types';
 
-const config: Config.InitialOptions = {
-  // testEnvironment: 'jsdom',
+// const config = {
+//   // testEnvironment: 'jsdom',
+
+//   globals: {
+//     __IS_STORYBOOK__: false,
+//   },
+// };
+
+const config = {
+  setupFilesAfterEnv: ['./jest.setup.js'],
 };
 
 export default config;

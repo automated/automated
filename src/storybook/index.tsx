@@ -1,40 +1,31 @@
-import React from 'react';
-import { UseCase, UseCases } from '../types';
 import { storiesOf } from '@storybook/react';
-// import storybookRunner from './storybook';
-// import jestRunner from './jest';
-
-const deriveDescribeName = ({ filename }: { filename: string }) => {
-  const pwd = String(process.env.PWD);
-  if (!pwd || pwd === 'undefined') {
-    throw new Error('Missing `process.env.PWD`');
-  }
-  return filename.replace(pwd, '');
-
-  // const initCwd = String(theirProcess.env.INIT_CWD);
-  // if (!initCwd || initCwd === 'undefined') {
-  //   // throw new Error('Missing `process.env.INIT_CWD`');
-  // }
-  // const describeName = filename.replace(initCwd, '');
-};
-
-const defaultUseCase: UseCase = {};
-const defaultUseCases: UseCases = { default: defaultUseCase };
+import { UseCases } from '../types';
+import React from 'react';
+import Wrapper from './wrapper';
+import deriveDescribeName from '../utils/derive-describe-name';
+import deriveUseCases from '../utils/derive-use-cases';
 
 export const runner = ({
-  filename,
+  dirname,
   Component,
-  // process: theirProcess,
   useCases: useCasesProp,
 }: {
-  filename: string;
-  // process: Process;
+  dirname: string;
   Component: React.ElementType;
   useCases?: UseCases;
 }) => {
-  const foo = storiesOf('Button', module);
+  const describeName = deriveDescribeName({ dirname });
+  const useCases = deriveUseCases({ useCases: useCasesProp });
 
-  const Foo = () => <div>kldskjsflk</div>;
+  const storiesOfInstance = storiesOf(describeName, module);
 
-  foo.add('hello', () => <Foo />);
+  Object.entries(useCases).forEach(([key, value]) => {
+    const { props } = value;
+
+    storiesOfInstance.add(key, () => (
+      <Wrapper>
+        <Component {...props} />
+      </Wrapper>
+    ));
+  });
 };
