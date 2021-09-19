@@ -1,4 +1,4 @@
-import { TestName, UseCase as GenericUseCase } from '@automated/automated';
+import { UseCase as GenericUseCase } from '@automated/automated';
 import { runner } from '@automated/automated/out/jest/index';
 
 import Component, { Props } from './';
@@ -7,27 +7,33 @@ interface UseCase extends Omit<GenericUseCase, 'props'> {
   props: Props;
 }
 
-const useCases: Record<TestName, UseCase> = {};
-
-useCases.default = {
+const defaults: UseCase = {
   props: {
     onClick: () => {},
   },
 };
 
-useCases.setText = {
-  props: {
-    ...useCases.default.props,
-    text: 'Hello automated',
-  },
-};
+const useCases: Array<UseCase> = [
+  defaults,
 
-useCases.setBackground = {
-  props: {
-    ...useCases.default.props,
-    background: 'green',
+  {
+    name: 'Set text',
+    props: {
+      ...defaults.props,
+
+      text: 'Hello automated',
+    },
   },
-};
+
+  {
+    name: 'Set background',
+    props: {
+      ...defaults.props,
+
+      background: 'green',
+    },
+  },
+];
 
 runner({
   dirname: __dirname,
