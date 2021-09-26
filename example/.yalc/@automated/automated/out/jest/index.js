@@ -9,22 +9,22 @@ const snapshot_diff_1 = require("snapshot-diff");
 const jest_image_snapshot_1 = require("jest-image-snapshot");
 const derive_describe_name_1 = __importDefault(require("../utils/derive-describe-name"));
 const derive_use_cases_1 = __importDefault(require("../utils/derive-use-cases"));
-// import asyncLoop from '../utils/async-loop';
 const shared_1 = __importDefault(require("../shared"));
 const puppeteer_1 = __importDefault(require("puppeteer"));
 const react_test_renderer_1 = __importDefault(require("react-test-renderer"));
 const react_1 = __importDefault(require("react"));
+const console = require('console');
 expect.extend({ toMatchImageSnapshot: jest_image_snapshot_1.toMatchImageSnapshot, toMatchDiffSnapshot: snapshot_diff_1.toMatchDiffSnapshot });
 const runner = async ({ dirname, Component, useCases: useCasesProp, }) => {
     const describeName = (0, derive_describe_name_1.default)({ dirname });
     const useCases = (0, derive_use_cases_1.default)({ useCases: useCasesProp });
-    let isStorybookRunning = false;
-    let storybookTestFn = process.env.STORYBOOK_IS_RUNNING ? test : test.skip;
+    let isStorybookRunning = process.env.STORYBOOK_IS_RUNNING;
+    let storybookTestFn = isStorybookRunning ? test : test.skip;
     let browser;
     beforeAll(async () => {
         if (isStorybookRunning) {
             browser = await puppeteer_1.default.launch({
-            // headless: false,
+                headless: false,
             });
         }
     });
@@ -52,8 +52,8 @@ const runner = async ({ dirname, Component, useCases: useCasesProp, }) => {
                     });
                     const id = `${(0, change_case_1.paramCase)(describeName)}--${name}`;
                     const url = `${shared_1.default.storybookUrl}/iframe.html?id=${id}&args=&viewMode=story`;
+                    console.log(url);
                     await page.goto(url);
-                    // const image = await page.screenshot({ path: `${id}.png` });
                     const image = await page.screenshot();
                     expect(image).toMatchImageSnapshot({
                         failureThreshold: 0.01,

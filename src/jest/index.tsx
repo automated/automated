@@ -5,13 +5,12 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import { UseCases } from '../types';
 import deriveDescribeName from '../utils/derive-describe-name';
 import deriveUseCases from '../utils/derive-use-cases';
-// import asyncLoop from '../utils/async-loop';
 import shared from '../shared';
 import puppeteer from 'puppeteer';
 import TestRenderer from 'react-test-renderer';
 import React from 'react';
 
-import fetch from 'node-fetch';
+const console = require('console');
 
 expect.extend({ toMatchImageSnapshot, toMatchDiffSnapshot });
 
@@ -27,14 +26,14 @@ export const runner = async ({
   const describeName = deriveDescribeName({ dirname });
   const useCases = deriveUseCases({ useCases: useCasesProp });
 
-  let isStorybookRunning = false;
-  let storybookTestFn = process.env.STORYBOOK_IS_RUNNING ? test : test.skip;
+  let isStorybookRunning = process.env.STORYBOOK_IS_RUNNING;
+  let storybookTestFn = isStorybookRunning ? test : test.skip;
   let browser: Browser;
 
   beforeAll(async () => {
     if (isStorybookRunning) {
       browser = await puppeteer.launch({
-        // headless: false,
+        headless: false,
       });
     }
   });
@@ -68,9 +67,10 @@ export const runner = async ({
 
           const url = `${shared.storybookUrl}/iframe.html?id=${id}&args=&viewMode=story`;
 
+          console.log(url);
+
           await page.goto(url);
 
-          // const image = await page.screenshot({ path: `${id}.png` });
           const image = await page.screenshot();
 
           expect(image).toMatchImageSnapshot({
