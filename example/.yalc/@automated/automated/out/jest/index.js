@@ -24,7 +24,7 @@ const runner = async ({ dirname, Component, useCases: useCasesProp, }) => {
     beforeAll(async () => {
         if (isStorybookRunning) {
             browser = await puppeteer_1.default.launch({
-                headless: false,
+            // headless: false,
             });
         }
     });

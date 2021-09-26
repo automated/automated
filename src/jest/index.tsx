@@ -33,7 +33,7 @@ export const runner = async ({
   beforeAll(async () => {
     if (isStorybookRunning) {
       browser = await puppeteer.launch({
-        headless: false,
+        // headless: false,
       });
     }
   });
