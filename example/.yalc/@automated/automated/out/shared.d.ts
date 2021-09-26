@@ -1,5 +1,4 @@
 declare const base: {
-    storybookPort: number;
-    storybookUrl: string;
+    storybookUrl: string | undefined;
 };
 export default base;

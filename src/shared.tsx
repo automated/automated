@@ -1,8 +1,7 @@
 const storybookPort = 3144;
 
 const base = {
-  storybookPort,
-  storybookUrl: `http://localhost:${storybookPort}`,
+  storybookUrl: process.env.STORYBOOK_URL,
 };
 
 export default base;

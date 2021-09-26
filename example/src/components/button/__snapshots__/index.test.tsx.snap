@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/src/components/button snapshot-test-1 1`] = `
+.emotion-0 {
+  background: blue;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 20px 30px;
+}
+
+<button
+  className="emotion-0"
+  onClick={[Function]}
+>
+  Get started
+</button>
+`;
+
+exports[`/src/components/button snapshot-test-2 1`] = `
+.emotion-0 {
+  background: blue;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 20px 30px;
+}
+
+<button
+  className="emotion-0"
+  onClick={[Function]}
+>
+  Hello automated
+</button>
+`;
+
+exports[`/src/components/button snapshot-test-3 1`] = `
+.emotion-0 {
+  background: green;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 20px 30px;
+}
+
+<button
+  className="emotion-0"
+  onClick={[Function]}
+>
+  Get started
+</button>
+`;

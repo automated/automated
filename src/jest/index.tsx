@@ -13,8 +13,6 @@ import React from 'react';
 
 import fetch from 'node-fetch';
 
-const console = require('console');
-
 expect.extend({ toMatchImageSnapshot, toMatchDiffSnapshot });
 
 export const runner = async ({
@@ -34,34 +32,37 @@ export const runner = async ({
   let browser: Browser;
 
   beforeAll(async () => {
-    const { status } = await fetch(shared.storybookUrl);
-    isStorybookRunning = status === 200;
-
     if (isStorybookRunning) {
       browser = await puppeteer.launch({
-        headless: false,
+        // headless: false,
       });
     }
   });
 
   describe(describeName, () => {
     useCases.forEach(async (item, key) => {
-      const { name } = item;
-
-      // test(`snapshot-${name}`, async () => {
-      //   const render = TestRenderer.create(<Component {...props} />);
-      //   const renderToJson = render.toJSON();
-      //   if (!key) renderToJson;
-      //   expect(renderToJson).toMatchSnapshot();
-      // });
+      const { name, props } = item;
 
       afterAll(async () => {
         if (browser) await browser.close();
       });
 
-      storybookTestFn(`image-${name}`, async () => {
+      test(`snapshot-${name}`, async () => {
+        const render = TestRenderer.create(<Component {...props} />);
+        const renderToJson = render.toJSON();
+        if (!key) renderToJson;
+        expect(renderToJson).toMatchSnapshot();
+      });
+
+      storybookTestFn(`storybook-${name}`, async () => {
         if (browser) {
           const page = await browser.newPage();
+
+          await page.evaluateOnNewDocument(() => {
+            const style = document.createElement('style');
+            style.innerHTML = '.body { caret-color: transparent }';
+            document.getElementsByTagName('head')[0].appendChild(style);
+          });
 
           const id = `${paramCase(describeName)}--${name}`;
 
@@ -69,10 +70,9 @@ export const runner = async ({
 
           await page.goto(url);
 
-          // // caret-color: transparent;
-
-          await page.screenshot({ path: `${id}.png` });
+          // const image = await page.screenshot({ path: `${id}.png` });
           const image = await page.screenshot();
+
           expect(image).toMatchImageSnapshot({
             failureThreshold: 0.01,
             failureThresholdType: 'percent',
