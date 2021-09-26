@@ -52,7 +52,6 @@ const runner = async ({ dirname, Component, useCases: useCasesProp, }) => {
                     });
                     const id = `${(0, change_case_1.paramCase)(describeName)}--${name}`;
                     const url = `${shared_1.default.storybookUrl}/iframe.html?id=${id}&args=&viewMode=story`;
-                    console.log(url);
                     await page.goto(url);
                     const image = await page.screenshot();
                     expect(image).toMatchImageSnapshot({

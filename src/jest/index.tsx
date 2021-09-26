@@ -66,13 +66,9 @@ export const runner = async ({
           const id = `${paramCase(describeName)}--${name}`;
 
           const url = `${shared.storybookUrl}/iframe.html?id=${id}&args=&viewMode=story`;
-
-          console.log(url);
-
           await page.goto(url);
 
           const image = await page.screenshot();
-
           expect(image).toMatchImageSnapshot({
             failureThreshold: 0.01,
             failureThresholdType: 'percent',
