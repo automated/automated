@@ -1,4 +1,5 @@
 /example/.next
+/example/.yalc/@automated/automated/out
 /example/node_modules
 /node_modules
 /out

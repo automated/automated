@@ -5,7 +5,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import { UseCases } from '../types';
 import deriveDescribeName from '../utils/derive-describe-name';
 import deriveUseCases from '../utils/derive-use-cases';
-import asyncLoop from '../utils/async-loop';
+// import asyncLoop from '../utils/async-loop';
 import shared from '../shared';
 import puppeteer from 'puppeteer';
 import TestRenderer from 'react-test-renderer';
@@ -13,9 +13,11 @@ import React from 'react';
 
 import fetch from 'node-fetch';
 
+const console = require('console');
+
 expect.extend({ toMatchImageSnapshot, toMatchDiffSnapshot });
 
-export const runner = ({
+export const runner = async ({
   dirname,
   Component,
   useCases: useCasesProp,
@@ -27,61 +29,58 @@ export const runner = ({
   const describeName = deriveDescribeName({ dirname });
   const useCases = deriveUseCases({ useCases: useCasesProp });
 
-  let browser: Browser;
   let isStorybookRunning = false;
+  let storybookTestFn = process.env.STORYBOOK_IS_RUNNING ? test : test.skip;
+  let browser: Browser;
 
   beforeAll(async () => {
-    try {
-      const storybookRes = await fetch(shared.storybookUrl);
-      console.log(storybookRes);
+    const { status } = await fetch(shared.storybookUrl);
+    isStorybookRunning = status === 200;
 
-      isStorybookRunning = true;
-
+    if (isStorybookRunning) {
       browser = await puppeteer.launch({
         headless: false,
       });
-    } catch (error) {
-      // console.log(error);
-    }
-  });
-
-  afterAll(async () => {
-    if (isStorybookRunning) {
-      await browser.close();
     }
   });
 
   describe(describeName, () => {
-    Object.entries(useCases).forEach(async ([key, value]) => {
-      const { props } = value;
+    useCases.forEach(async (item, key) => {
+      const { name } = item;
 
-      test(`snapshot-${key}`, async () => {
-        const render = TestRenderer.create(<Component {...props} />);
-        const renderToJson = render.toJSON();
-        if (key === 'default') renderToJson;
-        expect(renderToJson).toMatchSnapshot();
+      // test(`snapshot-${name}`, async () => {
+      //   const render = TestRenderer.create(<Component {...props} />);
+      //   const renderToJson = render.toJSON();
+      //   if (!key) renderToJson;
+      //   expect(renderToJson).toMatchSnapshot();
+      // });
+
+      afterAll(async () => {
+        if (browser) await browser.close();
       });
 
-      if (isStorybookRunning) {
-        test(`image-${key}`, async () => {
+      storybookTestFn(`image-${name}`, async () => {
+        if (browser) {
           const page = await browser.newPage();
 
-          const url = `${shared.storybookUrl}/iframe.html?id=${paramCase(
-            describeName,
-          )}--${key}&args=&viewMode=story`;
-          console.log(url);
+          const id = `${paramCase(describeName)}--${name}`;
+
+          const url = `${shared.storybookUrl}/iframe.html?id=${id}&args=&viewMode=story`;
+
           await page.goto(url);
 
-          // caret-color: transparent;
+          // // caret-color: transparent;
 
-          // await page.screenshot({ path: `example-${key}.png` });
+          await page.screenshot({ path: `${id}.png` });
           const image = await page.screenshot();
+          expect(image).toMatchImageSnapshot({
+            failureThreshold: 0.01,
+            failureThresholdType: 'percent',
+          });
 
           await page.close();
-
-          expect(image).toMatchImageSnapshot();
-        });
-      }
+        }
+      });
     });
   });
 };

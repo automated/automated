@@ -13,6 +13,12 @@ if [ "$1" = "jest" ]; then
 
   export IS_JEST=true
 
+  STORYBOOK_URL="http://localhost:3144"
+  if [ "$(curl -s -o /dev/null -w "%{http_code}" $STORYBOOK_URL)" = "200" ]; then
+      STORYBOOK_IS_RUNNING=true
+  fi
+  export STORYBOOK_IS_RUNNING
+
   IS_JEST=true \
   /Users/kirkstrobeck/sync/homedir/git/automated/automated/example/node_modules/.bin/jest \
   ${rest_args[@]}

@@ -1,16 +1,14 @@
 export type Props = Record<string, any>;
 
 export type UseCase = {
-  /** Will use the key as the name unless a string is provided **/
+  /** The title associated with a test **/
   name?: string;
 
   /** The React props to use **/
-  props?: Props;
+  props: Props;
 };
 
-export type UseCases = Record<TestName, UseCase>;
-
-export type TestName = string;
+export type UseCases = Array<UseCase>;
 
 type Process = NodeJS.Process & {
   env: {

@@ -16,13 +16,12 @@ export const runner = ({
 }) => {
   const describeName = deriveDescribeName({ dirname });
   const useCases = deriveUseCases({ useCases: useCasesProp });
-
   const storiesOfInstance = storiesOf(describeName, module);
 
-  Object.entries(useCases).forEach(([key, value]) => {
-    const { props } = value;
+  useCases.forEach((item) => {
+    const { name, props } = item;
 
-    storiesOfInstance.add(key, () => (
+    storiesOfInstance.add(name, () => (
       <Wrapper>
         <Component {...props} />
       </Wrapper>

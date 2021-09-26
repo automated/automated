@@ -1,5 +1,11 @@
 import { UseCases } from '../types';
-declare const base: ({ useCases }: {
-    useCases?: UseCases | undefined;
-}) => UseCases;
+declare const base: ({ useCases: useCasesProp }: {
+    useCases?: UseCases;
+}) => ({
+    name: string;
+    props: import("../types").Props;
+} | {
+    name: string;
+    props: {};
+})[];
 export default base;

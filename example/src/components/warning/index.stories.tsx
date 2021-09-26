@@ -1,7 +1,4 @@
 import { runner } from '@automated/automated/out/storybook/index';
-import Component from './';
+import automated from './automated';
 
-runner({
-  dirname: __dirname,
-  Component,
-});
+runner(automated);

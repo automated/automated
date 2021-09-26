@@ -13,9 +13,9 @@ const runner = ({ dirname, Component, useCases: useCasesProp, }) => {
     const describeName = (0, derive_describe_name_1.default)({ dirname });
     const useCases = (0, derive_use_cases_1.default)({ useCases: useCasesProp });
     const storiesOfInstance = (0, react_1.storiesOf)(describeName, module);
-    Object.entries(useCases).forEach(([key, value]) => {
-        const { props } = value;
-        storiesOfInstance.add(key, () => (react_2.default.createElement(wrapper_1.default, null,
+    useCases.forEach((item) => {
+        const { name, props } = item;
+        storiesOfInstance.add(name, () => (react_2.default.createElement(wrapper_1.default, null,
             react_2.default.createElement(Component, { ...props }))));
     });
 };

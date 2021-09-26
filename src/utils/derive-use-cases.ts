@@ -1,9 +1,20 @@
-import { UseCase, UseCases } from '../types';
+import { UseCases } from '../types';
 
-const base = ({ useCases }: { useCases?: UseCases }) => {
-  const defaultUseCase: UseCase = {};
-  const defaultUseCases: UseCases = { default: defaultUseCase };
-  return useCases || defaultUseCases;
+const base = ({ useCases: useCasesProp }: { useCases?: UseCases }) => {
+  return (
+    useCasesProp || [
+      {
+        name: 0,
+        props: {},
+      },
+    ]
+  ).map((item, key) => {
+    return {
+      ...item,
+
+      name: `test-${key + 1}`,
+    };
+  });
 };
 
 export default base;
