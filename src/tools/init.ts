@@ -1,4 +1,4 @@
-import { copySync, rmSync } from 'fs-extra';
+import { copySync, rmSync, readdirSync } from 'fs-extra';
 import { existsSync } from 'fs';
 import glob from 'glob';
 import path from 'path';
@@ -11,6 +11,8 @@ const testFiles = glob.sync(`**/${fileName}.*`);
 const templatePath = path.join(__dirname, '../template');
 
 const libMeta = require(path.join(templatePath, 'index.json'));
+
+const templateContentsFileNames = readdirSync(templatePath);
 
 asyncLoop(testFiles, (file: string) => {
   const dir = file.substr(0, file.indexOf(fileName));
@@ -25,7 +27,9 @@ asyncLoop(testFiles, (file: string) => {
     ));
     if (meta.version >= libMeta.version) return;
 
-    rmSync(automatedFiles, { recursive: true });
+    templateContentsFileNames.forEach((file) => {
+      rmSync(path.join(automatedFiles, file));
+    });
   }
 
   copySync(templatePath, automatedFiles);
