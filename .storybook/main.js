@@ -26,7 +26,9 @@ function findStories() {
     process.env[`STORYBOOK_${key}`] = value;
   });
 
-  return glob.sync(`**/__automated__/index.stories.tsx`);
+  return glob.sync(
+    path.join(__dirname, `../**/__automated__/index.stories.tsx`),
+  );
 }
 
 const resolveModulesPath = (_path) =>
