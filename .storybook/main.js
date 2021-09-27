@@ -10,6 +10,7 @@
 
   */
 
+const glob = require('glob');
 const path = require('path');
 const { DefinePlugin } = require('webpack');
 const nodeExternals = require('webpack-node-externals');
@@ -25,13 +26,7 @@ function findStories() {
     process.env[`STORYBOOK_${key}`] = value;
   });
 
-  return [
-    path.join(__dirname, '/../example/src/components/button/index.stories.tsx'),
-    path.join(
-      __dirname,
-      '/../example/src/components/warning/index.stories.tsx',
-    ),
-  ];
+  return glob.sync(`**/__automated__/index.stories.tsx`);
 }
 
 const resolveModulesPath = (_path) =>

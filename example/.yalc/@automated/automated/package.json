@@ -34,8 +34,12 @@
   },
   "version": "0.1.0",
   "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "fs-extra": "^10.0.0",
+    "glob": "^7.2.0",
     "node-fetch": "^3.0.0",
+    "ts-node": "^10.2.1",
     "webpack-node-externals": "^3.0.0"
   },
-  "yalcSig": "0493ff5833262c78018fcde92ac31a14"
+  "yalcSig": "bc1b82abdd7bca07d17a7e1155b4d3c5"
 }
