@@ -15,6 +15,6 @@
     "target": "esnext",
     "skipLibCheck": true
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "src/template"],
   "include": ["src"]
 }
