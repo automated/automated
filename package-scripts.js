@@ -18,27 +18,12 @@ const dev = [
     `--watch "tsconfig.json"`,
     `--watch "package.json"`,
     `--watch "src/**/*"`,
-    // `--watch "webpack.config.ts"`,
     `--exec "${build} && ${yalcPublishToExample}"`,
   ].join(' '),
 ].join(' ');
 
 const scripts = {
   dev,
-
-  // yalcPublishBinToExample: [
-  //   "yalc publish",
-  //   [
-  //     `(cd example`,
-  //     "../node_modules/.bin/yalc add @automated/automated",
-  //     "npm install)",
-  //   ].join(" && "),
-  // ].join(" && "),
 };
 
 module.exports = { scripts };
-
-// N/A
-// "bin": {
-//   "automated": "./out/index.sh"
-// },
