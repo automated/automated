@@ -1,2 +1,6 @@
+__automated__
+/example/.next
+/example/.yalc/@automated/automated/out
+/example/node_modules
 /node_modules
-/package-lock.json
+/out
