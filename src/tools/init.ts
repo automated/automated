@@ -1,4 +1,4 @@
-import { copySync, rmSync, readdirSync } from 'fs-extra';
+import { writeFileSync, copySync, rmSync, readdirSync } from 'fs-extra';
 import { existsSync } from 'fs';
 import glob from 'glob';
 import path from 'path';
@@ -33,4 +33,8 @@ asyncLoop(testFiles, (file: string) => {
   }
 
   copySync(templatePath, automatedFiles);
+  writeFileSync(
+    path.join(automatedFiles, '/.gitignore'),
+    ['index.stories.tsx', 'index.test.tsx', 'README.md'].join('\n'),
+  );
 });
