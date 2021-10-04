@@ -6,16 +6,25 @@
 
 ## `__automated.tsx`
 
-Create a file named `__automated.tsx` with the following contents
+### Quick start
+
+1. Go to one of your components and let’s say the component is named “Foo”
+1. Put it in a folder called “foo” with the component file named `index.tsx`
+1. Make the component the default export
+1. Add a sibling file named `__automated.tsx`, with the following contents
 
 ```tsx
 import Component from '.';
 
 export default {
-  dirname: __dirname,
   Component,
+  dirname: __dirname,
 };
 ```
+
+1. Then run `yarn automated init` (You’ll see some files added).
+1. Now you can run `yarn automated storybook` to see it in an isolated dev environment
+1. Open another terminal and run `yarn automated jest` to generate snapshots and visual regression tests.
 
 ### Examples
 
