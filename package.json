@@ -9,6 +9,14 @@
   "bugs": {
     "url": "https://github.com/automated/automated/issues"
   },
+  "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "fs-extra": "^10.0.0",
+    "glob": "^7.2.0",
+    "node-fetch": "^3.0.0",
+    "ts-node": "^10.2.1",
+    "webpack-node-externals": "^3.0.0"
+  },
   "description": "Use-case-oriented testing",
   "devDependencies": {
     "@babel/core": "^7.15.0",
@@ -77,13 +85,5 @@
   "scripts": {
     "default": "nps"
   },
-  "version": "0.3.0",
-  "dependencies": {
-    "@types/fs-extra": "^9.0.13",
-    "fs-extra": "^10.0.0",
-    "glob": "^7.2.0",
-    "node-fetch": "^3.0.0",
-    "ts-node": "^10.2.1",
-    "webpack-node-externals": "^3.0.0"
-  }
+  "version": "0.3.0"
 }
