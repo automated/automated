@@ -28,11 +28,11 @@ export default {
 
 ```tsx
 export default {
-  // [required] this supports automatic naming
-  dirname: __dirname,
-
   // [required] the subject React component
   Component,
+
+  // [required] this supports automatic naming
+  dirname: __dirname,
 
   // an array of use-cases
   useCases,

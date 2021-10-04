@@ -4,6 +4,7 @@ const build = [
   'tsc',
   'cp ./src/cli/index.sh ./dist/automated.sh',
   'cp -r ./src/template ./dist/template',
+  'cp ./src/types.d.ts ./dist',
 ].join(' && ');
 
 const yalcPublishToExample = [
