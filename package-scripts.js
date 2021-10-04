@@ -2,7 +2,7 @@ const lint = "eslint --ignore-path .gitignore --ext .jsx,.js,.ts,.tsx '.'";
 
 const build = [
   'tsc',
-  'cp -r ./src/cli ./dist/cli',
+  'cp ./src/cli/index.sh ./dist/automated.sh',
   'cp -r ./src/template ./dist/template',
 ].join(' && ');
 

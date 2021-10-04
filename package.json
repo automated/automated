@@ -4,7 +4,7 @@
     "url": "https://github.com/automated/automated/contributors"
   },
   "bin": {
-    "automated": "src/cli/index.sh"
+    "automated": "dist/automated.sh"
   },
   "bugs": {
     "url": "https://github.com/automated/automated/issues"
