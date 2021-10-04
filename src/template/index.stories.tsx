@@ -1,4 +1,4 @@
-import { runner } from '@automated/automated/out/storybook/index';
+import { runner } from '@automated/automated/dist/storybook/index';
 import automated from '../__automated';
 
 runner(automated);

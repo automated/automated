@@ -1,6 +1,6 @@
 const lint = "eslint --ignore-path .gitignore --ext .jsx,.js,.ts,.tsx '.'";
 
-const build = 'tsc';
+const build = ['tsc', 'cp -r ./src/cli ./dist/cli'].join(' && ');
 
 const yalcPublishToExample = [
   'yalc publish',
@@ -8,8 +8,6 @@ const yalcPublishToExample = [
     ' && ',
   ),
 ].join(' && ');
-
-const yalcWatchAndPublish = `yarn nodemon --watch out --exec "${yalcPublishToExample}"`;
 
 const dev = [
   `yarn nodemon`,
@@ -23,7 +21,11 @@ const dev = [
 ].join(' ');
 
 const scripts = {
+  build,
+
   dev,
+
+  publish: '',
 };
 
 module.exports = { scripts };

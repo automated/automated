@@ -9,7 +9,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "./out",
+    "outDir": "./dist",
     "sourceMap": true,
     "strict": true,
     "target": "esnext",

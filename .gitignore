@@ -1,6 +1,5 @@
-__automated__
+/dist
 /example/.next
-/example/.yalc/@automated/automated/out
+/example/.yalc
 /example/node_modules
 /node_modules
-/out

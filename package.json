@@ -59,7 +59,7 @@
     "node": ">=14.17.5"
   },
   "files": [
-    "out"
+    "dist"
   ],
   "homepage": "https://github.com/automated/automated",
   "keywords": [
@@ -68,7 +68,7 @@
     "coverage"
   ],
   "license": "Apache-2.0",
-  "main": "out/index.js",
+  "main": "dist/index.js",
   "name": "@automated/automated",
   "repository": {
     "type": "git",
