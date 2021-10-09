@@ -21,6 +21,7 @@ asyncLoop(testFiles, (file: string) => {
   const readMe = path.join(automatedDir, 'README.md');
   const config = path.join(automatedDir, 'index.json');
 
+  console.log('projectRootDir', projectRootDir);
   console.log('componentDir', componentDir);
 
   if (!existsSync(readMe) || libVersion > require(config).version) {
