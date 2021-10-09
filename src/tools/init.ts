@@ -24,6 +24,10 @@ asyncLoop(testFiles, (file: string) => {
   if (!existsSync(readMe) || libVersion > require(config).version) {
     readdirSync(automatedDir).forEach((file) => {
       if (file !== 'foo') {
+        console.log(
+          `path.join(automatedDir, file)`,
+          path.join(automatedDir, file),
+        );
         rmSync(path.join(automatedDir, file));
       }
     });
