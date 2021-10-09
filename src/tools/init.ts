@@ -37,6 +37,10 @@ asyncLoop(testFiles, (file: string) => {
     });
   }
 
+  console.log('copySync');
+  console.log('libTemplateDir', libTemplateDir);
+  console.log('automatedDir', automatedDir);
+
   copySync(libTemplateDir, automatedDir, { overwrite: true });
 
   writeFileSync(
