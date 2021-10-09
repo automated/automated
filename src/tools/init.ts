@@ -43,6 +43,12 @@ asyncLoop(testFiles, (file: string) => {
 
   copySync(libTemplateDir, path.join(automatedDir, '/foo'), {
     overwrite: true,
+    filter: (src, dest) => {
+      console.log('src', src);
+      console.log('dest', dest);
+      console.log('---');
+      return true;
+    },
   });
 
   writeFileSync(
