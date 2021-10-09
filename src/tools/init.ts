@@ -12,38 +12,38 @@ import asyncLoop from '../utils/async-loop';
 const fileName = '__automated';
 const templateDirName = '__automated__';
 
-const libTemplateDir = path.join(__dirname, '../template');
+const absLibTemplateDir = path.join(__dirname, '../template');
 
-const projectRootDir = path.join(__dirname, '../../../../../');
-const projectTestFiles = glob.sync(`${projectRootDir}/**/${fileName}.*`);
+const absProjectRootDir = path.join(__dirname, '../../../../../');
+const absProjectTestFiles = glob.sync(`${absProjectRootDir}/**/${fileName}.*`);
 
-const libMeta = require(path.join(libTemplateDir, 'index.json'));
+const libMeta = require(path.join(absLibTemplateDir, 'index.json'));
 const libVersion = libMeta.version;
 
-asyncLoop(projectTestFiles, (file: string) => {
-  const relativeComponentDir = file.substr(0, file.indexOf(fileName));
-  const componentDir = path.join(projectRootDir, relativeComponentDir);
-  const automatedDir = path.join(componentDir, templateDirName);
-  const readMe = path.join(automatedDir, 'README.md');
-  const config = path.join(automatedDir, 'index.json');
+asyncLoop(absProjectTestFiles, (file: string) => {
+  const relComponentDir = file.substr(0, file.indexOf(fileName));
+  const absComponentDir = path.join(absProjectRootDir, relComponentDir);
+  const absAutomatedDir = path.join(absComponentDir, templateDirName);
+  const absReadMe = path.join(absAutomatedDir, 'README.md');
+  const absConfig = path.join(absAutomatedDir, 'index.json');
 
   if (
-    pathExistsSync(automatedDir) &&
-    (!pathExistsSync(readMe) || libVersion > require(config).version)
+    pathExistsSync(absAutomatedDir) &&
+    (!pathExistsSync(absReadMe) || libVersion > require(absConfig).version)
   ) {
-    readdirSync(automatedDir).forEach((file) => {
+    readdirSync(absAutomatedDir).forEach((file) => {
       if (file !== 'foo') {
-        rmSync(path.join(automatedDir, file));
+        rmSync(path.join(absAutomatedDir, file));
       }
     });
   }
 
-  copySync(libTemplateDir, automatedDir, {
+  copySync(absLibTemplateDir, absAutomatedDir, {
     overwrite: true,
   });
 
   writeFileSync(
-    path.join(automatedDir, '/.gitignore'),
+    path.join(absAutomatedDir, '/.gitignore'),
     ['index.stories.tsx', 'index.test.tsx', 'README.md'].join('\n'),
   );
 });
