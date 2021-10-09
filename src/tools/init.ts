@@ -40,6 +40,13 @@ asyncLoop(absProjectTestFiles, (file: string) => {
 
   copySync(absLibTemplateDir, absAutomatedDir, {
     overwrite: true,
+
+    filter: (src, dest) => {
+      console.log('src', src);
+      console.log('dest', dest);
+      console.log('---');
+      return true;
+    },
   });
 
   writeFileSync(
