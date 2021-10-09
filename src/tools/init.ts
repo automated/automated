@@ -16,27 +16,21 @@ const libMeta = require(path.join(templatePath, 'index.json'));
 const templateContentsFileNames = readdirSync(templatePath);
 
 asyncLoop(testFiles, (file: string) => {
-  const dir = file.substr(0, file.indexOf(fileName));
-  const automatedFiles = path.join(projectRoot, dir, templateFolderName);
-  console.log('automatedFiles', automatedFiles);
+  const relativeComponentDir = file.substr(0, file.indexOf(fileName));
+  const componentDir = path.join(projectRoot, relativeComponentDir);
+  const automatedDir = path.join(componentDir, templateFolderName);
+  const readMe = path.join(automatedDir, 'README.md');
+  const config = path.join(automatedDir, 'index.json');
 
-  if (existsSync(automatedFiles)) {
-    const meta = require(path.join(
-      __dirname,
-      '../../',
-      automatedFiles,
-      'index.json',
-    ));
-    if (meta.version >= libMeta.version) return;
-
+  if (!existsSync(readMe) || require(config).version >= libMeta.version) {
     templateContentsFileNames.forEach((file) => {
-      rmSync(path.join(automatedFiles, file));
+      rmSync(path.join(automatedDir, file));
     });
   }
 
-  copySync(templatePath, automatedFiles);
+  copySync(templatePath, automatedDir);
   writeFileSync(
-    path.join(automatedFiles, '/.gitignore'),
+    path.join(automatedDir, '/.gitignore'),
     ['index.stories.tsx', 'index.test.tsx', 'README.md'].join('\n'),
   );
 });
