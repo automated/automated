@@ -9,7 +9,7 @@ const templateDirName = '__automated__';
 
 const testFiles = glob.sync(`**/${fileName}.*`);
 const libTemplateDir = path.join(__dirname, '../template');
-const projectRootDir = path.join(__dirname, '../../../');
+const projectRootDir = path.join(__dirname, '../../../../../');
 
 const libMeta = require(path.join(libTemplateDir, 'index.json'));
 const libVersion = libMeta.version;
