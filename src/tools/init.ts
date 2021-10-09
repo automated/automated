@@ -8,27 +8,29 @@ const fileName = '__automated';
 const templateFolderName = '__automated__';
 
 const testFiles = glob.sync(`**/${fileName}.*`);
-const templatePath = path.join(__dirname, '../template');
-const projectRoot = path.join(__dirname, '../../../');
+const libTemplateDir = path.join(__dirname, '../template');
+const projectRootDir = path.join(__dirname, '../../../');
 
-const libMeta = require(path.join(templatePath, 'index.json'));
-
-const templateContentsFileNames = readdirSync(templatePath);
+const libMeta = require(path.join(libTemplateDir, 'index.json'));
+const libVersion = libMeta.version;
 
 asyncLoop(testFiles, (file: string) => {
   const relativeComponentDir = file.substr(0, file.indexOf(fileName));
-  const componentDir = path.join(projectRoot, relativeComponentDir);
+  const componentDir = path.join(projectRootDir, relativeComponentDir);
   const automatedDir = path.join(componentDir, templateFolderName);
   const readMe = path.join(automatedDir, 'README.md');
   const config = path.join(automatedDir, 'index.json');
 
-  if (!existsSync(readMe) || require(config).version >= libMeta.version) {
-    templateContentsFileNames.forEach((file) => {
-      rmSync(path.join(automatedDir, file));
+  if (!existsSync(readMe) || libVersion > require(config).version) {
+    readdirSync(automatedDir).forEach((file) => {
+      if (file !== 'foo') {
+        rmSync(path.join(automatedDir, file));
+      }
     });
   }
 
-  copySync(templatePath, automatedDir);
+  copySync(libTemplateDir, automatedDir);
+
   writeFileSync(
     path.join(automatedDir, '/.gitignore'),
     ['index.stories.tsx', 'index.test.tsx', 'README.md'].join('\n'),
