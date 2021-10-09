@@ -1,5 +1,10 @@
-import { writeFileSync, copySync, rmSync, readdirSync } from 'fs-extra';
-import { existsSync } from 'fs';
+import {
+  copySync,
+  pathExistsSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from 'fs-extra';
 import glob from 'glob';
 import path from 'path';
 import asyncLoop from '../utils/async-loop';
@@ -21,7 +26,7 @@ asyncLoop(testFiles, (file: string) => {
   const readMe = path.join(automatedDir, 'README.md');
   const config = path.join(automatedDir, 'index.json');
 
-  if (!existsSync(readMe) || libVersion > require(config).version) {
+  if (!!pathExistsSync(readMe) || libVersion > require(config).version) {
     readdirSync(automatedDir).forEach((file) => {
       if (file !== 'foo') {
         rmSync(path.join(automatedDir, file));
