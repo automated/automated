@@ -9,6 +9,7 @@ const templateFolderName = '__automated__';
 
 const testFiles = glob.sync(`**/${fileName}.*`);
 const templatePath = path.join(__dirname, '../template');
+const projectRoot = path.join(__dirname, '../../../');
 
 const libMeta = require(path.join(templatePath, 'index.json'));
 
@@ -16,12 +17,8 @@ const templateContentsFileNames = readdirSync(templatePath);
 
 asyncLoop(testFiles, (file: string) => {
   const dir = file.substr(0, file.indexOf(fileName));
-
-  console.log('dir', dir);
-  console.log('file', file);
-  console.log('fileName', fileName);
-
-  const automatedFiles = path.join(dir, templateFolderName);
+  const automatedFiles = path.join(projectRoot, dir, templateFolderName);
+  console.log('automatedFiles', automatedFiles);
 
   if (existsSync(automatedFiles)) {
     const meta = require(path.join(
