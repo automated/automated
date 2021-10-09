@@ -12,14 +12,15 @@ import asyncLoop from '../utils/async-loop';
 const fileName = '__automated';
 const templateDirName = '__automated__';
 
-const testFiles = glob.sync(`**/${fileName}.*`);
 const libTemplateDir = path.join(__dirname, '../template');
+
 const projectRootDir = path.join(__dirname, '../../../../../');
+const projectTestFiles = glob.sync(`${projectRootDir}/**/${fileName}.*`);
 
 const libMeta = require(path.join(libTemplateDir, 'index.json'));
 const libVersion = libMeta.version;
 
-asyncLoop(testFiles, (file: string) => {
+asyncLoop(projectTestFiles, (file: string) => {
   const relativeComponentDir = file.substr(0, file.indexOf(fileName));
   const componentDir = path.join(projectRootDir, relativeComponentDir);
   const automatedDir = path.join(componentDir, templateDirName);
