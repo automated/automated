@@ -21,20 +21,15 @@ asyncLoop(testFiles, (file: string) => {
   const readMe = path.join(automatedDir, 'README.md');
   const config = path.join(automatedDir, 'index.json');
 
-  console.log('projectRootDir', projectRootDir);
-  console.log('componentDir', componentDir);
-
   if (!existsSync(readMe) || libVersion > require(config).version) {
     readdirSync(automatedDir).forEach((file) => {
       if (file !== 'foo') {
-        console.log('file', file);
-        console.log('automatedDir', automatedDir);
         rmSync(path.join(automatedDir, file));
       }
     });
   }
 
-  copySync(libTemplateDir, automatedDir);
+  // copySync(libTemplateDir, automatedDir, { overwrite: true });
 
   writeFileSync(
     path.join(automatedDir, '/.gitignore'),
