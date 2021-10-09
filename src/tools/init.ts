@@ -29,7 +29,7 @@ asyncLoop(testFiles, (file: string) => {
     });
   }
 
-  // copySync(libTemplateDir, automatedDir, { overwrite: true });
+  copySync(libTemplateDir, automatedDir, { overwrite: true });
 
   writeFileSync(
     path.join(automatedDir, '/.gitignore'),
