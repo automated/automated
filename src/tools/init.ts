@@ -5,7 +5,7 @@ import path from 'path';
 import asyncLoop from '../utils/async-loop';
 
 const fileName = '__automated';
-const templateFolderName = '__automated__';
+const templateDirName = '__automated__';
 
 const testFiles = glob.sync(`**/${fileName}.*`);
 const libTemplateDir = path.join(__dirname, '../template');
@@ -17,17 +17,15 @@ const libVersion = libMeta.version;
 asyncLoop(testFiles, (file: string) => {
   const relativeComponentDir = file.substr(0, file.indexOf(fileName));
   const componentDir = path.join(projectRootDir, relativeComponentDir);
-  const automatedDir = path.join(componentDir, templateFolderName);
+  const automatedDir = path.join(componentDir, templateDirName);
   const readMe = path.join(automatedDir, 'README.md');
   const config = path.join(automatedDir, 'index.json');
 
   if (!existsSync(readMe) || libVersion > require(config).version) {
     readdirSync(automatedDir).forEach((file) => {
       if (file !== 'foo') {
-        console.log(
-          `path.join(automatedDir, file)`,
-          path.join(automatedDir, file),
-        );
+        console.log('file', file);
+        console.log('automatedDir', automatedDir);
         rmSync(path.join(automatedDir, file));
       }
     });
