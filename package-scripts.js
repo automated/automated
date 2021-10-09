@@ -5,6 +5,7 @@ const build = [
   'cp ./src/cli/index.sh ./dist/automated.sh',
   'cp -r ./src/template ./dist/template',
   'cp ./src/types.d.ts ./dist',
+  'cp ./src/.storybook ./dist',
 ].join(' && ');
 
 const yalcPublishToExample = [
