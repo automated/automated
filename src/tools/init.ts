@@ -16,6 +16,11 @@ const templateContentsFileNames = readdirSync(templatePath);
 
 asyncLoop(testFiles, (file: string) => {
   const dir = file.substr(0, file.indexOf(fileName));
+
+  console.log('dir', dir);
+  console.log('file', file);
+  console.log('fileName', fileName);
+
   const automatedFiles = path.join(dir, templateFolderName);
 
   if (existsSync(automatedFiles)) {
