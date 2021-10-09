@@ -41,7 +41,9 @@ asyncLoop(testFiles, (file: string) => {
   console.log('libTemplateDir', libTemplateDir);
   console.log('automatedDir', automatedDir);
 
-  copySync(libTemplateDir, automatedDir, { overwrite: true });
+  copySync(libTemplateDir, path.join(automatedDir, '/foo'), {
+    overwrite: true,
+  });
 
   writeFileSync(
     path.join(automatedDir, '/.gitignore'),
