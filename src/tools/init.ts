@@ -37,18 +37,8 @@ asyncLoop(testFiles, (file: string) => {
     });
   }
 
-  console.log('copySync');
-  console.log('libTemplateDir', libTemplateDir);
-  console.log('automatedDir', automatedDir);
-
-  copySync(libTemplateDir, path.join(automatedDir, '/foo'), {
+  copySync(libTemplateDir, automatedDir, {
     overwrite: true,
-    filter: (src, dest) => {
-      console.log('src', src);
-      console.log('dest', dest);
-      console.log('---');
-      return true;
-    },
   });
 
   writeFileSync(
