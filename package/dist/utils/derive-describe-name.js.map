@@ -1,0 +1,1 @@
+{"version":3,"file":"derive-describe-name.js","sourceRoot":"","sources":["../../src/utils/derive-describe-name.ts"],"names":[],"mappings":";;AAAA,MAAM,IAAI,GAAG,CAAC,EAAE,OAAO,EAAuB,EAAU,EAAE;IACxD,MAAM,GAAG,GAAG,OAAO,CAAC,GAAG,CAAC,GAAG,CAAC;IAC5B,IAAI,GAAG;QAAE,OAAO,OAAO,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,CAAC,CAAC;IAEzC,OAAO,OAAO,CAAC;AACjB,CAAC,CAAC;AAEF,kBAAe,IAAI,CAAC"}

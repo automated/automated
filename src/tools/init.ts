@@ -22,7 +22,6 @@ const libVersion = libMeta.version;
 
 asyncLoop(absProjectTestFiles, (file: string) => {
   const absComponentDir = file.substr(0, file.indexOf(fileName));
-  // const absComponentDir = path.join(absProjectRootDir, relComponentDir);
   const absAutomatedDir = path.join(absComponentDir, templateDirName);
   const absReadMe = path.join(absAutomatedDir, 'README.md');
   const absConfig = path.join(absAutomatedDir, 'index.json');
@@ -40,13 +39,6 @@ asyncLoop(absProjectTestFiles, (file: string) => {
 
   copySync(absLibTemplateDir, absAutomatedDir, {
     overwrite: true,
-
-    filter: (src, dest) => {
-      console.log('src', src);
-      console.log('dest', dest);
-      console.log('---');
-      return true;
-    },
   });
 
   writeFileSync(
