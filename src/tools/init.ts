@@ -21,8 +21,8 @@ const libMeta = require(path.join(absLibTemplateDir, 'index.json'));
 const libVersion = libMeta.version;
 
 asyncLoop(absProjectTestFiles, (file: string) => {
-  const relComponentDir = file.substr(0, file.indexOf(fileName));
-  const absComponentDir = path.join(absProjectRootDir, relComponentDir);
+  const absComponentDir = file.substr(0, file.indexOf(fileName));
+  // const absComponentDir = path.join(absProjectRootDir, relComponentDir);
   const absAutomatedDir = path.join(absComponentDir, templateDirName);
   const absReadMe = path.join(absAutomatedDir, 'README.md');
   const absConfig = path.join(absAutomatedDir, 'index.json');
