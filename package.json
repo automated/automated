@@ -9,21 +9,22 @@
   "bugs": {
     "url": "https://github.com/automated/automated/issues"
   },
-  "dependencies": {},
-  "description": "Use-case-oriented testing",
-  "devDependencies": {
+  "dependencies": {
     "@storybook/addon-actions": "^6.3.7",
     "@storybook/addon-essentials": "^6.3.7",
     "@storybook/addon-links": "^6.3.7",
     "@storybook/react": "^6.3.7",
     "storybook": "^6.3.6",
-    "@types/jest": "^26.0.24",
-    "@types/jest-image-snapshot": "^4.3.1",
     "jest": "^27.0.6",
     "jest-image-snapshot": "^4.5.1",
     "@testing-library/jest-dom": "^5.14.1",
+    "ts-jest": "^27.0.5"
+  },
+  "description": "Use-case-oriented testing",
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/jest-image-snapshot": "^4.3.1",
     "@types/fs-extra": "^9.0.13",
-    "ts-jest": "^27.0.5",
     "fs-extra": "^10.0.0",
     "glob": "^7.2.0",
     "node-fetch": "^3.0.0",
