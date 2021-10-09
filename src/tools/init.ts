@@ -26,7 +26,10 @@ asyncLoop(testFiles, (file: string) => {
   const readMe = path.join(automatedDir, 'README.md');
   const config = path.join(automatedDir, 'index.json');
 
-  if (!!pathExistsSync(readMe) || libVersion > require(config).version) {
+  if (
+    !pathExistsSync(readMe) ||
+    (pathExistsSync(config) && libVersion > require(config).version)
+  ) {
     readdirSync(automatedDir).forEach((file) => {
       if (file !== 'foo') {
         rmSync(path.join(automatedDir, file));
