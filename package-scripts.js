@@ -1,8 +1,9 @@
 const lint = "eslint --ignore-path .gitignore --ext .jsx,.js,.ts,.tsx '.'";
 
 const build = [
-  'tsc',
+  'rm -rf ./dist',
 
+  'tsc',
   'cp -r ./src/storybook/config ./dist/storybook/config',
   'cp -r ./src/template ./dist/template',
   'cp ./src/cli/index.sh ./dist/automated.sh',
