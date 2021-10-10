@@ -2,8 +2,6 @@
 Component with state and onClick
 */
 
-import { useState } from 'react';
-
 export type Props = {
   background?: string;
   text?: string;

@@ -27,12 +27,15 @@ function findStories() {
   });
 
   return glob.sync(
-    path.join(__dirname, `../**/__automated__/index.stories.tsx`),
+    path.join(
+      __dirname,
+      `../../../../../../**/__automated__/index.stories.tsx`,
+    ),
   );
 }
 
 const resolveModulesPath = (_path) =>
-  path.join(process.cwd(), 'node_modules', _path);
+  path.join(__dirname, '../../../node_modules', _path);
 
 const out = {
   stories: async (list) => [...list, ...findStories()],

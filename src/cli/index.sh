@@ -1,17 +1,19 @@
 #!/bin/sh
 
-# RUNNER_ROOT=$(pwd);
+echo "automated"
 
-# AUTOMATED_ROOT="~/sync/homedir/git/automated/automated"
+ROOT="$(pwd)";
+
+AUTOMATED_ROOT=$ROOT/node_modules/@automated/automated;
+BIN=$AUTOMATED_ROOT/node_modules/.bin;
+DIST=$AUTOMATED_ROOT/dist;
+
+ALL_ARGS=("$@")
+REST_ARGS=("${ALL_ARGS[@]:1}")
 
 if [ "$1" = "jest" ]; then
 
-  echo "automated:jest"
-
-  all_args=("$@")
-  rest_args=("${all_args[@]:1}")
-
-  export IS_JEST=true
+  echo "jest"
 
   export STORYBOOK_URL="http://localhost:3144"
   if [ "$(curl -s -o /dev/null -w "%{http_code}" $STORYBOOK_URL)" = "200" ]; then
@@ -19,18 +21,23 @@ if [ "$1" = "jest" ]; then
   fi
   export STORYBOOK_IS_RUNNING
 
-  IS_JEST=true \
-  /Users/kirkstrobeck/sync/homedir/git/automated/automated/example/node_modules/.bin/jest \
-  ${rest_args[@]}
+  $BIN/jest \
+    ${REST_ARGS[@]}
 
 elif [ "$1" = "storybook" ]; then
 
-  echo "automated:storybook"
+  echo "storybook"
+  echo $BIN
 
-  export STORYBOOK_IS_STORYBOOK=true
+  $BIN/start-storybook \
+    --config-dir="$DIST/storybook/config" \
+    --port 3144 \
+    ${REST_ARGS[@]}
 
-  STORYBOOK_IS_STORYBOOK=true \
-  /Users/kirkstrobeck/sync/homedir/git/automated/automated/node_modules/.bin/start-storybook \
-  --config-dir="/Users/kirkstrobeck/sync/homedir/git/automated/automated/.storybook" \
-  --port 3144
+elif [ "$1" = "init" ]; then
+
+  echo "init"
+
+  node $AUTOMATED_ROOT/dist/tools/init.js
+
 fi;
