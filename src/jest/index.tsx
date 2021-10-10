@@ -9,7 +9,7 @@ import shared from '../shared';
 import puppeteer from 'puppeteer';
 import TestRenderer from 'react-test-renderer';
 import React from 'react';
-import screenshotConfig from './screenshot-config';
+import screenshotConfigs from './screenshot-configs';
 
 expect.extend({ toMatchImageSnapshot, toMatchDiffSnapshot });
 
@@ -52,40 +52,39 @@ export const runner = async ({
         expect(renderToJson).toMatchSnapshot();
       });
 
-      console.log(screenshotConfig);
+      Object.entries(screenshotConfigs).forEach(
+        ([
+          configName,
+          { viewport, matchImageSnapshotOptions, screenshotOptions },
+        ]) => {
+          storybookTestFn(
+            `storybook@${describeName}@${name}@${configName}`,
+            async () => {
+              if (browser) {
+                const page = await browser.newPage();
 
-      storybookTestFn(`storybook-${name}`, async () => {
-        if (browser) {
-          const page = await browser.newPage();
+                await page.evaluateOnNewDocument(() => {
+                  const style = document.createElement('style');
+                  style.innerHTML = '.body { caret-color: transparent }';
+                  document.getElementsByTagName('head')[0].appendChild(style);
+                });
 
-          await page.evaluateOnNewDocument(() => {
-            const style = document.createElement('style');
-            style.innerHTML = '.body { caret-color: transparent }';
-            document.getElementsByTagName('head')[0].appendChild(style);
-          });
+                const storybookId = `${paramCase(describeName)}--${name}`;
 
-          const id = `${paramCase(describeName)}--${name}`;
+                const url = `${shared.storybookUrl}/iframe.html?id=${storybookId}&args=&viewMode=story`;
+                await page.goto(url);
+                await page.setViewport(viewport);
 
-          const url = `${shared.storybookUrl}/iframe.html?id=${id}&args=&viewMode=story`;
-          await page.goto(url);
-          await page.setViewport({
-            deviceScaleFactor: 2,
-            height: 768,
-            width: 1080,
-          });
+                const image = await page.screenshot(screenshotOptions);
 
-          const image = await page.screenshot({
-            omitBackground: true,
-          });
+                expect(image).toMatchImageSnapshot(matchImageSnapshotOptions);
 
-          expect(image).toMatchImageSnapshot({
-            failureThreshold: 0.01,
-            failureThresholdType: 'percent',
-          });
-
-          await page.close();
-        }
-      });
+                await page.close();
+              }
+            },
+          );
+        },
+      );
     });
   });
 };

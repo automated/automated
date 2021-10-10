@@ -4,8 +4,8 @@ import uuidByString from 'uuid-by-string';
 
 type ScreenshotConfig = {
   viewport: Viewport;
-  screenshot: ScreenshotOptions;
-  matchImageSnapshot: MatchImageSnapshotOptions;
+  screenshotOptions: ScreenshotOptions;
+  matchImageSnapshotOptions: MatchImageSnapshotOptions;
 };
 
 type ScreenshotConfigs = Record<string, ScreenshotConfig>;
@@ -17,11 +17,11 @@ const defaults: ScreenshotConfig = {
     width: 1080,
   },
 
-  screenshot: {
+  screenshotOptions: {
     omitBackground: true,
   },
 
-  matchImageSnapshot: {
+  matchImageSnapshotOptions: {
     failureThreshold: 0.01,
     failureThresholdType: 'percent',
   },
@@ -34,7 +34,5 @@ const out: ScreenshotConfigs = configs.reduce((acc, config) => {
 
   return acc;
 }, <ScreenshotConfigs>{});
-
-console.log(out);
 
 export default out;
