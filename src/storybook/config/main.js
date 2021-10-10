@@ -35,7 +35,7 @@ function findStories() {
 }
 
 const resolveModulesPath = (_path) =>
-  path.join(process.cwd(), 'node_modules', _path);
+  path.join(__dirname, '../../../node_modules', _path);
 
 const out = {
   stories: async (list) => [...list, ...findStories()],
