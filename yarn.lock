@@ -8416,6 +8416,16 @@ jest@^27.0.6:
     import-local "^3.0.2"
     jest-cli "^27.1.0"
 
+js-md5@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/js-md5/-/js-md5-0.7.3.tgz#b4f2fbb0b327455f598d6727e38ec272cd09c3f2"
+  integrity sha512-ZC41vPSTLKGwIRjqDh8DfXoCrdQIyBgspJVPXHBGu4nZlAEvG3nf+jO9avM9RmLiGakg7vz974ms99nEV0tmTQ==
+
+js-sha1@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/js-sha1/-/js-sha1-0.6.0.tgz#adbee10f0e8e18aa07cdea807cf08e9183dbc7f9"
+  integrity sha512-01gwBFreYydzmU9BmZxpVk6svJJHrVxEN3IOiGl6VO93bVKYETJ0sIth6DASI6mIFdt7NmfX9UiByRzsYHGU9w==
+
 js-string-escape@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/js-string-escape/-/js-string-escape-1.0.1.tgz#e2625badbc0d67c7533e9edc1068c587ae4137ef"
@@ -12772,6 +12782,14 @@ uuid-browser@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/uuid-browser/-/uuid-browser-3.1.0.tgz#0f05a40aef74f9e5951e20efbf44b11871e56410"
   integrity sha1-DwWkCu90+eWVHiDvv0SxGHHlZBA=
+
+uuid-by-string@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/uuid-by-string/-/uuid-by-string-3.0.4.tgz#761cf7f6e4314f841bfc014a8f517daa61080bc1"
+  integrity sha512-kkzMtWXvFLYEV2ycn2RalaA61BbNboBaSxFQugZl3djr2ZLpEc9BRWBVQTibJWdjGtBKwrKiFm3+D8n8kv2eUw==
+  dependencies:
+    js-md5 "^0.7.3"
+    js-sha1 "^0.6.0"
 
 uuid@^3.3.2:
   version "3.4.0"

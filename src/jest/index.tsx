@@ -9,8 +9,7 @@ import shared from '../shared';
 import puppeteer from 'puppeteer';
 import TestRenderer from 'react-test-renderer';
 import React from 'react';
-
-const console = require('console');
+import screenshotConfig from './screenshot-config';
 
 expect.extend({ toMatchImageSnapshot, toMatchDiffSnapshot });
 
@@ -53,6 +52,8 @@ export const runner = async ({
         expect(renderToJson).toMatchSnapshot();
       });
 
+      console.log(screenshotConfig);
+
       storybookTestFn(`storybook-${name}`, async () => {
         if (browser) {
           const page = await browser.newPage();
@@ -67,8 +68,16 @@ export const runner = async ({
 
           const url = `${shared.storybookUrl}/iframe.html?id=${id}&args=&viewMode=story`;
           await page.goto(url);
+          await page.setViewport({
+            deviceScaleFactor: 2,
+            height: 768,
+            width: 1080,
+          });
 
-          const image = await page.screenshot();
+          const image = await page.screenshot({
+            omitBackground: true,
+          });
+
           expect(image).toMatchImageSnapshot({
             failureThreshold: 0.01,
             failureThresholdType: 'percent',
