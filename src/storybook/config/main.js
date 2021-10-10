@@ -27,7 +27,10 @@ function findStories() {
   });
 
   return glob.sync(
-    path.join(__dirname, `../**/__automated__/index.stories.tsx`),
+    path.join(
+      __dirname,
+      `../../../../../../**/__automated__/index.stories.tsx`,
+    ),
   );
 }
 
