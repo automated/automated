@@ -21,6 +21,10 @@ const config: Config.InitialOptions = {
   coverageDirectory: './coverage-from-automated',
 
   collectCoverageFrom,
+
+  snapshotSerializers: [
+    '<rootDir>/node_modules/@automated/automated/node_modules/@emotion/jest/serializer',
+  ],
 };
 
 export default config;
