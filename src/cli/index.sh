@@ -23,6 +23,7 @@ if [ "$1" = "jest" ]; then
 
   export JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE=1
   $BIN/jest \
+    --rootDir=$ROOT \
     --config="$DIST/jest/jest.config.js" \
     ${REST_ARGS[@]}
 
