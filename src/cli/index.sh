@@ -23,7 +23,7 @@ if [ "$1" = "jest" ]; then
 
   export JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE=1
   $BIN/jest \
-    --config="$DIST/jest/jest.config.ts" \
+    --config="$DIST/jest/jest.config.js" \
     ${REST_ARGS[@]}
 
 elif [ "$1" = "storybook" ]; then
