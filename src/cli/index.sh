@@ -21,7 +21,9 @@ if [ "$1" = "jest" ]; then
   fi
   export STORYBOOK_IS_RUNNING
 
+  export JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE=1
   $BIN/jest \
+    --config="$DIST/jest/jest.config.ts" \
     ${REST_ARGS[@]}
 
 elif [ "$1" = "storybook" ]; then
