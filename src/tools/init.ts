@@ -31,7 +31,7 @@ asyncLoop(absProjectTestFiles, (file: string) => {
     (!pathExistsSync(absReadMe) || libVersion > require(absConfig).version)
   ) {
     readdirSync(absAutomatedDir).forEach((file) => {
-      if (file !== 'foo') {
+      if (file !== '__image_snapshots__' && file !== '__snapshots__') {
         rmSync(path.join(absAutomatedDir, file));
       }
     });

@@ -1,6 +1,6 @@
 const base = ({ dirname }: { dirname: string }): string => {
-  const pwd = process.env.PWD;
-  if (pwd) return dirname.replace(pwd, '');
+  const absPrefix = __dirname.substr(0, __dirname.indexOf('node_modules') - 1);
+  if (__dirname) return dirname.replace(absPrefix, '');
 
   return dirname;
 };

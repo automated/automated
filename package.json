@@ -12,6 +12,7 @@
   "dependencies": {
     "@babel/core": "^7.15.0",
     "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@emotion/jest": "^11.3.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@storybook/addon-actions": "^6.3.7",
@@ -42,8 +43,11 @@
     "eslint-plugin-typescript-sort-keys": "^1.6.0",
     "fs-extra": "^10.0.0",
     "glob": "^7.2.0",
+    "istanbul": "^0.4.5",
+    "istanbul-merge": "^1.1.1",
     "jest": "^27.0.6",
     "jest-image-snapshot": "^4.5.1",
+    "lcov-result-merger": "^3.1.0",
     "node-fetch": "^3.0.0",
     "nodemon": "^2.0.12",
     "nps": "^5.10.0",
@@ -57,6 +61,7 @@
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5",
+    "uuid-by-string": "^3.0.4",
     "webpack-node-externals": "^3.0.0",
     "yalc": "^1.0.0-pre.53"
   },
@@ -84,5 +89,5 @@
   "scripts": {
     "default": "nps"
   },
-  "version": "0.51.0"
+  "version": "0.75.0"
 }

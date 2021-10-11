@@ -9,8 +9,7 @@ import shared from '../shared';
 import puppeteer from 'puppeteer';
 import TestRenderer from 'react-test-renderer';
 import React from 'react';
-
-const console = require('console');
+import screenshotConfigs from './screenshot-configs';
 
 expect.extend({ toMatchImageSnapshot, toMatchDiffSnapshot });
 
@@ -53,30 +52,39 @@ export const runner = async ({
         expect(renderToJson).toMatchSnapshot();
       });
 
-      storybookTestFn(`storybook-${name}`, async () => {
-        if (browser) {
-          const page = await browser.newPage();
+      Object.entries(screenshotConfigs).forEach(
+        ([
+          configName,
+          { viewport, matchImageSnapshotOptions, screenshotOptions },
+        ]) => {
+          storybookTestFn(
+            `storybook@${describeName}@${name}@${configName}`,
+            async () => {
+              if (browser) {
+                const page = await browser.newPage();
 
-          await page.evaluateOnNewDocument(() => {
-            const style = document.createElement('style');
-            style.innerHTML = '.body { caret-color: transparent }';
-            document.getElementsByTagName('head')[0].appendChild(style);
-          });
+                await page.evaluateOnNewDocument(() => {
+                  const style = document.createElement('style');
+                  style.innerHTML = '.body { caret-color: transparent }';
+                  document.getElementsByTagName('head')[0].appendChild(style);
+                });
 
-          const id = `${paramCase(describeName)}--${name}`;
+                const storybookId = `${paramCase(describeName)}--${name}`;
 
-          const url = `${shared.storybookUrl}/iframe.html?id=${id}&args=&viewMode=story`;
-          await page.goto(url);
+                const url = `${shared.storybookUrl}/iframe.html?id=${storybookId}&args=&viewMode=story`;
+                await page.goto(url);
+                await page.setViewport(viewport);
 
-          const image = await page.screenshot();
-          expect(image).toMatchImageSnapshot({
-            failureThreshold: 0.01,
-            failureThresholdType: 'percent',
-          });
+                const image = await page.screenshot(screenshotOptions);
 
-          await page.close();
-        }
-      });
+                expect(image).toMatchImageSnapshot(matchImageSnapshotOptions);
+
+                await page.close();
+              }
+            },
+          );
+        },
+      );
     });
   });
 };

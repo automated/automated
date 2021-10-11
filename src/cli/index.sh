@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "automated"
+echo "automated ⚙️"
 
 ROOT="$(pwd)";
 
@@ -13,21 +13,19 @@ REST_ARGS=("${ALL_ARGS[@]:1}")
 
 if [ "$1" = "jest" ]; then
 
-  echo "jest"
-
   export STORYBOOK_URL="http://localhost:3144"
   if [ "$(curl -s -o /dev/null -w "%{http_code}" $STORYBOOK_URL)" = "200" ]; then
       STORYBOOK_IS_RUNNING=true
   fi
   export STORYBOOK_IS_RUNNING
 
+  export JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE=1
   $BIN/jest \
+    --rootDir=$ROOT \
+    --config="$DIST/jest/jest.config.js" \
     ${REST_ARGS[@]}
 
 elif [ "$1" = "storybook" ]; then
-
-  echo "storybook"
-  echo $BIN
 
   $BIN/start-storybook \
     --config-dir="$DIST/storybook/config" \
@@ -36,8 +34,19 @@ elif [ "$1" = "storybook" ]; then
 
 elif [ "$1" = "init" ]; then
 
-  echo "init"
 
   node $AUTOMATED_ROOT/dist/tools/init.js
+
+elif [ "$1" = "combine-coverage" ]; then
+
+  $BIN/istanbul-merge \
+    --out "$ROOT/coverage-combined/coverage-final.json" \
+    "$ROOT/coverage/coverage-final.json" \
+    "$ROOT/coverage-from-automated/coverage-final.json' &" \
+
+  $BIN/istanbul report \
+    --include "$ROOT/coverage-combined/coverage-final.json" \
+    --dir "$ROOT/coverage-combined/lcov-report" \
+    html
 
 fi;
