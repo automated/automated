@@ -22,9 +22,10 @@ const config: Config.InitialOptions = {
 
   collectCoverageFrom,
 
-  snapshotSerializers: [
-    '<rootDir>/node_modules/@automated/automated/node_modules/@emotion/jest/serializer',
-  ],
+  // sometimes lives in different places
+  // snapshotSerializers: [
+  //   '<rootDir>/node_modules/@automated/automated/node_modules/@emotion/jest/serializer',
+  // ],
 };
 
 export default config;
