@@ -11,6 +11,7 @@ type ScreenshotConfig = {
 type ScreenshotConfigs = Record<string, ScreenshotConfig>;
 
 const defaults: ScreenshotConfig = {
+  // desktop
   viewport: {
     deviceScaleFactor: 2,
     height: 768,
@@ -27,7 +28,20 @@ const defaults: ScreenshotConfig = {
   },
 };
 
-const configs = [defaults];
+const configs = [
+  defaults,
+  {
+    ...defaults,
+
+    viewport: {
+      deviceScaleFactor: 2,
+      width: 375,
+      height: 812,
+      isMobile: true,
+      hasTouch: true,
+    },
+  },
+];
 
 const out: ScreenshotConfigs = configs.reduce((acc, config) => {
   acc[uuidByString(JSON.stringify(config))] = config;
