@@ -18,7 +18,7 @@ const config: Config.InitialOptions = {
     'jest-image-snapshot/src/outdated-snapshot-reporter.js',
   ],
 
-  coverageDirectory: './coverage/__from-automated',
+  coverageDirectory: './coverage-from-automated',
 
   collectCoverageFrom,
 };
