@@ -34,7 +34,7 @@ jobs:
       - run: npm publish
 
 workflows:
-  build_and_test:
+  primary:
     jobs:
       - build:
           context:
@@ -44,7 +44,7 @@ workflows:
           context:
             - production
           requires:
-            - test
+            - build
           filters:
             branches:
               only: main
