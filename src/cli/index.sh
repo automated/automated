@@ -2,14 +2,24 @@
 
 echo "automated ⚙️"
 
-ROOT="$(pwd)";
+PROJECT_ROOT="$(pwd)";
+AUTOMATED_ROOT=$PROJECT_ROOT/node_modules/@automated/automated;
 
-AUTOMATED_ROOT=$ROOT/node_modules/@automated/automated;
-BIN=$AUTOMATED_ROOT/node_modules/.bin;
-DIST=$AUTOMATED_ROOT/dist;
+PROJECT_BIN=$PROJECT_ROOT/node_modules/.bin;
+AUTOMATED_BIN=$AUTOMATED_ROOT/node_modules/.bin;
+
+AUTOMATED_DIST=$AUTOMATED_ROOT/dist;
 
 ALL_ARGS=("$@")
 REST_ARGS=("${ALL_ARGS[@]:1}")
+
+derive_bin() {
+  if [ -f "$AUTOMATED_BIN/$1" ]; then
+      echo "$AUTOMATED_BIN/$1"
+  else
+      echo "$PROJECT_BIN/$1"
+  fi
+}
 
 if [ "$1" = "jest" ]; then
 
@@ -20,31 +30,31 @@ if [ "$1" = "jest" ]; then
   export STORYBOOK_IS_RUNNING
 
   export JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE=1
-  $BIN/jest \
-    --rootDir=$ROOT \
-    --config="$DIST/jest/jest.config.js" \
+
+  $(derive_bin jest) \
+    --rootDir=$PROJECT_ROOT \
+    --config="$AUTOMATED_DIST/jest/jest.config.js" \
     ${REST_ARGS[@]}
 
 elif [ "$1" = "storybook" ]; then
 
-  $BIN/start-storybook \
-    --config-dir="$DIST/storybook/config" \
+  $(derive_bin start-storybook) \
+    --config-dir="$AUTOMATED_DIST/storybook/config" \
     --port 3144 \
     ${REST_ARGS[@]}
 
 elif [ "$1" = "init" ]; then
 
-
   node $AUTOMATED_ROOT/dist/tools/init.js
 
 elif [ "$1" = "combine-coverage" ]; then
 
-  $BIN/istanbul-merge \
-    --out "$ROOT/coverage-combined/coverage-final.json" \
-    "$ROOT/coverage/coverage-final.json" \
-    "$ROOT/coverage-from-automated/coverage-final.json' &" \
+  $(derive_bin istanbul-merge) \
+    --out "$PROJECT_ROOT/coverage-combined/coverage-final.json" \
+    "$PROJECT_ROOT/coverage/coverage-final.json" \
+    "$PROJECT_ROOT/coverage-from-automated/coverage-final.json' &" \
 
-  $BIN/istanbul report \
+  $(derive_bin istanbul) report \
     --include "$ROOT/coverage-combined/coverage-final.json" \
     --dir "$ROOT/coverage-combined/lcov-report" \
     html
