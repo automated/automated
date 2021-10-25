@@ -15,9 +15,9 @@ REST_ARGS=("${ALL_ARGS[@]:1}")
 
 derive_bin() {
   if [ -f "$AUTOMATED_BIN/$1" ]; then
-      return "$AUTOMATED_BIN/$1"
+      echo "$AUTOMATED_BIN/$1"
   else
-      return "$PROJECT_BIN/$1"
+      echo "$PROJECT_BIN/$1"
   fi
 }
 
@@ -31,32 +31,30 @@ if [ "$1" = "jest" ]; then
 
   export JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE=1
 
-
-  "$(derive_bin jest)" \
+  $(derive_bin jest) \
     --rootDir=$PROJECT_ROOT \
     --config="$AUTOMATED_DIST/jest/jest.config.js" \
     ${REST_ARGS[@]}
 
 elif [ "$1" = "storybook" ]; then
 
-  $AUTOMATED_BIN/start-storybook \
+  $(derive_bin start-storybook) \
     --config-dir="$AUTOMATED_DIST/storybook/config" \
     --port 3144 \
     ${REST_ARGS[@]}
 
 elif [ "$1" = "init" ]; then
 
-
   node $AUTOMATED_ROOT/dist/tools/init.js
 
 elif [ "$1" = "combine-coverage" ]; then
 
-  $AUTOMATED_BIN/istanbul-merge \
+  $(derive_bin istanbul-merge) \
     --out "$PROJECT_ROOT/coverage-combined/coverage-final.json" \
     "$PROJECT_ROOT/coverage/coverage-final.json" \
     "$PROJECT_ROOT/coverage-from-automated/coverage-final.json' &" \
 
-  $AUTOMATED_BIN/istanbul report \
+  $(derive_bin istanbul) report \
     --include "$ROOT/coverage-combined/coverage-final.json" \
     --dir "$ROOT/coverage-combined/lcov-report" \
     html
