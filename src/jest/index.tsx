@@ -39,10 +39,6 @@ export const runner = async ({
     }
   });
 
-  expect(<Component test="say" />).toMatchDiffSnapshot(
-    <Component test="my name" />,
-  );
-
   describe(describeName, () => {
     useCases.forEach(async (item, key) => {
       const { name, props } = item;
