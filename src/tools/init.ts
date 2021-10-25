@@ -41,8 +41,8 @@ asyncLoop(absProjectTestFiles, (file: string) => {
     overwrite: true,
   });
 
-  writeFileSync(
-    path.join(absAutomatedDir, '/.gitignore'),
-    ['index.stories.tsx', 'index.test.tsx', 'README.md'].join('\n'),
-  );
+  // writeFileSync(
+  //   path.join(absAutomatedDir, '/.gitignore'),
+  //   ['index.stories.tsx', 'index.test.tsx', 'README.md'].join('\n'),
+  // );
 });
