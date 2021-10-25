@@ -1,6 +1,6 @@
 import { Browser } from 'puppeteer/lib/types';
 import { paramCase } from 'change-case';
-import { toMatchDiffSnapshot } from 'snapshot-diff';
+import snapshotDiff from 'snapshot-diff';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import { UseCases } from '../types';
 import deriveDescribeName from '../utils/derive-describe-name';
@@ -11,7 +11,9 @@ import TestRenderer from 'react-test-renderer';
 import React from 'react';
 import screenshotConfigs from './screenshot-configs';
 
-expect.extend({ toMatchImageSnapshot, toMatchDiffSnapshot });
+expect.extend({
+  toMatchImageSnapshot,
+});
 
 export const runner = async ({
   dirname,
@@ -37,6 +39,10 @@ export const runner = async ({
     }
   });
 
+  expect(<Component test="say" />).toMatchDiffSnapshot(
+    <Component test="my name" />,
+  );
+
   describe(describeName, () => {
     useCases.forEach(async (item, key) => {
       const { name, props } = item;
@@ -48,8 +54,17 @@ export const runner = async ({
       test(`snapshot-${name}`, async () => {
         const render = TestRenderer.create(<Component {...props} />);
         const renderToJson = render.toJSON();
-        if (!key) renderToJson;
-        expect(renderToJson).toMatchSnapshot();
+
+        if (!key) {
+          expect(<Component {...props} />).toMatchSnapshot();
+        } else {
+          expect(
+            snapshotDiff(
+              <Component {...useCases[0].props} />,
+              <Component {...props} />,
+            ),
+          ).toMatchSnapshot();
+        }
       });
 
       Object.entries(screenshotConfigs).forEach(
