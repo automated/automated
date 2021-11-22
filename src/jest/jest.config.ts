@@ -22,6 +22,10 @@ const config: Config.InitialOptions = {
 
   collectCoverageFrom,
 
+  moduleNameMapper: {
+    '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
+  },
+
   // sometimes lives in different places
   // snapshotSerializers: [
   //   '<rootDir>/node_modules/@automated/automated/node_modules/@emotion/jest/serializer',

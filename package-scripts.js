@@ -48,7 +48,9 @@ const scripts = {
         'yarn add yalc',
         'yalc add @automated/automated',
         'yarn',
-        'yarn automated init',
+        'yarn automated jest --updateSnapshot --testPathIgnorePatterns .yalc',
+
+        // 'yarn automated init', // then compare git status
       ].join(' && '),
       ')',
     ].join(''),

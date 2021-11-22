@@ -1,58 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`/src/components/button snapshot-test-1 1`] = `
-.emotion-0 {
-  background: blue;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  padding: 20px 30px;
-}
-
-<button
-  className="emotion-0"
+<Base
   onClick={[Function]}
->
-  Get started
-</button>
+/>
 `;
 
 exports[`/src/components/button snapshot-test-2 1`] = `
-.emotion-0 {
-  background: blue;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  padding: 20px 30px;
-}
+"Snapshot Diff:
+- <Base onClick={[Function onClick]} />
++ <Base onClick={[Function onClick]} text=\\"Hello automated\\" />
 
-<button
-  className="emotion-0"
-  onClick={[Function]}
->
-  Hello automated
-</button>
+@@ -9,8 +9,8 @@
+    />,
+    <button
+      className=\\"css-1e31kni-Base\\"
+      onClick={[Function onClick]}
+    >
+-     Get started
++     Hello automated
+    </button>,
+  ]"
 `;
 
 exports[`/src/components/button snapshot-test-3 1`] = `
-.emotion-0 {
-  background: green;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  padding: 20px 30px;
-}
+"Snapshot Diff:
+- <Base onClick={[Function onClick]} />
++ <Base background=\\"green\\" onClick={[Function onClick]} />
 
-<button
-  className="emotion-0"
-  onClick={[Function]}
->
-  Get started
-</button>
+  Array [
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+-         \\"__html\\": \\".css-1e31kni-Base{background:blue;border:none;border-radius:10px;color:white;font-size:20px;font-weight:600;padding:20px 30px;}\\",
++         \\"__html\\": \\".css-25suaw-Base{background:green;border:none;border-radius:10px;color:white;font-size:20px;font-weight:600;padding:20px 30px;}\\",
+        }
+      }
+-     data-emotion=\\"css 1e31kni-Base\\"
++     data-emotion=\\"css 25suaw-Base\\"
+    />,
+    <button
+-     className=\\"css-1e31kni-Base\\"
++     className=\\"css-25suaw-Base\\"
+      onClick={[Function onClick]}
+    >
+      Get started
+    </button>,
+  ]"
 `;
