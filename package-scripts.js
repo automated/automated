@@ -40,7 +40,7 @@ const scripts = {
   'install-example-deps': [
     build,
     'yalc publish',
-    `sed -i -e  's|"@automated/automated": "file:.yalc/@automated/automated",||g' example/package.json`,
+    `sed -i '' 's|"@automated/automated": "file:.yalc/@automated/automated",||g' example/package.json`,
     [
       '(',
       [
