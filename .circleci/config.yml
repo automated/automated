@@ -28,7 +28,7 @@ jobs:
       - run: yarn nps build
 
       - run:
-          command: yarn automated storybook
+          command: (cd example && yarn automated storybook)
           background: true
 
       - run: yarn nps test-ci
