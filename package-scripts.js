@@ -47,6 +47,7 @@ const scripts = {
         'cd example',
         'yarn add yalc',
         'yalc add @automated/automated',
+        'yarn',
         'yarn automated init',
       ].join(' && '),
       ')',
