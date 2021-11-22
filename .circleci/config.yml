@@ -27,10 +27,14 @@ jobs:
 
       - run: yarn nps build
 
+      - run:
+          command: yarn automated storybook
+          background: true
+
       - run: yarn nps test-ci
 
       - store_artifacts:
-          path: /tmp/automated
+          path: /example/tmp/automated
 
       - persist_to_workspace:
           root: ~/repo

@@ -57,7 +57,15 @@ const scripts = {
     '(',
     [
       'cd example',
-      'yarn automated jest --updateSnapshot --testPathIgnorePatterns .yalc',
+      [
+        'yarn automated jest',
+
+        '--coverage',
+        '--testPathIgnorePatterns .yalc',
+        // '--updateSnapshot',
+
+        '.',
+      ].join(' '),
       'yarn automated build-storybook',
 
       // 'yarn automated init', // then compare git status
