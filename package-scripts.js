@@ -40,13 +40,7 @@ const scripts = {
   'install-example-deps': [
     build,
     'yalc publish',
-    `
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  sed -i '' 's|"@automated/automated": "file:.yalc/@automated/automated",||g' example/package.json
-else
-  sed -i 's|"@automated/automated": "file:.yalc/@automated/automated",||g' example/package.json
-fi
-`,
+    'sh remove-automated-dep.sh',
     [
       '(',
       [
