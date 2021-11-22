@@ -12,9 +12,11 @@ const build = [
 
 const yalcPublishToExample = [
   'yalc publish',
-  [`(cd example`, '../node_modules/.bin/yalc add @automated/automated)'].join(
-    ' && ',
-  ),
+  [
+    '(',
+    ['cd example', 'yalc add @automated/automated', 'yarn'].join(' && '),
+    ')',
+  ].join(''),
 ].join(' && ');
 
 const dev = [
@@ -34,6 +36,34 @@ const scripts = {
   dev,
 
   publish: '',
+
+  'install-example-deps': [
+    build,
+    'yalc publish',
+    `sed -i '' 's|"@automated/automated": "file:.yalc/@automated/automated",||g' example/package.json`,
+    [
+      '(',
+      [
+        'cd example',
+        'yarn add yalc',
+        'yalc add @automated/automated',
+        'yarn',
+      ].join(' && '),
+      ')',
+    ].join(''),
+  ].join(' && '),
+
+  'test-ci': [
+    '(',
+    [
+      'cd example',
+      'yarn automated jest --updateSnapshot --testPathIgnorePatterns .yalc',
+      'yarn automated build-storybook',
+
+      // 'yarn automated init', // then compare git status
+    ].join(' && '),
+    ')',
+  ].join(''),
 };
 
 module.exports = { scripts };

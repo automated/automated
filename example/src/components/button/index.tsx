@@ -1,7 +1,3 @@
-/*
-Component with state and onClick
-*/
-
 export type Props = {
   background?: string;
   text?: string;
