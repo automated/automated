@@ -43,6 +43,13 @@ elif [ "$1" = "storybook" ]; then
     --port 3144 \
     ${REST_ARGS[@]}
 
+elif [ "$1" = "build-storybook" ]; then
+
+  $(derive_bin build-storybook) \
+    --config-dir="$AUTOMATED_DIST/storybook/config" \
+    --output-dir=$PROJECT_ROOT/tmp/automated/storybook \
+    ${REST_ARGS[@]}
+
 elif [ "$1" = "init" ]; then
 
   node $AUTOMATED_ROOT/dist/tools/init.js
