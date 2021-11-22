@@ -10,8 +10,8 @@ AUTOMATED_BIN=$AUTOMATED_ROOT/node_modules/.bin;
 
 AUTOMATED_DIST=$AUTOMATED_ROOT/dist;
 
-ALL_ARGS=("$@")
-REST_ARGS=("${ALL_ARGS[@]:1}")
+ALL_ARGS="$@"
+REST_ARGS="${ALL_ARGS[@]:1}"
 
 derive_bin() {
   if [ -f "$AUTOMATED_BIN/$1" ]; then
