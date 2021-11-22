@@ -2,8 +2,9 @@
   "version": "v1",
   "packages": {
     "@automated/automated": {
-      "signature": "1366e2ea9cb57f08fd5ad088a645c8eb",
-      "file": true
+      "signature": "38e1cb440961a68f39a03754e6f56dd3",
+      "file": true,
+      "replaced": "^0.84.0"
     }
   }
 }

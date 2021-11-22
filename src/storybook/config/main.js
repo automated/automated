@@ -10,6 +10,7 @@
 
   */
 
+const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
 const { DefinePlugin } = require('webpack');
@@ -34,8 +35,19 @@ function findStories() {
   );
 }
 
-const resolveModulesPath = (_path) =>
-  path.join(__dirname, '../../../node_modules', _path);
+// const resolveModulesPath = (_path) =>
+//   path.join(__dirname, '../../../node_modules', _path);
+
+const resolveModulesPath = (_path) => {
+  const localModules = path.join(__dirname, '../../../node_modules', _path);
+  const topLevelModules = path.join(
+    __dirname,
+    '../../../../../../node_modules',
+    _path,
+  );
+
+  return fs.existsSync(localModules) ? localModules : topLevelModules;
+};
 
 const out = {
   stories: async (list) => [...list, ...findStories()],
@@ -57,6 +69,11 @@ const out = {
 
         rules: [
           ...config.module.rules,
+
+          {
+            test: /\.scss$/,
+            use: ['style-loader', 'css-loader', 'sass-loader'],
+          },
 
           {
             test: /\.(ts|tsx)$/,

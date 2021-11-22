@@ -12,9 +12,11 @@ const build = [
 
 const yalcPublishToExample = [
   'yalc publish',
-  [`(cd example`, '../node_modules/.bin/yalc add @automated/automated)'].join(
-    ' && ',
-  ),
+  [
+    '(',
+    ['cd example', 'yalc add @automated/automated', 'yarn'].join(' && '),
+    ')',
+  ].join(''),
 ].join(' && ');
 
 const dev = [
