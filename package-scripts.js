@@ -40,7 +40,7 @@ const scripts = {
   'install-example-deps': [
     build,
     'yalc publish',
-    'sh remove-automated-dep.sh',
+    'sh ./remove-automated-dep.sh',
     [
       '(',
       [
