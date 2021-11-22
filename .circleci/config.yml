@@ -29,6 +29,9 @@ jobs:
 
       - run: yarn nps test-ci
 
+      - store_artifacts:
+          path: /tmp/automated
+
       - persist_to_workspace:
           root: ~/repo
           paths:

@@ -48,15 +48,22 @@ const scripts = {
         'yarn add yalc',
         'yalc add @automated/automated',
         'yarn',
-        'yarn automated jest --updateSnapshot --testPathIgnorePatterns .yalc',
-
-        // 'yarn automated init', // then compare git status
       ].join(' && '),
       ')',
     ].join(''),
   ].join(' && '),
 
-  'test-ci': '(cd example && yarn automated init)',
+  'test-ci': [
+    '(',
+    [
+      'cd example',
+      'yarn automated jest --updateSnapshot --testPathIgnorePatterns .yalc',
+      'yarn automated build-storybook',
+
+      // 'yarn automated init', // then compare git status
+    ].join(' && '),
+    ')',
+  ].join(''),
 };
 
 module.exports = { scripts };
