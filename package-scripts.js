@@ -36,6 +36,24 @@ const scripts = {
   dev,
 
   publish: '',
+
+  'install-example-deps': [
+    build,
+    'yalc publish',
+    `sed -i -e  's|"@automated/automated": "file:.yalc/@automated/automated",||g' example/package.json`,
+    [
+      '(',
+      [
+        'cd example',
+        'yarn add yalc',
+        'yalc add @automated/automated',
+        'yarn automated init',
+      ].join(' && '),
+      ')',
+    ].join(''),
+  ].join(' && '),
+
+  'test-ci': '(cd example && yarn automated init)',
 };
 
 module.exports = { scripts };
