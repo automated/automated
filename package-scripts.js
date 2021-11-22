@@ -40,7 +40,7 @@ const scripts = {
   'install-example-deps': [
     build,
     'yalc publish',
-    `sed -i '' 's|"@automated/automated": "file:.yalc/@automated/automated",||g' example/package.json`,
+    'sh ./remove-automated-dep.sh',
     [
       '(',
       [
@@ -57,7 +57,15 @@ const scripts = {
     '(',
     [
       'cd example',
-      'yarn automated jest --updateSnapshot --testPathIgnorePatterns .yalc',
+      [
+        'yarn automated jest',
+
+        '--coverage',
+        '--testPathIgnorePatterns .yalc',
+        // '--updateSnapshot',
+
+        '.',
+      ].join(' '),
       'yarn automated build-storybook',
 
       // 'yarn automated init', // then compare git status

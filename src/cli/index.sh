@@ -59,7 +59,7 @@ elif [ "$1" = "combine-coverage" ]; then
   $(derive_bin istanbul-merge) \
     --out "$PROJECT_ROOT/coverage-combined/coverage-final.json" \
     "$PROJECT_ROOT/coverage/coverage-final.json" \
-    "$PROJECT_ROOT/coverage-from-automated/coverage-final.json' &" \
+    "$PROJECT_ROOT/tmp/automated/coverage/coverage-final.json' &" \
 
   $(derive_bin istanbul) report \
     --include "$ROOT/coverage-combined/coverage-final.json" \
