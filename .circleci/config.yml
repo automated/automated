@@ -25,6 +25,8 @@ jobs:
 
       - run: yarn nps build
 
+      - run: yarn nps test-ci
+
       - persist_to_workspace:
           root: ~/repo
           paths:
