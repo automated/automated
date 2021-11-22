@@ -3,8 +3,7 @@
   "packages": {
     "@automated/automated": {
       "signature": "60eadaaa570bf710b489dfce1e38806d",
-      "file": true,
-      "replaced": "^0.84.0"
+      "file": true
     }
   }
 }
