@@ -63,9 +63,6 @@ const scripts = {
 
         '--coverage',
         '--testPathIgnorePatterns .yalc',
-        // '--updateSnapshot',
-
-        '.',
       ].join(' '),
       'yarn automated build-storybook',
 
