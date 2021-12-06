@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  puppeteer: threetreeslight/puppeteer@0.1.2
+
 defaults: &defaults
   working_directory: ~/repo
 
@@ -37,6 +40,12 @@ jobs:
 
       - store_artifacts:
           path: /example/tmp/automated
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "example/package.json" }}
+          paths:
+            - ./node_modules
+            - ./example/node_modules
 
       - persist_to_workspace:
           root: ~/repo
