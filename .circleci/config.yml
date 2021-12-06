@@ -31,6 +31,8 @@ jobs:
           background: true
           command: cd example && yarn automated storybook
 
+      - run: yarn wait-on http://localhost:3144
+
       - run: yarn nps test-ci
 
       - store_artifacts:
