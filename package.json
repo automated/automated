@@ -13,7 +13,7 @@
     "@babel/core": "^7.15.0",
     "@discoveryjs/json-ext": "^0.5.5",
     "@emotion/babel-preset-css-prop": "^11.2.0",
-    "@emotion/jest": "^11.3.0",
+    "@emotion/jest": "^11.6.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@jest/types": "^27.2.5",
