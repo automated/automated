@@ -36,7 +36,7 @@ jobs:
       - run: yarn nps test-ci
 
       - store_artifacts:
-          path: ./example/tmp/automated
+          path: ~/repo/example/tmp/automated
 
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "example/package.json" }}
