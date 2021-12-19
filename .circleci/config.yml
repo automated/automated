@@ -22,7 +22,7 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "example/package.json" }}
             - v1-dependencies-
 
-      - run: sudo apt-get update && sudo apt install libgdk-pixbuf2.0-dev libgtk-3-dev libnss3-dev libxss-dev
+      - run: sudo apt-get update && sudo apt install libatk-bridge2.0-0 libatk1.0-0 libgbm-dev libgconf-2-4 libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-dev libgtk-3-0 libgtk-3-dev libnss3-dev libxss-dev libasound2
 
       - run: yarn
 
@@ -44,8 +44,8 @@ jobs:
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "example/package.json" }}
           paths:
-            - ./node_modules
-            - ./example/node_modules
+            - ~/repo/node_modules
+            - ~/repo/example/node_modules
 
       - persist_to_workspace:
           root: ~/repo
