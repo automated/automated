@@ -4,9 +4,10 @@ const build = [
   'rm -rf ./dist',
 
   'tsc',
+  'cp -r ./src/cli ./dist/cli',
   'cp -r ./src/storybook/config ./dist/storybook/config',
   'cp -r ./src/template ./dist/template',
-  'cp ./src/cli/index.sh ./dist/automated.sh',
+  'cp ./src/automated.sh ./dist',
   'cp ./src/types.d.ts ./dist',
 ].join(' && ');
 
@@ -62,9 +63,6 @@ const scripts = {
 
         '--coverage',
         '--testPathIgnorePatterns .yalc',
-        // '--updateSnapshot',
-
-        '.',
       ].join(' '),
       'yarn automated build-storybook',
 
