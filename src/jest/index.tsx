@@ -35,6 +35,7 @@ export const runner = async ({
     if (isStorybookRunning) {
       browser = await puppeteer.launch({
         // headless: false,
+        args: ['--no-sandbox'],
       });
     }
   });

@@ -32,6 +32,25 @@ const dev = [
 ].join(' ');
 
 const scripts = {
+  'docker-run': [
+    'docker build --tag=automated:latest .',
+    'docker rm -f automated_dockerfile',
+    [
+      'docker run -it ',
+      '--env HOST_PWD=`pwd`',
+      '--publish-all',
+      '--name automated_dockerfile',
+      '--volume `pwd`:`pwd`',
+      // '--volume `yarn cache dir`:`yarn cache dir`',
+      '--workdir `pwd`',
+      'automated',
+    ].join(' '),
+  ].join(' && '),
+
+  //
+  // docker exec -it automated_dockerfile echo 123
+  //
+
   build,
 
   dev,
@@ -55,7 +74,7 @@ const scripts = {
   ].join(' && '),
 
   'test-ci': [
-    '(',
+    'yarn wait-on $STORYBOOK_URL && (',
     [
       'cd example',
       [

@@ -26,8 +26,7 @@ const automatedTitle = '[ Automated ⚙️ ]';
   if (argv[0] === 'jest') {
     console.log(`${automatedTitle}: Jest`);
 
-    const storybookUrl = 'http://localhost:3144';
-    process.env.STORYBOOK_URL = storybookUrl;
+    const storybookUrl = process.env.STORYBOOK_URL || 'http://localhost:3144';
     process.env.JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE = 'true';
 
     try {
