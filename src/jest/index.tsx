@@ -48,6 +48,12 @@ export const runner = async ({
         if (browser) await browser.close();
       });
 
+      beforeAll(async () => {
+        console.log(
+          `Visual regression: ${isStorybookRunning ? 'enabled' : 'disabled'}`,
+        );
+      });
+
       test(`snapshot-${name}`, async () => {
         const render = TestRenderer.create(<Component {...props} />);
         const renderToJson = render.toJSON();
