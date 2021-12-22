@@ -6,10 +6,12 @@ const build = [
   'rm -rf ./dist',
 
   'tsc',
+
   'cp -r ./src/cli ./dist/cli',
   'cp -r ./src/storybook/config ./dist/storybook/config',
   'cp -r ./src/template ./dist/template',
   'cp ./src/automated.sh ./dist',
+  'cp ./src/storybook/shared.js ./dist/storybook/shared.js',
   'cp ./src/types.d.ts ./dist',
 ].join(' && ');
 
