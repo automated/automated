@@ -27,7 +27,7 @@ export const runner = async ({
   const describeName = deriveDescribeName({ dirname });
   const useCases = deriveUseCases({ useCases: useCasesProp });
 
-  let isStorybookRunning = process.env.STORYBOOK_IS_RUNNING;
+  let isStorybookRunning = process.env.AUTOMATED_STORYBOOK_IS_RUNNING;
   let storybookTestFn = isStorybookRunning ? test : test.skip;
   let browser: Browser;
 
@@ -37,6 +37,13 @@ export const runner = async ({
         // headless: false,
         args: ['--no-sandbox'],
       });
+    } else {
+      if (process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED) {
+        throw new Error(
+          '`AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED` is true, ' +
+            'but visual regression is disabled',
+        );
+      }
     }
   });
 
@@ -46,12 +53,6 @@ export const runner = async ({
 
       afterAll(async () => {
         if (browser) await browser.close();
-      });
-
-      beforeAll(async () => {
-        console.log(
-          `Visual regression: ${isStorybookRunning ? 'enabled' : 'disabled'}`,
-        );
       });
 
       test(`snapshot-${name}`, async () => {

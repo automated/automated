@@ -80,6 +80,7 @@ const scripts = {
     [
       'cd example',
       [
+        `AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED=true`,
         'yarn automated jest',
 
         '--coverage',

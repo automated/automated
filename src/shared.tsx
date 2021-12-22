@@ -1,5 +1,5 @@
 const base = {
-  storybookUrl: process.env.STORYBOOK_URL,
+  storybookUrl: process.env.AUTOMATED_STORYBOOK_URL,
 };
 
 export default base;

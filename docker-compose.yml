@@ -26,7 +26,7 @@ services:
     working_dir: /home/circleci/project
 
     environment:
-      - STORYBOOK_URL=http://storybook:3144
+      - AUTOMATED_STORYBOOK_URL=http://storybook:3144
 
     command: yarn nps test-ci
 

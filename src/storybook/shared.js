@@ -1,3 +1,4 @@
 module.exports = {
-  getStorybookUrl: () => process.env.STORYBOOK_URL || 'http://localhost:3144',
+  getStorybookUrl: () =>
+    process.env.AUTOMATED_STORYBOOK_URL || 'http://localhost:3144',
 };
