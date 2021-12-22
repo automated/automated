@@ -1,6 +1,7 @@
 import fetch from 'cross-fetch';
 import fs from 'fs';
 import { execSync, spawnSync } from 'child_process';
+const shared = require('./src/storybook/shared');
 
 const projectRootDir = execSync('echo "$(pwd)"').toString().trim();
 
@@ -26,11 +27,10 @@ const automatedTitle = '[ Automated ⚙️ ]';
   if (argv[0] === 'jest') {
     console.log(`${automatedTitle}: Jest`);
 
-    const storybookUrl = process.env.STORYBOOK_URL || 'http://localhost:3144';
     process.env.JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE = 'true';
 
     try {
-      if ((await fetch(storybookUrl)).ok) {
+      if ((await fetch(shared.getStorybookUrl())).ok) {
         process.env.STORYBOOK_IS_RUNNING = 'true';
       }
     } catch (error) {}

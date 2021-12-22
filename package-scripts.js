@@ -1,3 +1,5 @@
+const shared = require('./src/storybook/shared');
+
 const lint = "eslint --ignore-path .gitignore --ext .jsx,.js,.ts,.tsx '.'";
 
 const build = [
@@ -74,7 +76,7 @@ const scripts = {
   ].join(' && '),
 
   'test-ci': [
-    'yarn wait-on $STORYBOOK_URL && (',
+    `yarn wait-on ${shared.getStorybookUrl()} && (`,
     [
       'cd example',
       [
