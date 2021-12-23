@@ -1,6 +1,7 @@
 import fetch from 'cross-fetch';
 import fs from 'fs';
 import { execSync, spawnSync } from 'child_process';
+const shared = require('../storybook/shared');
 
 const projectRootDir = execSync('echo "$(pwd)"').toString().trim();
 
@@ -26,13 +27,11 @@ const automatedTitle = '[ Automated ⚙️ ]';
   if (argv[0] === 'jest') {
     console.log(`${automatedTitle}: Jest`);
 
-    const storybookUrl = 'http://localhost:3144';
-    process.env.STORYBOOK_URL = storybookUrl;
     process.env.JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE = 'true';
 
     try {
-      if ((await fetch(storybookUrl)).ok) {
-        process.env.STORYBOOK_IS_RUNNING = 'true';
+      if ((await fetch(shared.getStorybookUrl())).ok) {
+        process.env.AUTOMATED_STORYBOOK_IS_RUNNING = 'true';
       }
     } catch (error) {}
 
@@ -46,7 +45,10 @@ const automatedTitle = '[ Automated ⚙️ ]';
 
         ...process.argv.slice(3),
       ],
-      { shell: true, stdio: 'inherit' },
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
     );
 
     return;
@@ -65,7 +67,10 @@ const automatedTitle = '[ Automated ⚙️ ]';
 
         ...process.argv.slice(3),
       ],
-      { shell: true, stdio: 'inherit' },
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
     );
 
     return;
@@ -83,7 +88,10 @@ const automatedTitle = '[ Automated ⚙️ ]';
 
         ...process.argv.slice(3),
       ],
-      { shell: true, stdio: 'inherit' },
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
     );
 
     return;
@@ -117,7 +125,10 @@ const automatedTitle = '[ Automated ⚙️ ]';
         `--dir="${projectRootDir}/coverage-combined/lcov-report"`,
         `html`,
       ],
-      { shell: true, stdio: 'inherit' },
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
     );
 
     return;

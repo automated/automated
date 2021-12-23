@@ -5,7 +5,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import { UseCases } from '../types';
 import deriveDescribeName from '../utils/derive-describe-name';
 import deriveUseCases from '../utils/derive-use-cases';
-import shared from '../shared';
+const shared = require('../storybook/shared');
 import puppeteer from 'puppeteer';
 import TestRenderer from 'react-test-renderer';
 import React from 'react';
@@ -27,7 +27,7 @@ export const runner = async ({
   const describeName = deriveDescribeName({ dirname });
   const useCases = deriveUseCases({ useCases: useCasesProp });
 
-  let isStorybookRunning = process.env.STORYBOOK_IS_RUNNING;
+  let isStorybookRunning = process.env.AUTOMATED_STORYBOOK_IS_RUNNING;
   let storybookTestFn = isStorybookRunning ? test : test.skip;
   let browser: Browser;
 
@@ -35,7 +35,15 @@ export const runner = async ({
     if (isStorybookRunning) {
       browser = await puppeteer.launch({
         // headless: false,
+        args: ['--no-sandbox'],
       });
+    } else {
+      if (process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED) {
+        throw new Error(
+          '`AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED` is true, ' +
+            'but visual regression is disabled',
+        );
+      }
     }
   });
 
@@ -49,7 +57,6 @@ export const runner = async ({
 
       test(`snapshot-${name}`, async () => {
         const render = TestRenderer.create(<Component {...props} />);
-        const renderToJson = render.toJSON();
 
         if (!key) {
           expect(<Component {...props} />).toMatchSnapshot();
@@ -82,7 +89,7 @@ export const runner = async ({
 
                 const storybookId = `${paramCase(describeName)}--${name}`;
 
-                const url = `${shared.storybookUrl}/iframe.html?id=${storybookId}&args=&viewMode=story`;
+                const url = `${shared.getStorybookUrl()}/iframe.html?id=${storybookId}&args=&viewMode=story`;
                 await page.goto(url);
                 await page.setViewport(viewport);
 

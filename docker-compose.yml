@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  storybook:
+    build: .
+
+    volumes:
+      - .:/home/circleci/project
+
+    ports:
+      - "3144:3144"
+
+    working_dir: /home/circleci/project/example
+
+    command: yarn automated storybook
+
+  runner:
+    build: .
+
+    volumes:
+      - .:/home/circleci/project
+
+    depends_on:
+      - storybook
+
+    working_dir: /home/circleci/project
+
+    environment:
+      - AUTOMATED_STORYBOOK_URL=http://storybook:3144
+
+    command: yarn nps test-ci

@@ -1,13 +1,17 @@
+const shared = require('./src/storybook/shared');
+
 const lint = "eslint --ignore-path .gitignore --ext .jsx,.js,.ts,.tsx '.'";
 
 const build = [
   'rm -rf ./dist',
 
   'tsc',
+
   'cp -r ./src/cli ./dist/cli',
   'cp -r ./src/storybook/config ./dist/storybook/config',
   'cp -r ./src/template ./dist/template',
   'cp ./src/automated.sh ./dist',
+  'cp ./src/storybook/shared.js ./dist/storybook/shared.js',
   'cp ./src/types.d.ts ./dist',
 ].join(' && ');
 
@@ -32,6 +36,20 @@ const dev = [
 ].join(' ');
 
 const scripts = {
+  'docker-run': [
+    'docker build --tag=automated:latest .',
+    'docker rm -f automated_dockerfile',
+    [
+      'docker run -it ',
+      '--env HOST_PWD=`pwd`',
+      '--publish-all',
+      '--name automated_dockerfile',
+      '--volume `pwd`:`pwd`',
+      '--workdir `pwd`',
+      'automated',
+    ].join(' '),
+  ].join(' && '),
+
   build,
 
   dev,
@@ -55,10 +73,11 @@ const scripts = {
   ].join(' && '),
 
   'test-ci': [
-    '(',
+    `yarn wait-on ${shared.getStorybookUrl()} && (`,
     [
       'cd example',
       [
+        `AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED=true`,
         'yarn automated jest',
 
         '--coverage',
