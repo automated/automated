@@ -5,7 +5,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import { UseCases } from '../types';
 import deriveDescribeName from '../utils/derive-describe-name';
 import deriveUseCases from '../utils/derive-use-cases';
-import shared from '../shared';
+const shared = require('../storybook/shared');
 import puppeteer from 'puppeteer';
 import TestRenderer from 'react-test-renderer';
 import React from 'react';
@@ -57,7 +57,7 @@ export const runner = async ({
 
       test(`snapshot-${name}`, async () => {
         const render = TestRenderer.create(<Component {...props} />);
-        const renderToJson = render.toJSON();
+        // const renderToJson = render.toJSON();
 
         if (!key) {
           expect(<Component {...props} />).toMatchSnapshot();
@@ -90,7 +90,7 @@ export const runner = async ({
 
                 const storybookId = `${paramCase(describeName)}--${name}`;
 
-                const url = `${shared.storybookUrl}/iframe.html?id=${storybookId}&args=&viewMode=story`;
+                const url = `${shared.getStorybookUrl()}/iframe.html?id=${storybookId}&args=&viewMode=story`;
                 await page.goto(url);
                 await page.setViewport(viewport);
 
