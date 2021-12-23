@@ -57,7 +57,6 @@ export const runner = async ({
 
       test(`snapshot-${name}`, async () => {
         const render = TestRenderer.create(<Component {...props} />);
-        // const renderToJson = render.toJSON();
 
         if (!key) {
           expect(<Component {...props} />).toMatchSnapshot();

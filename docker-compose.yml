@@ -29,19 +29,3 @@ services:
       - AUTOMATED_STORYBOOK_URL=http://storybook:3144
 
     command: yarn nps test-ci
-
-# version: "3.9"  # optional since v1.27.0
-# services:
-#   web:
-#     build: .
-#     ports:
-#       - "5000:5000"
-#     volumes:
-#       - .:/code
-#       - logvolume01:/var/log
-#     links:
-#       - redis
-#   redis:
-#     image: redis
-# volumes:
-#   logvolume01: {}

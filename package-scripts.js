@@ -45,15 +45,10 @@ const scripts = {
       '--publish-all',
       '--name automated_dockerfile',
       '--volume `pwd`:`pwd`',
-      // '--volume `yarn cache dir`:`yarn cache dir`',
       '--workdir `pwd`',
       'automated',
     ].join(' '),
   ].join(' && '),
-
-  //
-  // docker exec -it automated_dockerfile echo 123
-  //
 
   build,
 
