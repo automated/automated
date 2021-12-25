@@ -1,0 +1,102 @@
+{
+  "author": {
+    "name": "Contributors",
+    "url": "https://github.com/automated/automated/contributors"
+  },
+  "bin": {
+    "automated": "dist/automated.sh"
+  },
+  "bugs": {
+    "url": "https://github.com/automated/automated/issues"
+  },
+  "dependencies": {
+    "@babel/core": "^7.15.0",
+    "@discoveryjs/json-ext": "^0.5.5",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@emotion/jest": "^11.6.0",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@jest/types": "^27.2.5",
+    "@storybook/addon-actions": "6.2.3",
+    "@storybook/addon-essentials": "6.2.3",
+    "@storybook/addon-links": "6.2.3",
+    "@storybook/preset-scss": "^1.0.3",
+    "@storybook/react": "6.2.3",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@types/fs-extra": "^9.0.13",
+    "@types/jest": "^26.0.24",
+    "@types/jest-image-snapshot": "^4.3.1",
+    "@types/node": "^16.10.2",
+    "@types/react": "^17.0.15",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-test-renderer": "^16.9.5",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "change-case": "^4.1.2",
+    "cross-fetch": "^3.1.4",
+    "css-loader": "^6.5.1",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-typescript-sort-keys": "^1.6.0",
+    "fs-extra": "^10.0.0",
+    "glob": "^7.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "istanbul-merge": "^1.1.1",
+    "jest": "^27.0.6",
+    "jest-image-snapshot": "^4.5.1",
+    "lcov-result-merger": "^3.1.0",
+    "node-fetch": "^3.1.0",
+    "nodemon": "^2.0.12",
+    "nps": "^5.10.0",
+    "prettier": "^2.3.2",
+    "puppeteer": "^10.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.1",
+    "sass": "^1.43.4",
+    "sass-loader": "10.1.1",
+    "snapshot-diff": "^0.9.0",
+    "storybook": "^6.3.6",
+    "style-loader": "^3.3.1",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5",
+    "uuid-by-string": "^3.0.4",
+    "wait-on": "^6.0.0",
+    "webpack-node-externals": "^3.0.0",
+    "yalc": "^1.0.0-pre.53"
+  },
+  "description": "Use-case-oriented testing",
+  "engines": {
+    "node": ">=14.17.5"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/automated/automated",
+  "keywords": [
+    "test",
+    "testing",
+    "coverage"
+  ],
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "name": "@automated/automated",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/automated/automated.git"
+  },
+  "scripts": {
+    "default": "nps"
+  },
+  "version": "0.86.0"
+}

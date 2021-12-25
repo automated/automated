@@ -1,20 +1,19 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": true,
     "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "./dist",
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "esnext",
-    "skipLibCheck": true
+    "target": "esnext"
   },
-  "exclude": ["node_modules", "src/template"],
-  "include": ["src"]
+  "exclude": ["node_modules"],
+  "include": ["**/*"]
 }
