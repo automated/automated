@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import aptDeps from './apt-deps';
+import packageJson from '../main/package.json';
 import { execSync, spawnSync } from 'child_process';
 
 const dockerfileDirPath = path.join(__dirname, '../../dist');
@@ -15,6 +16,10 @@ const content = [
   'RUN sudo apt-get update',
   '\n\n',
   `RUN sudo apt install ${aptDeps.join(' ')}`,
+  '\n\n',
+  `RUN yarn add ${Object.entries(packageJson.dependencies)
+    .map(([lib, version]) => `${lib}@${version}`)
+    .join(' ')}`,
   '\n\n',
   'COPY main /home/circleci/project ',
   // '\n\n',

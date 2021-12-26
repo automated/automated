@@ -4,5 +4,5 @@
   },
   "extends": "./tsconfig.json",
   "include": ["src"],
-  "exclude": ["src/docker-generator"]
+  "exclude": ["src/docker-generator", "src/main/template"]
 }

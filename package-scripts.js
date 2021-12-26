@@ -4,8 +4,8 @@ const build = [
   'tsc --project tsconfig.lib.json',
 
   'cp ./src/cli/automated.sh ./dist/cli/automated.sh',
+  'cp -r ./src/main/template ./dist/main/template',
   //   'cp -r ./src/storybook/config ./dist/storybook/config',
-  //   'cp -r ./src/template ./dist/template',
   //   'cp ./src/automated.sh ./dist',
   //   'cp ./src/storybook/shared.js ./dist/storybook/shared.js',
   //   'cp ./src/types.d.ts ./dist',
@@ -36,7 +36,7 @@ const dev = [
 const scripts = {
   dev,
 
-  test: '(cd example && yarn automated)',
+  test: '(cd example && yarn automated init)',
 };
 
 module.exports = { scripts };
