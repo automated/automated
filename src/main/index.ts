@@ -1,61 +1,62 @@
 // import fetch from 'cross-fetch';
 // import fs from 'fs';
+import path from 'path';
 import { execSync, spawnSync } from 'child_process';
 // const shared = require('../storybook/shared');
 
-// const projectRootDir = execSync('echo "$(pwd)"').toString().trim();
+const projectDir = execSync('echo "$(pwd)"').toString().trim();
 
-const automatedRootDir = `/home/circleci/project`;
+export const automatedDir = `/home/circleci/project`;
+const automatedBins = path.join(automatedDir, `node_modules/.bin`);
 
 const argv = process.argv.slice(2);
 
 // console.log('argv', argv);
-// console.log('projectRootDir', projectRootDir);
-// console.log('automatedRootDir', automatedRootDir);
+// console.log('projectDir', projectDir);
+// console.log('automatedDir', automatedDir);
 
 const automatedTitle = '[ Automated ⚙️ ]';
 
 (async () => {
   if (argv[0] === 'init') {
     console.log(`${automatedTitle}: Init`);
-    spawnSync('node', [`${automatedRootDir}/tools/init.js`], {
+    spawnSync('node', [`${automatedDir}/init/index.js`], {
       shell: true,
       stdio: 'inherit',
     });
 
     return;
   }
+
+  if (argv[0] === 'jest') {
+    console.log(`${automatedTitle}: Jest`);
+
+    // process.env.JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE = 'true';
+
+    // try {
+    //   if ((await fetch(shared.getStorybookUrl())).ok) {
+    //     process.env.AUTOMATED_STORYBOOK_IS_RUNNING = 'true';
+    //   }
+    // } catch (error) {}
+
+    spawnSync(
+      'node',
+      [
+        `${automatedBins}/jest`,
+        `--rootDir="${projectDir}"`,
+        `--config="${automatedDir}/jest/jest.config.js"`,
+
+        ...process.argv.slice(3),
+      ],
+      {
+        shell: true,
+        stdio: 'inherit',
+      },
+    );
+
+    return;
+  }
 })();
-
-//   if (argv[0] === 'jest') {
-//     console.log(`${automatedTitle}: Jest`);
-
-//     process.env.JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE = 'true';
-
-//     try {
-//       if ((await fetch(shared.getStorybookUrl())).ok) {
-//         process.env.AUTOMATED_STORYBOOK_IS_RUNNING = 'true';
-//       }
-//     } catch (error) {}
-
-//     spawnSync(
-//       deriveBinary({
-//         bin: 'jest',
-//       }),
-//       [
-//         `--rootDir="${projectRootDir}"`,
-//         `--config="${automatedDistDir}/jest/jest.config.js"`,
-
-//         ...process.argv.slice(3),
-//       ],
-//       {
-//         shell: true,
-//         stdio: 'inherit',
-//       },
-//     );
-
-//     return;
-//   }
 
 //   if (argv[0] === 'hello') {
 //     console.log(`${automatedTitle}: Testing docker`);
@@ -95,7 +96,7 @@ const automatedTitle = '[ Automated ⚙️ ]';
 //       }),
 //       [
 //         `--config-dir="${automatedDistDir}/storybook/config"`,
-//         `--output-dir="${projectRootDir}/tmp/automated/storybook"`,
+//         `--output-dir="${projectDir}/tmp/automated/storybook"`,
 
 //         ...process.argv.slice(3),
 //       ],
@@ -115,15 +116,15 @@ const automatedTitle = '[ Automated ⚙️ ]';
 //         bin: 'istanbul-merge',
 //       }),
 //       [
-//         `--out="${projectRootDir}/coverage-combined/coverage-final.json"`,
-//         `${projectRootDir}/coverage/coverage-final.json`,
-//         `${projectRootDir}/tmp/automated/coverage/coverage-final.json`,
+//         `--out="${projectDir}/coverage-combined/coverage-final.json"`,
+//         `${projectDir}/coverage/coverage-final.json`,
+//         `${projectDir}/tmp/automated/coverage/coverage-final.json`,
 //         '&&',
 //         deriveBinary({
 //           bin: 'istanbul',
 //         }),
-//         `--include="${projectRootDir}/coverage-combined/coverage-final.json"`,
-//         `--dir="${projectRootDir}/coverage-combined/lcov-report"`,
+//         `--include="${projectDir}/coverage-combined/coverage-final.json"`,
+//         `--dir="${projectDir}/coverage-combined/lcov-report"`,
 //         `html`,
 //       ],
 //       {
@@ -135,9 +136,9 @@ const automatedTitle = '[ Automated ⚙️ ]';
 //     return;
 //   }
 
-// const projectBinDir = `${projectRootDir}/node_modules/.bin`;
-// const automatedBinDir = `${automatedRootDir}/node_modules/.bin`;
-// const automatedDistDir = `${automatedRootDir}/dist`;
+// const projectBinDir = `${projectDir}/node_modules/.bin`;
+// const automatedBinDir = `${automatedDir}/node_modules/.bin`;
+// const automatedDistDir = `${automatedDir}/dist`;
 // const deriveBinary = ({ bin }: { bin: string }) => {
 //   if (fs.statSync(`${automatedBinDir}/${bin}`)) {
 //     return `${automatedBinDir}/${bin}`;

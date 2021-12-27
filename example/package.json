@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "@automated/automated": "file:.yalc/@automated/automated"
+    "@automated/automated": "file:.yalc/@automated/automated",
+    "react": "^17.0.2",
+    "typescript": "^4.5.4"
   },
   "engines": {
     "node": ">=14.17.5"

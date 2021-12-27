@@ -22,6 +22,8 @@ const content = [
     .join(' ')}`,
   '\n\n',
   'COPY main /home/circleci/project ',
+  '\n\n',
+  'ENV IS_DOCKER=true',
   // '\n\n',
   // 'EXPOSE 3144',
   // '\n\n',

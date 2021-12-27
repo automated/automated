@@ -5,6 +5,7 @@ const build = [
 
   'cp ./src/cli/automated.sh ./dist/cli/automated.sh',
   'cp -r ./src/main/template ./dist/main/template',
+
   //   'cp -r ./src/storybook/config ./dist/storybook/config',
   //   'cp ./src/automated.sh ./dist',
   //   'cp ./src/storybook/shared.js ./dist/storybook/shared.js',
@@ -36,7 +37,8 @@ const dev = [
 const scripts = {
   dev,
 
-  test: '(cd example && yarn automated init)',
+  // test: '(cd example && yarn automated init)',
+  test: '(cd example && yarn automated jest --testPathPattern src/components/warning/__automated__/index.test.tsx -u --coverage)',
 };
 
 module.exports = { scripts };
