@@ -1,19 +1,21 @@
+const lintPrefix = 'eslint --ignore-path .gitignore --ext .jsx,.js,.ts,.tsx';
+
 const build = [
-  'rm -rf ./dist',
+  'rm -rf ./lib/dist',
 
-  'tsc --project tsconfig.lib.json',
+  'tsc',
 
-  'cp ./src/cli/automated.sh ./dist/cli/automated.sh',
-  'cp -r ./src/main/template ./dist/main/template',
+  'cp -r ./lib/src/main/template ./lib/dist/main/template',
+  'cp ./lib/src/cli/automated.sh ./lib/dist/cli/automated.sh',
+  'cp ./lib/src/main/types.d.ts ./lib/dist/main',
 
-  //   'cp -r ./src/storybook/config ./dist/storybook/config',
-  //   'cp ./src/automated.sh ./dist',
-  //   'cp ./src/storybook/shared.js ./dist/storybook/shared.js',
-  //   'cp ./src/types.d.ts ./dist',
+  //   'cp -r ./lib/src/storybook/config ./lib/dist/storybook/config',
+  //   'cp ./lib/src/automated.sh ./lib/dist',
+  //   'cp ./lib/src/storybook/shared.js ./lib/dist/storybook/shared.js',
 
-  'yarn ts-node src/docker-generator/index.ts',
+  'yarn ts-node ./lib/src/docker-generator/index.ts',
 
-  '(cd dist && docker build --tag=automated:latest .)',
+  '(cd ./lib/dist && docker build --tag=automated:latest .)',
 ].join(' && ');
 
 const yalcPublishToExample = [
@@ -26,16 +28,22 @@ const yalcPublishToExample = [
 ].join(' && ');
 
 const dev = [
-  `yarn nodemon`,
+  'yarn nodemon',
   [
     "--ext '*'",
-    `--watch "src/**/*"`,
+    '--watch "lib/src/**/*"',
     `--exec "${build} && ${yalcPublishToExample}"`,
   ].join(' '),
 ].join(' ');
 
 const scripts = {
+  build,
+
   dev,
+
+  format: `${lintPrefix} --fix '.'`,
+
+  lint: `${lintPrefix} '.'`,
 
   // test: '(cd example && yarn automated init)',
   test: '(cd example && yarn automated jest --testPathPattern src/components/warning/__automated__/index.test.tsx -u --coverage)',
@@ -43,21 +51,19 @@ const scripts = {
 
 module.exports = { scripts };
 
-// const shared = require('./src/storybook/shared');
-
-// const lint = "eslint --ignore-path .gitignore --ext .jsx,.js,.ts,.tsx '.'";
+// const shared = require('./lib/src/storybook/shared');
 
 // const build = [
-//   'rm -rf ./dist',
+//   'rm -rf ./lib/dist',
 
 //   'tsc',
 
-//   'cp -r ./src/cli ./dist/cli',
-//   'cp -r ./src/storybook/config ./dist/storybook/config',
-//   'cp -r ./src/template ./dist/template',
-//   'cp ./src/automated.sh ./dist',
-//   'cp ./src/storybook/shared.js ./dist/storybook/shared.js',
-//   'cp ./src/types.d.ts ./dist',
+//   'cp -r ./lib/src/cli ./lib/dist/cli',
+//   'cp -r ./lib/src/storybook/config ./lib/dist/storybook/config',
+//   'cp -r ./lib/src/template ./lib/dist/template',
+//   'cp ./lib/src/automated.sh ./lib/dist',
+//   'cp ./lib/src/storybook/shared.js ./lib/dist/storybook/shared.js',
+//   'cp ./lib/src/types.d.ts ./lib/dist',
 // ].join(' && ');
 
 // const dev = [

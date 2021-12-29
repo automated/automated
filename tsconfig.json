@@ -9,12 +9,19 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
+    "outDir": "./lib/dist",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "target": "esnext"
   },
-  "exclude": ["node_modules", "example"],
+  "exclude": [
+    "_old",
+    "example",
+    "lib/dist",
+    "lib/src/docker-generator",
+    "lib/src/main/template"
+  ],
   "include": ["**/*"]
 }

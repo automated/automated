@@ -1,9 +1,11 @@
-/.vscode
-/dist
+/_old
 /example/.next
 /example/.yalc
 /example/node_modules
 /example/tmp
+/example/yarn-error.log
+/lib/dist
+/lib/node_modules
+/lib/src/main/node_modules
+/lib/yarn-error.log
 /node_modules
-/src/main/node_modules
-/yarn-error.log
