@@ -4,7 +4,7 @@ import { execSync, spawnSync } from 'child_process';
 import path from 'path';
 // const shared = require('../storybook/shared');
 
-export * from './types';
+export type { Props, UseCase, UseCases } from './types';
 
 const projectDir = execSync('echo "$(pwd)"').toString().trim();
 

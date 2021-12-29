@@ -1,4 +1,4 @@
-import { runner } from '@automated/automated/dist/main/jest/index';
+import { runner } from '@automated/automated/lib/dist/main/jest/index';
 
 import automated from '../__automated';
 

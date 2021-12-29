@@ -34,7 +34,7 @@ const config: Config.InitialOptions = {
     deriveModulePath('jest-image-snapshot/src/outdated-snapshot-reporter.js'),
   ],
 
-  snapshotSerializers: [deriveModulePath('@emotion/jest/serializer')],
+  // snapshotSerializers: [deriveModulePath('@emotion/jest/serializer')],
 
   testEnvironment: 'jsdom',
 

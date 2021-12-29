@@ -1,2 +1,2 @@
-COMMAND="$(pwd)/node_modules/@automated/automated/dist/cli/runner.js $@"
+COMMAND="$(pwd)/node_modules/@automated/automated/lib/dist/cli/runner.js $@"
 node $COMMAND

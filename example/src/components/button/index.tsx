@@ -1,3 +1,5 @@
+import type React from 'react';
+
 export type Props = {
   background?: string;
   text?: string;
@@ -7,7 +9,8 @@ export type Props = {
 function Base({ background, text, onClick }: Props) {
   return (
     <button
-      css={{
+      onClick={onClick}
+      style={{
         background: background || 'blue',
         border: 'none',
         borderRadius: 10,
@@ -16,7 +19,6 @@ function Base({ background, text, onClick }: Props) {
         fontWeight: 600,
         padding: '20px 30px',
       }}
-      onClick={onClick}
       type="button"
     >
       {text || 'Get started'}

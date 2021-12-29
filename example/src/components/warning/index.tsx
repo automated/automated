@@ -1,7 +1,7 @@
 function Base() {
   return (
     <div
-      css={{
+      style={{
         background: 'red',
         borderRadius: 10,
         color: 'white',
