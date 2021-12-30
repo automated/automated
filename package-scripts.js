@@ -1,15 +1,15 @@
 const lintPrefix = 'eslint --ignore-path .gitignore --ext .jsx,.js,.ts,.tsx';
 
 const build = [
-  'rm -rf ./lib/dist',
+  'rm -rf ./lib/dist/*',
 
   'tsc',
 
+  'cp -r ./lib/src/main/storybook/config ./lib/dist/main/storybook/config',
   'cp -r ./lib/src/main/template ./lib/dist/main/template',
   'cp ./lib/src/cli/automated.sh ./lib/dist/cli/automated.sh',
   'cp ./lib/src/main/types.d.ts ./lib/dist/main',
 
-  //   'cp -r ./lib/src/storybook/config ./lib/dist/storybook/config',
   //   'cp ./lib/src/automated.sh ./lib/dist',
   //   'cp ./lib/src/storybook/shared.js ./lib/dist/storybook/shared.js',
 
@@ -46,7 +46,7 @@ const scripts = {
   lint: `${lintPrefix} '.'`,
 
   // test: '(cd example && yarn automated init)',
-  test: '(cd example && yarn automated jest -u --coverage src/components/warning/__automated__/index.test.tsx)',
+  test: '(cd example && yarn automated jest --testPathPattern src -u --coverage)',
 };
 
 module.exports = { scripts };

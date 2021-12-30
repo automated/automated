@@ -2,6 +2,7 @@ import type ChangeCase from 'change-case';
 import type JestImageSnapshot from 'jest-image-snapshot';
 import type Puppeteer from 'puppeteer/lib/types';
 import React from 'react';
+import type TestRenderer from 'react-test-renderer';
 import type SnapshotDiff from 'snapshot-diff';
 
 import { deriveModule } from '../shared';
@@ -21,14 +22,15 @@ export const runner = async ({
   Component: React.ElementType;
   useCases?: UseCases;
 }) => {
-  const { paramCase }: typeof ChangeCase = deriveModule('change-case');
-  const snapshotDiff: typeof SnapshotDiff =
-    deriveModule('snapshot-diff').default;
-  const { toMatchImageSnapshot }: typeof JestImageSnapshot = deriveModule(
+  const { paramCase }: typeof ChangeCase = await deriveModule('change-case');
+  const snapshotDiff: typeof SnapshotDiff = await deriveModule('snapshot-diff');
+  const { toMatchImageSnapshot }: typeof JestImageSnapshot = await deriveModule(
     'jest-image-snapshot',
   );
-  const puppeteer: typeof Puppeteer = deriveModule('puppeteer');
-  // import TestRenderer from 'react-test-renderer';
+  const puppeteer: typeof Puppeteer = await deriveModule('puppeteer');
+  const testRenderer: typeof TestRenderer = await deriveModule(
+    'react-test-renderer',
+  );
 
   expect.extend({
     toMatchImageSnapshot,
@@ -64,16 +66,13 @@ export const runner = async ({
       });
 
       test(`snapshot-${name}`, async () => {
-        // const render = TestRenderer.create(<Component {...props} />);
+        const render = testRenderer.create(<Component {...props} />).toJSON();
 
         if (!key) {
-          expect(<Component {...props} />).toMatchSnapshot();
+          expect(render).toMatchSnapshot();
         } else {
           expect(
-            snapshotDiff(
-              <Component {...useCases[0].props} />,
-              <Component {...props} />,
-            ),
+            snapshotDiff(<Component {...useCases[0].props} />, render),
           ).toMatchSnapshot();
         }
       });

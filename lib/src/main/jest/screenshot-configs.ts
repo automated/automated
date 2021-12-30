@@ -45,7 +45,7 @@ const configs = [
 ];
 
 const out = async (): Promise<ScreenshotConfigs> => {
-  const uuidByString = (await import(deriveModule('uuid-by-string'))).default;
+  const uuidByString = await deriveModule('uuid-by-string');
 
   return configs.reduce((acc, config) => {
     acc[uuidByString(JSON.stringify(config))] = config;

@@ -1,7 +1,5 @@
 import './index.scss';
 
-function Base() {
-  return <div className="warning">Warning!</div>;
-}
+const Base = () => <div className="warning">Warning!</div>;
 
 export default Base;

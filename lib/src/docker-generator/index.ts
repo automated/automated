@@ -25,8 +25,8 @@ const content = [
   'COPY main /home/circleci/project ',
   '\n\n',
   'ENV IS_DOCKER=true',
-  // '\n\n',
-  // 'EXPOSE 3144',
+  '\n\n',
+  'EXPOSE 3144',
   // '\n\n',
   // 'CMD ["/bin/sh"]',
 ].join('');

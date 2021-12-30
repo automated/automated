@@ -43,6 +43,7 @@ module.exports = {
   root: true,
   rules: {
     'arrow-parens': 'off',
+    'default-case': 'off',
     'func-names': 'error',
     'function-paren-newline': 'off',
     'implicit-arrow-linebreak': 'off',
@@ -66,6 +67,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'object-curly-newline': 'off',
     'operator-linebreak': 'off',
+    'react/function-component-definition': 'off',
     'react/jsx-curly-newline': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
     'react/jsx-one-expression-per-line': 'off',

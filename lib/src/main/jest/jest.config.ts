@@ -26,7 +26,7 @@ const config: Config.InitialOptions = {
   coverageDirectory: './tmp/automated/coverage',
 
   moduleNameMapper: {
-    '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
+    '^.+\\.(css|less|scss)$': deriveModulePath('identity-obj-proxy'),
   },
 
   reporters: [
