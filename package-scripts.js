@@ -46,7 +46,8 @@ const scripts = {
   lint: `${lintPrefix} '.'`,
 
   // test: '(cd example && yarn automated init)',
-  test: '(cd example && yarn automated jest --testPathPattern src -u --coverage)',
+  'test-ci':
+    '(cd example && yarn automated jest --testPathPattern src -u --coverage)',
 };
 
 module.exports = { scripts };
