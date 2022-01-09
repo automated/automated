@@ -44,8 +44,8 @@ const configs = [
   },
 ];
 
-const out = async (): Promise<ScreenshotConfigs> => {
-  const uuidByString = await deriveModule('uuid-by-string');
+export default (): ScreenshotConfigs => {
+  const uuidByString = deriveModule('uuid-by-string');
 
   return configs.reduce((acc, config) => {
     acc[uuidByString(JSON.stringify(config))] = config;
@@ -53,5 +53,3 @@ const out = async (): Promise<ScreenshotConfigs> => {
     return acc;
   }, <ScreenshotConfigs>{});
 };
-
-export default out;

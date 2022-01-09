@@ -16,7 +16,7 @@ const content = [
   '\n\n',
   'RUN sudo apt-get update',
   '\n\n',
-  `RUN sudo apt install ${aptDeps.join(' ')}`,
+  `RUN sudo apt-get install ${aptDeps.join(' ')}`,
   '\n\n',
   `RUN yarn add ${Object.entries(packageJson.dependencies)
     .map(([lib, version]) => `${lib}@${version}`)

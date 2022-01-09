@@ -41,6 +41,7 @@ export default [
   'libxss1',
   'libxtst6',
   'lsb-release',
+  'rsync',
   'wget',
   'xdg-utils',
 ];

@@ -10,10 +10,10 @@ import { getStorybookUrl } from '../storybook/shared';
 import { UseCases } from '../types';
 import deriveDescribeName from '../utils/derive-describe-name';
 import deriveUseCases from '../utils/derive-use-cases';
-import screenshotConfigs from './screenshot-configs';
+import deriveScreenshotConfigs from './derive-screenshot-configs';
 
 // eslint-disable-next-line import/prefer-default-export
-export const runner = async ({
+export const runner = ({
   dirname,
   Component,
   useCases: useCasesProp,
@@ -22,15 +22,13 @@ export const runner = async ({
   Component: React.ElementType;
   useCases?: UseCases;
 }) => {
-  const { paramCase }: typeof ChangeCase = await deriveModule('change-case');
-  const snapshotDiff: typeof SnapshotDiff = await deriveModule('snapshot-diff');
-  const { toMatchImageSnapshot }: typeof JestImageSnapshot = await deriveModule(
+  const { paramCase }: typeof ChangeCase = deriveModule('change-case');
+  const snapshotDiff: typeof SnapshotDiff = deriveModule('snapshot-diff');
+  const { toMatchImageSnapshot }: typeof JestImageSnapshot = deriveModule(
     'jest-image-snapshot',
   );
-  const puppeteer: typeof Puppeteer = await deriveModule('puppeteer');
-  const testRenderer: typeof TestRenderer = await deriveModule(
-    'react-test-renderer',
-  );
+  const puppeteer: typeof Puppeteer = deriveModule('puppeteer');
+  const testRenderer: typeof TestRenderer = deriveModule('react-test-renderer');
 
   expect.extend({
     toMatchImageSnapshot,
@@ -49,11 +47,16 @@ export const runner = async ({
         // headless: false,
         args: ['--no-sandbox'],
       });
+      // eslint-disable-next-line no-console
+      console.log('Visual regression via Storybook enabled');
     } else if (process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED) {
       throw new Error(
         '`AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED` is true, ' +
           'but visual regression is disabled',
       );
+    } else {
+      // eslint-disable-next-line no-console
+      console.log('Visual regression via Storybook not enabled');
     }
   });
 
@@ -65,7 +68,7 @@ export const runner = async ({
         if (browser) await browser.close();
       });
 
-      test(`snapshot-${name}`, async () => {
+      test(`${name}@jest-snapshot`, async () => {
         const render = testRenderer.create(<Component {...props} />).toJSON();
 
         if (!key) {
@@ -77,37 +80,34 @@ export const runner = async ({
         }
       });
 
-      Object.entries(screenshotConfigs).forEach(
+      Object.entries(deriveScreenshotConfigs()).forEach(
         ([
           configName,
           { viewport, matchImageSnapshotOptions, screenshotOptions },
         ]) => {
-          storybookTestFn(
-            `storybook@${describeName}@${name}@${configName}`,
-            async () => {
-              if (browser) {
-                const page = await browser.newPage();
+          storybookTestFn(`${name}@${configName}@storybook`, async () => {
+            if (browser) {
+              const page = await browser.newPage();
 
-                await page.evaluateOnNewDocument(() => {
-                  const style = document.createElement('style');
-                  style.innerHTML = '.body { caret-color: transparent }';
-                  document.getElementsByTagName('head')[0].appendChild(style);
-                });
+              await page.evaluateOnNewDocument(() => {
+                const style = document.createElement('style');
+                style.innerHTML = '.body { caret-color: transparent }';
+                document.getElementsByTagName('head')[0].appendChild(style);
+              });
 
-                const storybookId = `${paramCase(describeName)}--${name}`;
+              const storybookId = `${paramCase(describeName)}--${name}`;
 
-                const url = `${getStorybookUrl()}/iframe.html?id=${storybookId}&args=&viewMode=story`;
-                await page.goto(url);
-                await page.setViewport(viewport);
+              const url = `${getStorybookUrl()}/iframe.html?id=${storybookId}&args=&viewMode=story`;
+              await page.goto(url);
+              await page.setViewport(viewport);
 
-                const image = await page.screenshot(screenshotOptions);
+              const image = await page.screenshot(screenshotOptions);
 
-                expect(image).toMatchImageSnapshot(matchImageSnapshotOptions);
+              expect(image).toMatchImageSnapshot(matchImageSnapshotOptions);
 
-                await page.close();
-              }
-            },
-          );
+              await page.close();
+            }
+          });
         },
       );
     });

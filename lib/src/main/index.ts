@@ -1,6 +1,6 @@
-// import fetch from 'cross-fetch';
 // import fs from 'fs';
 import { execSync, spawnSync } from 'child_process';
+import fetch from 'cross-fetch';
 import path from 'path';
 
 // const shared = require('../storybook/shared');
@@ -14,10 +14,6 @@ export const automatedDir = '/home/circleci/project';
 const automatedBins = path.join(automatedDir, 'node_modules/.bin');
 
 const argv = process.argv.slice(2);
-
-// console.log('argv', argv);
-// console.log('projectDir', projectDir);
-// console.log('automatedDir', automatedDir);
 
 const automatedTitle = '[ Automated ⚙️ ]';
 
