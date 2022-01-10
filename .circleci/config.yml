@@ -15,6 +15,9 @@ jobs:
     <<: *defaults
 
     steps:
+      - setup_remote_docker:
+          version: 20.10.11
+
       - checkout
 
       - restore_cache:
@@ -27,9 +30,6 @@ jobs:
       - run: yarn nps install-example-deps
 
       - run: yarn nps build
-
-      - setup_remote_docker:
-          version: 20.10.11
 
       - run:
           background: true
