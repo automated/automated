@@ -28,6 +28,9 @@ jobs:
 
       - run: yarn nps build
 
+      - setup_remote_docker:
+          version: 20.10.11
+
       - run:
           background: true
           command: cd example && yarn automated storybook
