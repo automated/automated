@@ -11,6 +11,7 @@
   },
   "description": "Use-case-oriented testing",
   "devDependencies": {
+    "@storybook/react": "^6.4.9",
     "@types/fs-extra": "^9.0.13",
     "@types/glob": "^7.2.0",
     "@types/jest": "^27.0.3",
@@ -20,6 +21,8 @@
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "babel-eslint": "^10.1.0",
+    "change-case": "^4.1.2",
+    "cross-fetch": "^3.1.4",
     "eslint": "^8.5.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "^12.0.7",
@@ -34,11 +37,13 @@
     "nodemon": "^2.0.15",
     "nps": "^5.10.0",
     "prettier": "^2.5.1",
+    "puppeteer": "^13.0.1",
+    "react": "^17.0.2",
+    "snapshot-diff": "^0.9.0",
+    "ts-jest": "^27.1.2",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4",
-    "yalc": "^1.0.0-pre.53",
-    "puppeteer": "^13.0.1",
-    "react": "^17.0.2"
+    "yalc": "^1.0.0-pre.53"
   },
   "engines": {
     "node": ">=14.17.5"

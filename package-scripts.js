@@ -43,6 +43,22 @@ const scripts = {
 
   format: `${lintPrefix} --fix '.'`,
 
+  'install-example-deps': [
+    build,
+    'yalc publish',
+    'sh ./src/remove-automated-dep.sh',
+    [
+      '(',
+      [
+        'cd example',
+        'yarn add yalc',
+        'yalc add @automated/automated',
+        'yarn',
+      ].join(' && '),
+      ')',
+    ].join(''),
+  ].join(' && '),
+
   lint: `${lintPrefix} '.'`,
 
   // test: '(cd example && yarn automated init)',
@@ -98,22 +114,6 @@ module.exports = { scripts };
 //   dev,
 
 //   publish: '',
-
-//   'install-example-deps': [
-//     build,
-//     'yalc publish',
-//     'sh ./remove-automated-dep.sh',
-//     [
-//       '(',
-//       [
-//         'cd example',
-//         'yarn add yalc',
-//         'yalc add @automated/automated',
-//         'yarn',
-//       ].join(' && '),
-//       ')',
-//     ].join(''),
-//   ].join(' && '),
 
 //   'test-ci': [
 //     `yarn wait-on ${shared.getStorybookUrl()} && (`,
