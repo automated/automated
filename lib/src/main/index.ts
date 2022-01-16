@@ -36,6 +36,8 @@ const automatedTitle = '[ Automated ⚙️ ]';
 
       process.env.JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE = 'true';
 
+      execSync(`mkdir -p ${projectDir}/tmp/automated`);
+
       try {
         if ((await fetch(getStorybookUrl())).ok) {
           process.env.AUTOMATED_STORYBOOK_IS_RUNNING = 'true';
