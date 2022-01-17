@@ -36,8 +36,8 @@ const automatedTitle = '[ Automated ⚙️ ]';
 
       process.env.JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE = 'true';
 
-      execSync('pwd');
-      execSync('whoami');
+      execSync('echo $(pwd)');
+      execSync('echo $(whoami)');
       execSync('mkdir -p ./tmp/automated');
 
       try {
