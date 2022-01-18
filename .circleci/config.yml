@@ -28,6 +28,12 @@ jobs:
           background: true
           command: cd example && yarn automated storybook
 
+      - run: chmod -R 777 ~
+
+      - run: whoami
+
+      - run: pwd
+
       - run: yarn nps test-ci
 
       - store_artifacts:

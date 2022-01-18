@@ -1,6 +1,5 @@
 import { execSync, spawnSync } from 'child_process';
 import fetch from 'cross-fetch';
-import fsExtra from 'fs-extra';
 import path from 'path';
 
 // const shared = require('../storybook/shared');
@@ -35,8 +34,6 @@ const automatedTitle = '[ Automated ⚙️ ]';
       console.log(`${automatedTitle}: Jest`);
 
       process.env.JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE = 'true';
-
-      fsExtra.ensureDirSync('./tmp/automated');
 
       try {
         if ((await fetch(getStorybookUrl())).ok) {
