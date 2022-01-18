@@ -28,7 +28,7 @@ jobs:
           background: true
           command: cd example && yarn automated storybook
 
-      - run: chmod -R 777 ~
+      - run: chmod -R 777 ~/repo
 
       - run: whoami
 
