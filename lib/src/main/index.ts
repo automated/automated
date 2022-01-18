@@ -1,6 +1,6 @@
-// import fs from 'fs';
 import { execSync, spawnSync } from 'child_process';
 import fetch from 'cross-fetch';
+import fsExtra from 'fs-extra';
 import path from 'path';
 
 // const shared = require('../storybook/shared');
@@ -36,9 +36,7 @@ const automatedTitle = '[ Automated ⚙️ ]';
 
       process.env.JEST_IMAGE_SNAPSHOT_TRACK_OBSOLETE = 'true';
 
-      execSync('echo $(pwd)');
-      execSync('echo $(whoami)');
-      execSync('mkdir -p ./tmp/automated');
+      fsExtra.ensureDirSync('./tmp/automated');
 
       try {
         if ((await fetch(getStorybookUrl())).ok) {
