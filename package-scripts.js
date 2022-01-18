@@ -62,8 +62,10 @@ const scripts = {
   lint: `${lintPrefix} '.'`,
 
   // test: '(cd example && yarn automated init)',
-  'test-ci':
+  'test-ci': [
+    'AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED=1',
     '(cd example && yarn automated jest --testPathPattern src -u --coverage)',
+  ].join(' '),
 };
 
 module.exports = { scripts };

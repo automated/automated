@@ -28,11 +28,9 @@ jobs:
           background: true
           command: cd example && yarn automated storybook
 
-      - run: chmod -R 777 ~/repo
-
-      - run: whoami
-
-      - run: pwd
+      - run:
+          name: Fix permissions
+          command: chmod -R 777 ~/repo
 
       - run: yarn nps test-ci
 
