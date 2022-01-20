@@ -5,6 +5,11 @@ import waitFor from '../main/utils/wait-for';
 
 const command = () => {
   try {
+    console.log(
+      'x3.5 AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED',
+      process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED,
+    );
+
     const spawn = spawnSync(
       'docker',
       [
@@ -15,10 +20,17 @@ const command = () => {
         ...process.argv.slice(2),
       ],
       {
-        env: process.env,
+        env: {
+          ...process.env,
+        },
         shell: true,
         stdio: 'inherit',
       },
+    );
+
+    console.log(
+      'x3.6 AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED',
+      process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED,
     );
 
     if (!spawn.status) return true;
