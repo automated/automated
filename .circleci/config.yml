@@ -18,13 +18,6 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "example/package.json" }}
             - v1-dependencies-
 
-      - run:
-          name: Test
-          command: echo $AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED && echo $GOOBA
-          environment:
-            AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED: 1
-            GOOBA: foo
-
       - run: yarn
 
       - run: yarn nps install-example-deps
