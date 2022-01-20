@@ -15,6 +15,7 @@ const command = () => {
         ...process.argv.slice(2),
       ],
       {
+        env: process.env,
         shell: true,
         stdio: 'inherit',
       },
