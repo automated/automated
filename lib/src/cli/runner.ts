@@ -38,6 +38,11 @@ const copyModule = async (module: string) => {
 };
 
 (async () => {
+  console.log(
+    'x3 AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED',
+    process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED,
+  );
+
   if (process.env.AUTOMATED_DOCKER_FORCE_RESET || !command()) {
     // eslint-disable-next-line no-console
     console.log('Trying to start Automated docker container');
