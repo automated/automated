@@ -8,7 +8,7 @@ const command = () => {
     const args = [
       'exec -it',
       Object.entries(process.env)
-        .map(([key, value]) => `--env ${key}=${value}`)
+        .map(([key, value]) => `--env ${key}="${value}"`)
         .join(' '),
       'automated_dockerfile',
       'node /home/circleci/project/index.js',
