@@ -67,5 +67,8 @@
   "scripts": {
     "default": "nps"
   },
-  "version": "0.86.0"
+  "version": "0.86.0",
+  "dependencies": {
+    "wait-on": "^6.0.0"
+  }
 }
