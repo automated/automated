@@ -28,6 +28,8 @@ jobs:
           background: true
           command: cd example && yarn automated storybook
 
+      - run: yarn wait-on http://localhost:3144
+
       - run:
           name: Fix permissions
           command: chmod -R 777 ~/repo
