@@ -5,32 +5,22 @@ import waitFor from '../main/utils/wait-for';
 
 const command = () => {
   try {
-    console.log(
-      'x3.5 AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED',
-      process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED,
-    );
-
     const spawn = spawnSync(
       'docker',
       [
         'exec -it',
+        Object.entries(process.env)
+          .map(([key, value]) => `--env ${key}=${value}`)
+          .join(' '),
         'automated_dockerfile',
         'node /home/circleci/project/index.js',
 
         ...process.argv.slice(2),
       ],
       {
-        env: {
-          ...process.env,
-        },
         shell: true,
         stdio: 'inherit',
       },
-    );
-
-    console.log(
-      'x3.6 AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED',
-      process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED,
     );
 
     if (!spawn.status) return true;
@@ -51,11 +41,6 @@ const copyModule = async (module: string) => {
 };
 
 (async () => {
-  console.log(
-    'x3 AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED',
-    process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED,
-  );
-
   if (process.env.AUTOMATED_DOCKER_FORCE_RESET || !command()) {
     // eslint-disable-next-line no-console
     console.log('Trying to start Automated docker container');

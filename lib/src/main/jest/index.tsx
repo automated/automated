@@ -42,13 +42,6 @@ export const runner = ({
   let browser: Puppeteer.Browser;
 
   beforeAll(async () => {
-    console.log(process.env);
-
-    console.log(
-      'AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED',
-      process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED,
-    );
-
     if (isStorybookRunning) {
       browser = await puppeteer.launch({
         // headless: false,

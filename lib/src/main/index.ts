@@ -17,11 +17,6 @@ const argv = process.argv.slice(2);
 const automatedTitle = '[ Automated ⚙️ ]';
 
 (async () => {
-  console.log(
-    'x4 AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED',
-    process.env.AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED,
-  );
-
   switch (argv[0]) {
     case 'init': {
       // eslint-disable-next-line no-console
