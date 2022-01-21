@@ -5,23 +5,23 @@ import waitFor from '../main/utils/wait-for';
 
 const command = () => {
   try {
-    const spawn = spawnSync(
-      'docker',
-      [
-        'exec -it',
-        Object.entries(process.env)
-          .map(([key, value]) => `--env ${key}=${value}`)
-          .join(' '),
-        'automated_dockerfile',
-        'node /home/circleci/project/index.js',
+    const args = [
+      'exec -it',
+      Object.entries(process.env)
+        .map(([key, value]) => `--env ${key}=${value}`)
+        .join(' '),
+      'automated_dockerfile',
+      'node /home/circleci/project/index.js',
 
-        ...process.argv.slice(2),
-      ],
-      {
-        shell: true,
-        stdio: 'inherit',
-      },
-    );
+      ...process.argv.slice(2),
+    ];
+
+    console.log(args);
+
+    const spawn = spawnSync('docker', args, {
+      shell: true,
+      stdio: 'inherit',
+    });
 
     if (!spawn.status) return true;
   } catch (error) {
