@@ -28,7 +28,9 @@ jobs:
           background: true
           command: cd example && yarn automated storybook
 
-      - run: yarn wait-on --window 30000 http://localhost:3144
+      - run: yarn wait-on http://localhost:3144
+
+      - run: sleep 30
 
       - run:
           name: Fix permissions
