@@ -32,7 +32,7 @@ jobs:
           background: true
           command: cd example && yarn automated storybook
 
-      - run: wait-on http-get://localhost:3144
+      - run: yarn wait-on http-get://localhost:3144
 
       - run:
           name: Test
