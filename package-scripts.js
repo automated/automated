@@ -63,7 +63,7 @@ const scripts = {
 
   // test: '(cd example && yarn automated init)',
   'test-ci':
-    '(cd example && yarn automated jest --testPathPattern src -u --coverage)',
+    '(cd example && yarn automated jest --testPathPattern src --coverage --verbose)',
 };
 
 module.exports = { scripts };

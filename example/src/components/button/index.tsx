@@ -20,7 +20,7 @@ const Base = ({ background, text, onClick }: Props) => (
     }}
     type="button"
   >
-    {text || 'Get started!'}
+    {text || 'Get started'}
   </button>
 );
 
