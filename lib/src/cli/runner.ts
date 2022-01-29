@@ -4,6 +4,8 @@ import path from 'path';
 import spawn from '../main/utils/spawn';
 import waitFor from '../main/utils/wait-for';
 
+console.log('RUNNER');
+
 const healthCheck = async () => {
   try {
     await spawn('docker exec automated_dockerfile echo', {
