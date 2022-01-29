@@ -43,7 +43,7 @@ const automatedTitle = '[ Automated ⚙️ ]';
         // NOP
       }
 
-      spawnSync(
+      const spawnInstance = spawnSync(
         `${automatedBins}/jest`,
         [
           `--rootDir="${projectDir}"`,
@@ -56,6 +56,8 @@ const automatedTitle = '[ Automated ⚙️ ]';
           stdio: 'inherit',
         },
       );
+
+      if (spawnInstance.status) process.exit(spawnInstance.status);
 
       break;
     }

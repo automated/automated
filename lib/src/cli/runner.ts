@@ -3,27 +3,11 @@ import path from 'path';
 
 import waitFor from '../main/utils/wait-for';
 
-const command = () => {
+const healthCheck = () => {
   try {
-    const args = [
-      'exec -it',
-      Object.entries(process.env)
-        .map(([key, value]) => `--env ${key}="${value}"`)
-        .join(' '),
-      'automated_dockerfile',
-      'node /home/circleci/project/index.js',
+    execSync('docker exec automated_dockerfile echo');
 
-      ...process.argv.slice(2),
-    ];
-
-    console.log(args);
-
-    const spawn = spawnSync('docker', args, {
-      shell: true,
-      stdio: 'inherit',
-    });
-
-    if (!spawn.status) return true;
+    return true;
   } catch (error) {
     // NOP
   }
@@ -41,7 +25,7 @@ const copyModule = async (module: string) => {
 };
 
 (async () => {
-  if (process.env.AUTOMATED_DOCKER_FORCE_RESET || !command()) {
+  if (process.env.AUTOMATED_DOCKER_FORCE_RESET || !healthCheck()) {
     // eslint-disable-next-line no-console
     console.log('Trying to start Automated docker container');
 
@@ -67,14 +51,7 @@ const copyModule = async (module: string) => {
       stdio: 'ignore',
     });
 
-    await waitFor(() => {
-      try {
-        execSync('docker exec automated_dockerfile echo');
-        return true;
-      } catch (error) {
-        // NOP
-      }
-    });
+    await waitFor(healthCheck);
 
     execSync(`docker exec automated_dockerfile mkdir -p ${nodeModulesForHost}`);
 
@@ -89,6 +66,26 @@ const copyModule = async (module: string) => {
       copyModule('ts-dedent'),
     ]);
 
-    await waitFor(command);
+    execSync('docker exec automated_dockerfile sudo chmod -R 777 /var');
   }
+
+  const args = [
+    'exec -it',
+    Object.entries(process.env)
+      .map(([key, value]) => `--env ${key}="${value}"`)
+      .join(' '),
+    'automated_dockerfile',
+    'node /home/circleci/project/index.js',
+
+    ...process.argv.slice(2),
+  ];
+
+  const spawnInstance = spawnSync('docker', args, {
+    shell: true,
+    stdio: 'inherit',
+  });
+
+  if (spawnInstance.status) process.exit(spawnInstance.status);
+
+  if (spawnInstance.error) throw spawnInstance.error;
 })();
