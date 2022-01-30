@@ -1,14 +1,13 @@
-import { execSync, spawnSync } from 'child_process';
+import { execSync } from 'child_process';
 import fetch from 'cross-fetch';
 import path from 'path';
 
-// const shared = require('../storybook/shared');
+import spawn from '../main/utils/spawn';
 import { getStorybookUrl } from './storybook/shared';
 
 export const projectDir = execSync('echo "$(pwd)"').toString().trim();
 export type { Props, UseCase, UseCases } from './types';
 
-// eslint-disable-next-line import/prefer-default-export
 export const automatedDir = '/home/circleci/project';
 const automatedBins = path.join(automatedDir, 'node_modules/.bin');
 
@@ -21,10 +20,7 @@ const automatedTitle = '[ Automated ⚙️ ]';
     case 'init': {
       // eslint-disable-next-line no-console
       console.log(`${automatedTitle}: Init`);
-      spawnSync('node', [`${automatedDir}/init/index.js`], {
-        shell: true,
-        stdio: 'inherit',
-      });
+      await spawn(['node', `${automatedDir}/init/index.js`]);
 
       break;
     }
@@ -43,21 +39,13 @@ const automatedTitle = '[ Automated ⚙️ ]';
         // NOP
       }
 
-      const spawnInstance = spawnSync(
+      await spawn([
         `${automatedBins}/jest`,
-        [
-          `--rootDir="${projectDir}"`,
-          `--config="${automatedDir}/jest/jest.config.js"`,
+        `--rootDir="${projectDir}"`,
+        `--config="${automatedDir}/jest/jest.config.js"`,
 
-          ...process.argv.slice(3),
-        ],
-        {
-          shell: true,
-          stdio: 'inherit',
-        },
-      );
-
-      if (spawnInstance.status) process.exit(spawnInstance.status);
+        ...process.argv.slice(3),
+      ]);
 
       break;
     }
@@ -66,19 +54,13 @@ const automatedTitle = '[ Automated ⚙️ ]';
       // eslint-disable-next-line no-console
       console.log(`${automatedTitle}: Storybook`);
 
-      spawnSync(
+      await spawn([
         `${automatedBins}/start-storybook`,
-        [
-          `--config-dir="${automatedDir}/storybook/config"`,
-          '--port="3144"',
+        `--config-dir="${automatedDir}/storybook/config"`,
+        '--port="3144"',
 
-          ...process.argv.slice(3),
-        ],
-        {
-          shell: true,
-          stdio: 'inherit',
-        },
-      );
+        ...process.argv.slice(3),
+      ]);
 
       break;
     }
@@ -87,19 +69,13 @@ const automatedTitle = '[ Automated ⚙️ ]';
       // eslint-disable-next-line no-console
       console.log(`${automatedTitle}: Storybook: Build`);
 
-      spawnSync(
+      await spawn([
         `${automatedBins}/build-storybook`,
-        [
-          `--config-dir="${automatedDir}/storybook/config"`,
-          `--output-dir="${projectDir}/tmp/automated/storybook"`,
+        `--config-dir="${automatedDir}/storybook/config"`,
+        `--output-dir="${projectDir}/tmp/automated/storybook"`,
 
-          ...process.argv.slice(3),
-        ],
-        {
-          shell: true,
-          stdio: 'inherit',
-        },
-      );
+        ...process.argv.slice(3),
+      ]);
 
       break;
     }

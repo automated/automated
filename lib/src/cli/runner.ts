@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { exec, execSync } from 'child_process';
 import path from 'path';
 
 import spawn from '../main/utils/spawn';
@@ -23,15 +23,11 @@ const copyModule = async (module: string) => {
 
   const copyTo = path.join(nodeModulesForHost, module);
 
-  return spawn(
+  return exec(
     [
-      'docker exec',
-      'automated_dockerfile',
+      'docker exec automated_dockerfile',
       `rsync -av /home/circleci/project/node_modules/${module}/. ${copyTo}`,
-    ],
-    {
-      isSilent: true,
-    },
+    ].join(' '),
   );
 };
 
@@ -42,7 +38,7 @@ const copyModule = async (module: string) => {
 
     const projectDir = execSync('echo "$(pwd)"').toString().trim();
 
-    await spawn('docker rm -f automated_dockerfile', { isSilent: true });
+    execSync('docker rm -f automated_dockerfile');
 
     await spawn(
       [
@@ -64,11 +60,12 @@ const copyModule = async (module: string) => {
 
     await waitFor(healthCheck);
 
-    await spawn([
-      'docker exec',
-      'automated_dockerfile',
-      `mkdir -p ${nodeModulesForHost}`,
-    ]);
+    execSync(
+      [
+        'docker exec automated_dockerfile',
+        `mkdir -p ${nodeModulesForHost}`,
+      ].join(' '),
+    );
 
     await Promise.all([
       copyModule('@storybook'),
@@ -81,7 +78,9 @@ const copyModule = async (module: string) => {
       copyModule('ts-dedent'),
     ]);
 
-    await spawn('docker exec automated_dockerfile sudo chmod -R 777 /var');
+    execSync(
+      ['docker exec automated_dockerfile', 'sudo chmod -R 777 /var'].join(' '),
+    );
   }
 
   await spawn([
