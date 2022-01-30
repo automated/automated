@@ -19,7 +19,11 @@ export default (
     });
 
     spawnInstance.on('close', (code) => {
-      if (code && !dontExit) process.exit(code);
+      if (code && dontExit) {
+        throw new Error();
+      } else if (code && !dontExit) {
+        process.exit(code);
+      }
 
       resolve(undefined);
     });
