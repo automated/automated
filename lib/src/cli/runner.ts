@@ -4,12 +4,9 @@ import path from 'path';
 import spawn from '../main/utils/spawn';
 import waitFor from '../main/utils/wait-for';
 
-const healthCheck = async () => {
+const healthCheck = () => {
   try {
-    await spawn('docker exec automated_dockerfile echo', {
-      dontExit: true,
-      isSilent: true,
-    });
+    execSync('docker exec automated_dockerfile echo');
 
     return true;
   } catch (error) {
@@ -39,7 +36,7 @@ const copyModule = async (module: string) => {
 };
 
 (async () => {
-  if (process.env.AUTOMATED_DOCKER_FORCE_RESET || !(await healthCheck())) {
+  if (process.env.AUTOMATED_DOCKER_FORCE_RESET || !healthCheck()) {
     // eslint-disable-next-line no-console
     console.log('Trying to start Automated docker container');
 
