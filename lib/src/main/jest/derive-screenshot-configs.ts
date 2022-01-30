@@ -4,38 +4,46 @@ import { ScreenshotOptions, Viewport } from 'puppeteer';
 import { deriveModule } from '../shared';
 
 type ScreenshotConfig = {
-  viewport: Viewport;
-  screenshotOptions: ScreenshotOptions;
   matchImageSnapshotOptions: MatchImageSnapshotOptions;
+  screenshotOptions: ScreenshotOptions;
+  viewport: Viewport;
 };
 
-type ScreenshotConfigs = Record<string, ScreenshotConfig>;
-
-const defaults: ScreenshotConfig = {
-  matchImageSnapshotOptions: {
-    failureThreshold: 0.01,
-    failureThresholdType: 'percent',
-  },
-
-  screenshotOptions: {
-    omitBackground: true,
-  },
-
-  // desktop
-  viewport: {
-    deviceScaleFactor: 2,
-    height: 768,
-    width: 1080,
-  },
+const viewportDefaults: Partial<Viewport> = {
+  deviceScaleFactor: 2,
 };
 
-const configs = [
-  defaults,
+const matchImageSnapshotOptionsDefaults: MatchImageSnapshotOptions = {};
+
+const screenshotOptionsDefaults: ScreenshotOptions = {
+  omitBackground: true,
+};
+
+const configDefaults: Omit<ScreenshotConfig, 'viewport'> = {
+  matchImageSnapshotOptions: matchImageSnapshotOptionsDefaults,
+  screenshotOptions: screenshotOptionsDefaults,
+};
+
+const configs: Array<ScreenshotConfig> = [
   {
-    ...defaults,
+    ...configDefaults,
 
+    // generic desktop
     viewport: {
-      deviceScaleFactor: 2,
+      ...viewportDefaults,
+
+      height: 768,
+      width: 1080,
+    },
+  },
+
+  {
+    ...configDefaults,
+
+    // generic mobile
+    viewport: {
+      ...viewportDefaults,
+
       hasTouch: true,
       height: 812,
       isMobile: true,
@@ -43,6 +51,8 @@ const configs = [
     },
   },
 ];
+
+type ScreenshotConfigs = Record<string, ScreenshotConfig>;
 
 export default (): ScreenshotConfigs => {
   const uuidByString = deriveModule('uuid-by-string');

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`/src/components/button test-1@jest-snapshot 1`] = `
+exports[`/src/components/button test-1 jest-snapshot 1`] = `
 <button
   onClick={[Function]}
   style={
@@ -16,11 +16,11 @@ exports[`/src/components/button test-1@jest-snapshot 1`] = `
   }
   type="button"
 >
-  Get started
+  Get started!
 </button>
 `;
 
-exports[`/src/components/button test-2@jest-snapshot 1`] = `
+exports[`/src/components/button test-2 jest-snapshot 1`] = `
 "Snapshot Diff:
 - First value
 + Second value
@@ -46,7 +46,7 @@ exports[`/src/components/button test-2@jest-snapshot 1`] = `
 + </button>"
 `;
 
-exports[`/src/components/button test-3@jest-snapshot 1`] = `
+exports[`/src/components/button test-3 jest-snapshot 1`] = `
 "Snapshot Diff:
 - First value
 + Second value
@@ -68,6 +68,6 @@ exports[`/src/components/button test-3@jest-snapshot 1`] = `
 +   }
 +   type=\\"button\\"
 + >
-+   Get started
++   Get started!
 + </button>"
 `;

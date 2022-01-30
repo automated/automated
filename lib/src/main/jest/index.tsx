@@ -68,7 +68,7 @@ export const runner = ({
         if (browser) await browser.close();
       });
 
-      test(`${name}@jest-snapshot`, async () => {
+      test(`${name} jest-snapshot`, async () => {
         const render = testRenderer.create(<Component {...props} />).toJSON();
 
         if (!key) {
@@ -85,10 +85,11 @@ export const runner = ({
           configName,
           { viewport, matchImageSnapshotOptions, screenshotOptions },
         ]) => {
-          storybookTestFn(`${name}@${configName}@storybook`, async () => {
+          storybookTestFn(`${name} ${configName} jest-storybook`, async () => {
             if (browser) {
               const page = await browser.newPage();
 
+              // hide cursor
               await page.evaluateOnNewDocument(() => {
                 const style = document.createElement('style');
                 style.innerHTML = '.body { caret-color: transparent }';
