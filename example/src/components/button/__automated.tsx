@@ -35,7 +35,7 @@ const useCases: Array<UseCase> = [
 ];
 
 export default {
-  dirname: __dirname,
   Component,
+  dirname: __dirname,
   useCases,
 };

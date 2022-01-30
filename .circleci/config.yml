@@ -3,12 +3,8 @@ version: 2.1
 defaults: &defaults
   working_directory: ~/repo
 
-  docker:
-    - image: cimg/node:14.17.5
-
-      auth:
-        username: $DOCKERHUB_USER
-        password: $DOCKERHUB_PASSWORD
+  machine:
+    image: ubuntu-2004:202111-02
 
 jobs:
   build:
@@ -22,9 +18,11 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "example/package.json" }}
             - v1-dependencies-
 
-      - run: sudo apt-get update && sudo apt install libatk-bridge2.0-0 libatk1.0-0 libgbm-dev libgconf-2-4 libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-dev libgtk-3-0 libgtk-3-dev libnss3-dev libxss-dev libasound2
-
       - run: yarn
+
+      - run:
+          name: Fix permissions
+          command: chmod -R 777 ~/repo
 
       - run: yarn nps install-example-deps
 
@@ -34,7 +32,15 @@ jobs:
           background: true
           command: cd example && yarn automated storybook
 
-      - run: yarn nps test-ci
+      - run: yarn wait-on http-get://localhost:3144
+
+      - run:
+          name: Test
+          command: yarn nps test-ci
+          environment:
+            AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED: 1
+
+      - run: cd example && yarn automated storybook-build
 
       - store_artifacts:
           path: ~/repo/example/tmp/automated

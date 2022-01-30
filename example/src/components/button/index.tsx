@@ -1,3 +1,5 @@
+import type React from 'react';
+
 export type Props = {
   background?: string;
   text?: string;
@@ -7,7 +9,7 @@ export type Props = {
 const Base = ({ background, text, onClick }: Props) => (
   <button
     onClick={onClick}
-    css={{
+    style={{
       background: background || 'blue',
       border: 'none',
       borderRadius: 10,
@@ -16,8 +18,9 @@ const Base = ({ background, text, onClick }: Props) => (
       fontWeight: 600,
       padding: '20px 30px',
     }}
+    type="button"
   >
-    {text || 'Get started'}
+    {text || 'Get started!'}
   </button>
 );
 

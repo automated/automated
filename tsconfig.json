@@ -1,20 +1,27 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": true,
     "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "./dist",
+    "outDir": "./lib/dist",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "esnext",
-    "skipLibCheck": true
+    "target": "esnext"
   },
-  "exclude": ["node_modules", "src/template"],
-  "include": ["src"]
+  "exclude": [
+    "_old",
+    "example",
+    "lib/dist",
+    "lib/src/docker-generator",
+    "lib/src/main/template"
+  ],
+  "include": ["**/*"]
 }
