@@ -3,8 +3,10 @@ import { spawn } from 'child_process';
 export default (
   command: Array<string> | string,
   {
+    dontExit,
     isSilent,
   }: {
+    dontExit?: boolean;
     isSilent?: boolean;
   } = {},
 ) =>
@@ -17,7 +19,7 @@ export default (
     });
 
     spawnInstance.on('close', (code) => {
-      if (code) process.exit(code);
+      if (code && !dontExit) process.exit(code);
 
       resolve(undefined);
     });
