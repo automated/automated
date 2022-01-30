@@ -9,9 +9,7 @@ console.log('RUNNER');
 const healthCheck = async () => {
   console.log('Running healthCheck');
   try {
-    await spawn('docker exec automated_dockerfile echo', {
-      isSilent: true,
-    });
+    await spawn('docker exec automated_dockerfile echo');
 
     return true;
   } catch (error) {
