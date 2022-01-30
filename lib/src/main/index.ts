@@ -2,8 +2,8 @@ import { execSync } from 'child_process';
 import fetch from 'cross-fetch';
 import path from 'path';
 
-import spawn from '../main/utils/spawn';
 import { getStorybookUrl } from './storybook/shared';
+import spawn from './utils/spawn';
 
 export const projectDir = execSync('echo "$(pwd)"').toString().trim();
 export type { Props, UseCase, UseCases } from './types';

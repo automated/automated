@@ -7,6 +7,7 @@ const build = [
 
   'cp -r ./lib/src/main/storybook/config ./lib/dist/main/storybook/config',
   'cp -r ./lib/src/main/template ./lib/dist/main/template',
+  'cp -r ./lib/src/main/utils ./lib/dist/main/utils',
   'cp ./lib/src/cli/automated.sh ./lib/dist/cli/automated.sh',
   'cp ./lib/src/main/types.d.ts ./lib/dist/main',
 
