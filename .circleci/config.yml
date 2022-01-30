@@ -40,6 +40,8 @@ jobs:
           environment:
             AUTOMATED_JEST_VISUAL_REGRESSION_REQUIRED: 1
 
+      - run: cd example && yarn automated storybook-build
+
       - store_artifacts:
           path: ~/repo/example/tmp/automated
 
