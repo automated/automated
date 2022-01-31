@@ -69,6 +69,8 @@ jobs:
 
       - run: npm publish --access public
 
+      - run: docker image list
+
       - run: docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
 
       - run: yarn nps docker-publish
