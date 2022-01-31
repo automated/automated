@@ -1,3 +1,5 @@
+const packageJson = require('./package.json');
+
 const lintPrefix = 'eslint --ignore-path .gitignore --ext .jsx,.js,.ts,.tsx';
 
 const build = [
@@ -37,10 +39,23 @@ const dev = [
   ].join(' '),
 ].join(' ');
 
+const dockerDetails = {
+  org: 'kirkstrobeck',
+  repo: 'automated',
+  version: packageJson.version,
+};
+
+const dockerImage = `${dockerDetails.org}/${dockerDetails.repo}:${dockerDetails.version}`;
+
 const scripts = {
   build,
 
   dev,
+
+  'docker-publish': [
+    `docker tag ${dockerDetails.repo}:latest ${dockerDetails.org}/${dockerDetails.repo}:${dockerDetails.version}`,
+    `docker push ${dockerDetails.org}/${dockerDetails.repo}:${dockerDetails.version}`,
+  ].join(' && '),
 
   format: `${lintPrefix} --fix '.'`,
 
