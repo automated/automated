@@ -53,7 +53,7 @@ const scripts = {
   dev,
 
   'docker-publish': [
-    // `docker tag ${dockerDetails.repo}:latest ${dockerDetails.org}/${dockerDetails.repo}:${dockerDetails.version}`,
+    `docker tag ${dockerDetails.repo}:latest ${dockerDetails.org}/${dockerDetails.repo}:${dockerDetails.version}`,
     `docker push ${dockerDetails.org}/${dockerDetails.repo}:${dockerDetails.version}`,
   ].join(' && '),
 
