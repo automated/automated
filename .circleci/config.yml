@@ -63,17 +63,17 @@ jobs:
       - attach_workspace:
           at: ~/repo
 
-      - run:
-          name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      # - run:
+      #     name: Authenticate with registry
+      #     command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
 
-      - run: npm publish --access public
+      # - run: npm publish --access public
 
       - run: docker image list
 
-      - run: docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+      # - run: docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
 
-      - run: yarn nps docker-publish
+      # - run: yarn nps docker-publish
 
 workflows:
   primary:
@@ -87,6 +87,6 @@ workflows:
             - production
           requires:
             - build
-          filters:
-            branches:
-              only: main
+          # filters:
+          #   branches:
+          #     only: main
