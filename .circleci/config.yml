@@ -1,14 +1,11 @@
 version: 2.1
 
-defaults: &defaults
-  working_directory: ~/repo
-
-  machine:
-    image: ubuntu-2004:202111-02
-
 jobs:
   build:
-    <<: *defaults
+    working_directory: ~/repo
+
+    machine:
+      image: ubuntu-2004:202111-02
 
     steps:
       - checkout
@@ -51,42 +48,13 @@ jobs:
             - ~/repo/node_modules
             - ~/repo/example/node_modules
 
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - .
-
-  publish:
-    <<: *defaults
-
-    steps:
-      - attach_workspace:
-          at: ~/repo
-
       - run:
-          name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+          name: Publish
+          command: |
+            if [ $CIRCLE_BRANCH = "main" ]; then
+              echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc;
+              npm publish --access public;
 
-      - run: npm publish --access public
-
-      - run: docker image list
-
-      - run: docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-
-      - run: yarn nps docker-publish
-
-workflows:
-  primary:
-    jobs:
-      - build:
-          context:
-            - production
-
-      - publish:
-          context:
-            - production
-          requires:
-            - build
-          filters:
-            branches:
-              only: main
+              docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD;
+              yarn nps docker-publish;
+            fi
