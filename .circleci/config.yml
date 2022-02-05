@@ -1,9 +1,14 @@
 version: 2.1
 
-jobs:
-  context: production
+workflows:
+  main-workflow:
+    jobs:
+      - main-job:
+          context:
+            - production
 
-  build:
+jobs:
+  main-job:
     working_directory: ~/repo
 
     machine:
