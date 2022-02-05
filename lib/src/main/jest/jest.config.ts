@@ -38,6 +38,8 @@ const config: Config.InitialOptions = {
 
   testEnvironment: 'jsdom',
 
+  testTimeout: 30 * 1000,
+
   transform: {
     // this overrides tsjPreset
     '^.+\\.tsx?$': deriveModulePath('ts-jest'),
