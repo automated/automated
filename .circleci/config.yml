@@ -2,6 +2,8 @@ version: 2.1
 
 jobs:
   build:
+    context: production
+
     working_directory: ~/repo
 
     machine:
