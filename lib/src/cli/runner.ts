@@ -76,6 +76,7 @@ const copyModule = async (module: string) => {
       copyModule('lodash'),
       copyModule('qs'),
       copyModule('ts-dedent'),
+      copyModule('util-deprecate'),
     ]);
 
     execSync(
