@@ -42,7 +42,7 @@ const config: Config.InitialOptions = {
 
   transform: {
     // this overrides tsjPreset
-    '^.+\\.tsx?$': deriveModulePath('ts-jest'),
+    '^.+\\.tsx?$': deriveModulePath('babel-jest'),
   },
 };
 
