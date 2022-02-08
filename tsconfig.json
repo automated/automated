@@ -21,6 +21,7 @@
     "example",
     "lib/dist",
     "lib/src/docker-generator",
+    "lib/src/meta-generator",
     "lib/src/main/template"
   ],
   "include": ["**/*"]

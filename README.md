@@ -47,3 +47,13 @@ export default {
   useCases,
 };
 ```
+
+### Contributing
+
+```
+# in one terminal
+yarn nps dev
+
+# in another
+cd example && AUTOMATED_DEVELOPMENT=true yarn automated jest
+```
