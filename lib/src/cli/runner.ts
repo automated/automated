@@ -6,9 +6,19 @@ import waitFor from '../main/utils/wait-for';
 
 const meta = require('../meta.json');
 
+const isDev = process.env.AUTOMATED_DEVELOPMENT;
+
+const dockerImage = isDev
+  ? 'automated_image_development'
+  : `kirkstrobeck/automated:${meta.version}`;
+
+const dockerName = isDev
+  ? 'automated_dockerfile_development'
+  : 'automated_dockerfile';
+
 const healthCheck = () => {
   try {
-    execSync('docker exec automated_development_dockerfile echo');
+    execSync(`docker exec ${dockerName} echo`);
 
     return true;
   } catch (error) {
@@ -27,7 +37,7 @@ const copyModule = async (module: string) => {
 
   return exec(
     [
-      'docker exec automated_development_dockerfile',
+      `docker exec ${dockerName}`,
       `rsync -av /home/circleci/project/node_modules/${module}/. ${copyTo}`,
     ].join(' '),
   );
@@ -36,41 +46,29 @@ const copyModule = async (module: string) => {
 (async () => {
   if (process.env.AUTOMATED_DOCKER_FORCE_RESET || !healthCheck()) {
     // eslint-disable-next-line no-console
-    console.log('Trying to start Automated docker');
+    console.log('Trying to start Automated Docker');
 
     const projectDir = execSync('echo "$(pwd)"').toString().trim();
 
-    execSync('docker rm -f automated_development_dockerfile');
+    execSync(`docker rm -f ${dockerName}`);
 
-    const dockerImage = !process.env.AUTOMATED_DEVELOPMENT
-      ? 'automated_development'
-      : `kirkstrobeck/automated:${meta.version}`;
-
-    await spawn(
-      [
-        'docker run -di',
-        '--env HOST_PWD=`pwd`',
-        '--name automated_development_dockerfile',
-        '--publish 3144:3144',
-        `--mount type=bind,source=${path.join(
-          projectDir,
-          'node_modules',
-        )},target=/home/circleci/project/node_modules-for-host`,
-        '--volume `pwd`:`pwd`',
-        `--workdir \`pwd\` ${dockerImage}`,
-      ],
-      {
-        isSilent: true,
-      },
-    );
+    await spawn([
+      'docker run -di',
+      '--env HOST_PWD=`pwd`',
+      `--name ${dockerName}`,
+      '--publish 3144:3144',
+      `--mount type=bind,source=${path.join(
+        projectDir,
+        'node_modules',
+      )},target=/home/circleci/project/node_modules-for-host`,
+      '--volume `pwd`:`pwd`',
+      `--workdir \`pwd\` ${dockerImage}`,
+    ]);
 
     await waitFor(healthCheck);
 
     execSync(
-      [
-        'docker exec automated_development_dockerfile',
-        `mkdir -p ${nodeModulesForHost}`,
-      ].join(' '),
+      [`docker exec ${dockerName}`, `mkdir -p ${nodeModulesForHost}`].join(' '),
     );
 
     await Promise.all([
@@ -85,12 +83,7 @@ const copyModule = async (module: string) => {
       copyModule('util-deprecate'),
     ]);
 
-    execSync(
-      [
-        'docker exec automated_development_dockerfile',
-        'sudo chmod -R 777 /var',
-      ].join(' '),
-    );
+    execSync([`docker exec ${dockerName}`, 'sudo chmod -R 777 /var'].join(' '));
   }
 
   await spawn([
@@ -98,7 +91,7 @@ const copyModule = async (module: string) => {
     Object.entries(process.env)
       .map(([key, value]) => `--env ${key}="${value}"`)
       .join(' '),
-    'automated_development_dockerfile',
+    dockerName,
     'node /home/circleci/project/index.js',
 
     ...process.argv.slice(2),

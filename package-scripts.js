@@ -16,7 +16,7 @@ const build = [
   'yarn ts-node ./lib/src/docker-generator/index.ts',
   'yarn ts-node ./lib/src/meta-generator/index.ts',
 
-  '(cd ./lib/dist && docker build --tag=automated_development:latest .)',
+  '(cd ./lib/dist && docker build --tag=automated_image_development:latest .)',
 ].join(' && ');
 
 const yalcPublishToExample = [
