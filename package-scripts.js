@@ -38,12 +38,18 @@ const dev = [
 ].join(' ');
 
 const dockerDetails = {
-  org: 'kirkstrobeck',
-  repo: 'automated',
-  version: packageJson.version,
+  development: {
+    image: 'automated_development',
+    version: 'latest',
+  },
+  production: {
+    org: 'kirkstrobeck',
+    repo: 'automated',
+    version: packageJson.version,
+  },
 };
 
-const dockerImage = `${dockerDetails.org}/${dockerDetails.repo}:${dockerDetails.version}`;
+const dockerPathProduction = `${dockerDetails.production.org}/${dockerDetails.production.repo}:${dockerDetails.production.version}`;
 
 const scripts = {
   build,
@@ -51,8 +57,8 @@ const scripts = {
   dev,
 
   'docker-publish': [
-    `docker tag ${dockerDetails.repo}:latest ${dockerDetails.org}/${dockerDetails.repo}:${dockerDetails.version}`,
-    `docker push ${dockerDetails.org}/${dockerDetails.repo}:${dockerDetails.version}`,
+    `docker tag ${dockerDetails.development.image}:${dockerDetails.development.version} ${dockerPathProduction}`,
+    `docker push ${dockerPathProduction}`,
   ].join(' && '),
 
   format: `${lintPrefix} --fix '.'`,
