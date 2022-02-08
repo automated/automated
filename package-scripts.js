@@ -39,7 +39,7 @@ const dev = [
 
 const dockerDetails = {
   development: {
-    image: 'automated_development',
+    image: 'automated_image_development',
     version: 'latest',
   },
   production: {
