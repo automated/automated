@@ -2,6 +2,14 @@
 
 **Automated is a test framework designed to simplify testing by standardizing.**
 
+With a few lines of code here’s what you get out of the box:
+
+1. Multiple viewport visual regression coverage
+3. Jest unit tests (via snapshots)
+4. Code coverage (can persist to CI)
+6. Storybook artifacts (can persist to CI)
+7. Isolated component development environment (Storybook)
+
 # Installation
 
 ## `__automated.tsx`
