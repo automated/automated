@@ -29,7 +29,13 @@ jobs:
 
       - run: yarn nps install-example-deps
 
+      - run:
+          command: chmod -R 777 ~/repo
+
       - run: yarn nps build
+
+      - run:
+          command: chmod -R 777 ~/repo
 
       - run:
           background: true
